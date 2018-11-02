@@ -1,0 +1,2 @@
+https://${DomainName}/soknadsveiviserproxy/*
+https://${DomainName}/soknadsveiviserproxy
