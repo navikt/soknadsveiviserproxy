@@ -1,4 +1,4 @@
-FROM node as node-builder
+FROM node:10 as node-builder
 
 ENV CI=true
 WORKDIR /app
