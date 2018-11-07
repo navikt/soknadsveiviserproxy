@@ -3,10 +3,12 @@ kind: "Application"
 metadata:
   name: soknadsveiviserproxy
   namespace: default
+  labels:
+    team: teaminformasjonogveiledning
 spec:
   image: navikt/soknadsveiviserproxy:latest
   team: teaminformasjonogveiledning
-  port: 80
+  port: 8080
   healthcheck:
     liveness:
       path: /isAlive
