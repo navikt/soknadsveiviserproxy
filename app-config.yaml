@@ -1,15 +1,24 @@
-# ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
-image: docker.adeo.no:5000/sbl/soknadsveiviserproxy
-team: teaminformasjonogveiledning
-replicas:
-  min: 1
-  max: 2
-  cpuThresholdPercentage: 50
-port: 8080
-healthcheck:
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: soknadsveiviserproxy
+  namespace: default
+  labels:
+    team: teaminformasjonogveiledning
+spec:
+  image: docker.adeo.no:5000/sbl/soknadsveiviserproxy:latest
+  team: teaminformasjonogveiledning
+  port: 8080
+  ingresses:
+  - https://soknadsveiviserproxy.nais.oera-q.local
   liveness:
-    path: soknadsveiviserproxy/isAlive
+    path: /isAlive
     initialDelay: 20
   readiness:
-    path: soknadsveiviserproxy/isReady
+    path: /isReady
     initialDelay: 20
+  secrets: true
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 90
