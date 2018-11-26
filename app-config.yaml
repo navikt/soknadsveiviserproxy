@@ -11,6 +11,7 @@ spec:
   port: 8080
   ingresses:
   - https://soknadsveiviserproxy.nais.oera-q.local
+  - https://tjenester-q0.nav.no/soknadsveiviserproxy
   liveness:
     path: /isAlive
     initialDelay: 20
