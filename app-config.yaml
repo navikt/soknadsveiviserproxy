@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teaminformasjonogveiledning
 spec:
-  image: docker.adeo.no:5000/sbl/soknadsveiviserproxy:40
+  image: navikt/soknadsveiviserproxy:1
   team: teaminformasjonogveiledning
   port: 8080
   ingresses:

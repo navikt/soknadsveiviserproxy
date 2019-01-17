@@ -29,7 +29,6 @@ app.get('/', (req, res) => {
         `tema, "navn": navn.nb, "pdf": pdf.nb}`;
 
     client.fetch(skjemaQuery).then((docs) => {
-        console.log(docs[0]);
         res.sendStatus(200);
     }).catch((error) => console.log(error));
 });
