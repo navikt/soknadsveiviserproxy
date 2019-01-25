@@ -3,13 +3,13 @@ const sanityClient = require('@sanity/client');
 const fs = require('file-system');
 
 const app = express();
-app.get('/isAlive', (req, res) =>
+app.get('/soknadsveiviserproxy/isAlive', (req, res) =>
     res.sendStatus(200));
 
-app.get('/isReady', (req, res) =>
+app.get('/soknadsveiviserproxy/isReady', (req, res) =>
     res.sendStatus(200));
 
-app.get('/', (req, res) => {
+app.get('/soknadsveiviserproxy', (req, res) => {
     const secretsFilePath = '/var/run/secrets/nais.io/vault';
     const projectIDPath = secretsFilePath + '/sanity.projectID';
     const tokenPath = secretsFilePath + '/sanity.token';

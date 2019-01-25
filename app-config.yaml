@@ -6,17 +6,17 @@ metadata:
   labels:
     team: teaminformasjonogveiledning
 spec:
-  image: navikt/soknadsveiviserproxy:1
+  image: navikt/soknadsveiviserproxy:3
   team: teaminformasjonogveiledning
   port: 8080
   ingresses:
   - https://soknadsveiviserproxy.nais.oera-q.local
   - https://tjenester-q0.nav.no/soknadsveiviserproxy
   liveness:
-    path: /isAlive
+    path: /soknadsveiviserproxy/isAlive
     initialDelay: 20
   readiness:
-    path: /isReady
+    path: /soknadsveiviserproxy/isReady
     initialDelay: 20
   secrets: true
   replicas:
