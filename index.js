@@ -16,7 +16,6 @@ app.get('/soknadsveiviserproxy', (req, res) => {
 
     const projectID = fs.readFileSync(projectIDPath, 'utf8');
     const token = fs.readFileSync(tokenPath, 'utf8');
-
     const client = sanityClient({
         projectId: projectID,
         dataset: 'skjemaveileder',

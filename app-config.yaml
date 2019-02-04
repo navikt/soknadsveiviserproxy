@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teaminformasjonogveiledning
 spec:
-  image: navikt/soknadsveiviserproxy:3
+  image: navikt/soknadsveiviserproxy:17
   team: teaminformasjonogveiledning
   port: 8080
   ingresses:
@@ -24,3 +24,6 @@ spec:
     max: 2
     cpuThresholdPercentage: 90
   webproxy: true
+  env:
+    - name: NODE_EXTRA_CA_CERTS
+      value: /etc/ssl/ca-bundle.pem
