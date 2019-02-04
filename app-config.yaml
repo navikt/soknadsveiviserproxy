@@ -6,20 +6,24 @@ metadata:
   labels:
     team: teaminformasjonogveiledning
 spec:
-  image: docker.adeo.no:5000/sbl/soknadsveiviserproxy:latest
+  image: navikt/soknadsveiviserproxy:17
   team: teaminformasjonogveiledning
   port: 8080
   ingresses:
   - https://soknadsveiviserproxy.nais.oera-q.local
   - https://tjenester-q0.nav.no/soknadsveiviserproxy
   liveness:
-    path: /isAlive
+    path: /soknadsveiviserproxy/isAlive
     initialDelay: 20
   readiness:
-    path: /isReady
+    path: /soknadsveiviserproxy/isReady
     initialDelay: 20
   secrets: true
   replicas:
     min: 1
     max: 2
     cpuThresholdPercentage: 90
+  webproxy: true
+  env:
+    - name: NODE_EXTRA_CA_CERTS
+      value: /etc/ssl/ca-bundle.pem

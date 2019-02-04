@@ -1,6 +1,9 @@
-FROM docker.adeo.no:5000/pus/node as node-builder
+FROM node:10.15.0
 
+RUN ln -fs /usr/share/zoneinfo/Europe/Oslo /etc/localtime
+ENV NODE_ENV production
 ENV CI=true
+
 WORKDIR /app
 
 EXPOSE 8080
