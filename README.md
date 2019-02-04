@@ -7,8 +7,8 @@ For lokal kjøring:
 `node index.js`
 
 For å laste opp til docker og deploye til preprod:
-`docker build -t docker.adeo.no:5000/sbl/soknadsveiviserproxy:VERSION .`
-`docker push docker.adeo.no:5000/sbl/soknadsveiviserproxy:VERSION`
-`kubectl apply -f app-config.yaml --context=preprod-sbs`
+`docker build -t navikt/soknadsveiviserproxy:VERSION .`
+`docker push navikt/soknadsveiviserproxy:VERSION`
+`kubectl apply -f app-config.yaml`
 
-Applikasjonen ligger i default namespace.
+Applikasjonen ligger i default namespace i preprod-sbs.
