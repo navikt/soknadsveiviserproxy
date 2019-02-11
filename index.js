@@ -23,12 +23,10 @@ app.get('/soknadsveiviserproxy', (req, res) => {
         useCdn: false,
     });
 
-    const skjemaQuery = `*[_type == "skjema" && ` +
-        `!(_id in path("drafts.**"))]{emneord, malgruppe, skjemanummer,` +
-        `tema, "navn": navn.nb, "pdf": pdf.nb}`;
+    const skjemaQuery = `*[_type == "skjema"]`;
 
     client.fetch(skjemaQuery).then((docs) => {
-        res.sendStatus(200);
+        console.log(docs);
     }).catch((error) => console.log(error));
 });
 
