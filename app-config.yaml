@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teaminformasjonogveiledning
 spec:
-  image: navikt/soknadsveiviserproxy:17
+  image: navikt/soknadsveiviserproxy:23
   team: teaminformasjonogveiledning
   port: 8080
   ingresses:
