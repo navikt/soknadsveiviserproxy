@@ -1,17 +1,17 @@
-apiVersion: "nais.io/v1alpha1"
-kind: "Application"
+apiVersion: 'nais.io/v1alpha1'
+kind: 'Application'
 metadata:
   name: soknadsveiviserproxy
   namespace: default
   labels:
-    team: teaminformasjonogveiledning
+    team: personbruker
 spec:
   image: navikt/soknadsveiviserproxy:23
-  team: teaminformasjonogveiledning
+  team: personbruker
   port: 8080
   ingresses:
-  - https://soknadsveiviserproxy.nais.oera-q.local
-  - https://tjenester-q0.nav.no/soknadsveiviserproxy
+    - https://soknadsveiviserproxy.nais.oera-q.local
+    - https://tjenester-q0.nav.no/soknadsveiviserproxy
   liveness:
     path: /soknadsveiviserproxy/isAlive
     initialDelay: 20

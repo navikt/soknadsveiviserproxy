@@ -9,6 +9,7 @@
     "lint": "eslint index.js",
     "docker-build": "docker build -t soknadsveiviserproxy .",
     "docker-run": "docker run --rm -p 8080:8080 soknadsveiviserproxy",
+    "deploy": "kubectl apply -f nais.yaml",
     "test:coverage": "exit 0",
     "build": "exit 0"
   },
