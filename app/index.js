@@ -14,7 +14,7 @@ const datasetPath = secretsFilePath + '/sanity.dataset';
 const projectID = fs.readFileSync(projectIDPath, 'utf8');
 const token = fs.readFileSync(tokenPath, 'utf8');
 const dataset = fs.readFileSync(datasetPath, 'utf8');
-const client = sanityClient({ // eslint-disable-line no-unused-vars
+const client = sanityClient({
     projectId: projectID,
     dataset: dataset,
     token: token,
@@ -28,7 +28,6 @@ app.get('/soknadsveiviserproxy/isReady', (req, res) =>
     res.sendStatus(200));
 
 app.get('/soknadsveiviserproxy/allekategorier', (req, res) => {
-    console.log(locale);
     client.fetch(sporringer.alleKategorier()).then((docs) => {
         res.send(docs);
     }).catch((error) => console.log(error));
