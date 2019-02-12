@@ -6,20 +6,18 @@ const fs = require('file-system');
 
 const app = express();
 
-if (process.env.NODE_ENV === 'production') {
-    const secretsFilePath = '/var/run/secrets/nais.io/vault';
-    const projectIDPath = secretsFilePath + '/sanity.projectID';
-    const tokenPath = secretsFilePath + '/sanity.token';
+const secretsFilePath = '/var/run/secrets/nais.io/vault';
+const projectIDPath = secretsFilePath + '/sanity.projectID';
+const tokenPath = secretsFilePath + '/sanity.token';
 
-    const projectID = fs.readFileSync(projectIDPath, 'utf8');
-    const token = fs.readFileSync(tokenPath, 'utf8');
-    const client = sanityClient({ // eslint-disable-line no-unused-vars
-        projectId: projectID,
-        dataset: 'skjemaveileder',
-        token: token,
-        useCdn: false,
-    });
-}
+const projectID = fs.readFileSync(projectIDPath, 'utf8');
+const token = fs.readFileSync(tokenPath, 'utf8');
+const client = sanityClient({ // eslint-disable-line no-unused-vars
+    projectId: projectID,
+    dataset: 'skjemaveileder',
+    token: token,
+    useCdn: false,
+});
 
 app.get('/soknadsveiviserproxy/isAlive', (req, res) =>
     res.sendStatus(200));
