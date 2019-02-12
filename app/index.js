@@ -28,7 +28,7 @@ app.get('/soknadsveiviserproxy/isReady', (req, res) =>
     res.sendStatus(200));
 
 app.get('/soknadsveiviserproxy/allekategorier', (req, res) => {
-    client.fetch(sporringer.underkategori(req.query.locale)).then((docs) => {
+    client.fetch(sporringer.alleKategorier(req.query.locale)).then((docs) => {
         res.send(docs);
     }).catch((error) => console.log(error));
 });
