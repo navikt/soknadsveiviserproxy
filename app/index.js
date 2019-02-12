@@ -28,22 +28,25 @@ app.get('/soknadsveiviserproxy/isReady', (req, res) =>
     res.sendStatus(200));
 
 app.get('/soknadsveiviserproxy/allekategorier', (req, res) => {
-    client.fetch(sporringer.alleKategorier(req.query.locale)).then((docs) => {
+    console.log(locale);
+    client.fetch(sporringer.alleKategorier()).then((docs) => {
         res.send(docs);
     }).catch((error) => console.log(error));
 });
 
 app.get('/soknadsveiviserproxy/underkategori', (req, res) => {
+    kategori = JSON.stringify(req.query.kategori);
+    underkategori = JSON.stringify(req.query.underkategori);
     client.fetch(
-        sporringer.underkategori(
-            req.query.kategori, req.query.underkategori, req.query.locale
-        )
+        sporringer.underkategori(kategori, underkategori)
     ).then((docs) => {
         res.send(docs);
     }).catch((error) => console.log(error));
 });
 
 app.get('/soknadsveiviserproxy/soknadsobjekt', (req, res) => {
+    kategori = JSON.stringify(req.query.kategori);
+    underkategori = JSON.stringify(req.query.underkategori);
     client.fetch(
         sporringer.soknadsobjektsQuery(
             req.query.kategori, req.query.underkategori

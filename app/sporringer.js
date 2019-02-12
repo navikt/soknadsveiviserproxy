@@ -1,17 +1,19 @@
 
-const alleKategorier = ( locale ) => {
+const alleKategorier = () => {
+    let locale = 'nb'; // temp, skal hente begge sprak
     return `*[_type == "kategori" && !(_id in path("drafts.**"))]
     {"tittel": tittel.${locale}, urlparam, domene, underkategorier[]
     {"navn": navn.${locale}, urlparam, lenketilhorlighet}}`;
 };
 
 const underkategori =
-    (kategoriUrlparam, underkategoriUrlparam, locale) => {
+    (kategoriUrlparam, underkategoriUrlparam) => {
+    let locale = 'nb'; // temp, skal hente begge sprak
         return (
-            `*[_type == "kategori" && urlparam == "${kategoriUrlparam}" 
+            `*[_type == "kategori" && urlparam == ${kategoriUrlparam} 
             && !(_id in path("drafts.**"))]
             {"underkategori": underkategorier
-                [ urlparam == "${underkategoriUrlparam}" ][0]
+                [ urlparam == ${underkategoriUrlparam} ][0]
                     {"navn": navn.${locale}, inngangtilsoknadsdialog
                         {"soknadsdialogURL": soknadsdialogURL.${locale}, 
                         lenker[]{"lenke" : lenke.${locale}, 
@@ -23,9 +25,9 @@ const underkategori =
     };
 
 const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
-    return (`*[_type == "kategori" && urlparam == "${kategoriUrlparam}" 
+    return (`*[_type == "kategori" && urlparam == ${kategoriUrlparam} 
         && !(_id in path("drafts.**"))]{
-            underkategorier[ urlparam == "${underkategoriUrlparam}" ][0]{
+            underkategorier[ urlparam == ${underkategoriUrlparam} ][0]{
                 navn, inngangtilsoknadsdialog, soknadsobjekter[] -> {
                      inngangtilsoknadsdialog, hovedskjema ->, tema->, 
                      beskrivelse, dokumentinnsending, gosysid, 
