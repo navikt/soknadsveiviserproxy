@@ -9,8 +9,8 @@
     "lint": "eslint index.js",
     "docker-build": "docker build -t soknadsveiviserproxy .",
     "docker-run": "docker run --rm -p 8080:8080 soknadsveiviserproxy",
-    "test:coverage": "exit 0",
-    "build": "exit 0"
+    "deploy-preprod": "kubectl apply -f ../nais-preprod.yaml",
+    "deploy-prod": "kubectl apply -f ../nais-prod.yaml"
   },
   "repository": {
     "type": "git",
