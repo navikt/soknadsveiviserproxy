@@ -52,7 +52,7 @@ app.get('/soknadsveiviserproxy/soknadsobjekt', (req, res) => {
 });
 
 app.get('/soknadsveiviserproxy/alleskjemaer', (req, res) => {
-    client.fetch(sporringer.alleskjemaerQuery)
+    client.fetch(sporringer.alleskjemaerQuery())
         .then((docs) => {
             res.send(docs);
         })
@@ -60,7 +60,7 @@ app.get('/soknadsveiviserproxy/alleskjemaer', (req, res) => {
 });
 
 app.get('/soknadsveiviserproxy/samlet', (req, res) => {
-    client.fetch(sporringer.samleQuery)
+    client.fetch(sporringer.samleQuery())
         .then((docs) => {
             res.send(docs);
         })
