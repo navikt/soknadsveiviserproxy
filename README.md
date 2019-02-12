@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/navikt/soknadsveiviserproxy.svg?style=svg)](https://circleci.com/gh/navikt/soknadsveiviserproxy)
+
 # soknadsveiviserproxy
 
 Soknadsveiviserproxy er en Node.js Express applikasjon .
