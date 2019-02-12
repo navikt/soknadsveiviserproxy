@@ -9,12 +9,14 @@ const app = express();
 const secretsFilePath = '/var/run/secrets/nais.io/vault';
 const projectIDPath = secretsFilePath + '/sanity.projectID';
 const tokenPath = secretsFilePath + '/sanity.token';
+const datasetPath = secretsFilePath + '/sanity.dataset';
 
 const projectID = fs.readFileSync(projectIDPath, 'utf8');
 const token = fs.readFileSync(tokenPath, 'utf8');
+const dataset = fs.readFileSync(datasetPath, 'utf8');
 const client = sanityClient({ // eslint-disable-line no-unused-vars
     projectId: projectID,
-    dataset: 'skjemaveileder',
+    dataset: dataset,
     token: token,
     useCdn: false,
 });
