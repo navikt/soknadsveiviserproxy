@@ -1,25 +1,34 @@
 const sporringer = require('./sporringer');
-
 const express = require('express');
 const sanityClient = require('@sanity/client');
 const fs = require('file-system');
 
 const app = express();
 
-const secretsFilePath = '/var/run/secrets/nais.io/vault';
-const projectIDPath = secretsFilePath + '/sanity.projectID';
-const tokenPath = secretsFilePath + '/sanity.token';
-const datasetPath = secretsFilePath + '/sanity.dataset';
+if (process.env.NODE_ENV === 'production') {
+    const secretsFilePath = '/var/run/secrets/nais.io/vault';
+    const projectIDPath = secretsFilePath + '/sanity.projectID';
+    const tokenPath = secretsFilePath + '/sanity.token';
+    const datasetPath = secretsFilePath + '/sanity.dataset';
 
-const projectID = fs.readFileSync(projectIDPath, 'utf8');
-const token = fs.readFileSync(tokenPath, 'utf8');
-const dataset = fs.readFileSync(datasetPath, 'utf8');
-const client = sanityClient({
-    projectId: projectID,
-    dataset: dataset,
-    token: token,
-    useCdn: false,
-});
+    const projectID = fs.readFileSync(projectIDPath, 'utf8');
+    const token = fs.readFileSync(tokenPath, 'utf8');
+    const dataset = fs.readFileSync(datasetPath, 'utf8');
+    const client = sanityClient({
+        projectId: projectID,
+        dataset: dataset,
+        token: token,
+        useCdn: false,
+    });
+
+} else {
+    const client = sanityClient({
+        projectId: 'gx9wf39f',
+        dataset: 'local-testset',
+        useCdn: true,
+    });
+}
+
 
 app.get('/soknadsveiviserproxy/isAlive', (req, res) =>
     res.sendStatus(200));
