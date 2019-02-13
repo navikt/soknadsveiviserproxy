@@ -1,34 +1,9 @@
 const sporringer = require('./sporringer');
 const express = require('express');
-const sanityClient = require('@sanity/client');
-const fs = require('file-system');
+const createSanityClient = require('./createSanityClient');
 
 const app = express();
-
-if (process.env.NODE_ENV === 'production') {
-    const secretsFilePath = '/var/run/secrets/nais.io/vault';
-    const projectIDPath = secretsFilePath + '/sanity.projectID';
-    const tokenPath = secretsFilePath + '/sanity.token';
-    const datasetPath = secretsFilePath + '/sanity.dataset';
-
-    const projectID = fs.readFileSync(projectIDPath, 'utf8');
-    const token = fs.readFileSync(tokenPath, 'utf8');
-    const dataset = fs.readFileSync(datasetPath, 'utf8');
-    const client = sanityClient({
-        projectId: projectID,
-        dataset: dataset,
-        token: token,
-        useCdn: false,
-    });
-
-} else {
-    const client = sanityClient({
-        projectId: 'gx9wf39f',
-        dataset: 'local-testset',
-        useCdn: true,
-    });
-}
-
+const sanityClient = createSanityClient();
 
 app.get('/soknadsveiviserproxy/isAlive', (req, res) =>
     res.sendStatus(200));
@@ -37,7 +12,7 @@ app.get('/soknadsveiviserproxy/isReady', (req, res) =>
     res.sendStatus(200));
 
 app.get('/soknadsveiviserproxy/allekategorier', (req, res) => {
-    client.fetch(sporringer.alleKategorier()).then((docs) => {
+    sanityClient.fetch(sporringer.alleKategorier()).then((docs) => {
         res.send(docs);
     }).catch((error) => console.log(error));
 });
@@ -45,7 +20,7 @@ app.get('/soknadsveiviserproxy/allekategorier', (req, res) => {
 app.get('/soknadsveiviserproxy/underkategori', (req, res) => {
     kategori = JSON.stringify(req.query.kategori);
     underkategori = JSON.stringify(req.query.underkategori);
-    client.fetch(
+    sanityClient.fetch(
         sporringer.underkategori(kategori, underkategori)
     ).then((docs) => {
         res.send(docs);
@@ -55,7 +30,7 @@ app.get('/soknadsveiviserproxy/underkategori', (req, res) => {
 app.get('/soknadsveiviserproxy/soknadsobjekt', (req, res) => {
     kategori = JSON.stringify(req.query.kategori);
     underkategori = JSON.stringify(req.query.underkategori);
-    client.fetch(
+    sanityClient.fetch(
         sporringer.soknadsobjektsQuery(
             req.query.kategori, req.query.underkategori
         )
@@ -65,7 +40,7 @@ app.get('/soknadsveiviserproxy/soknadsobjekt', (req, res) => {
 });
 
 app.get('/soknadsveiviserproxy/alleskjemaer', (req, res) => {
-    client.fetch(sporringer.alleskjemaerQuery())
+    sanityClient.fetch(sporringer.alleskjemaerQuery())
         .then((docs) => {
             res.send(docs);
         })
@@ -73,7 +48,7 @@ app.get('/soknadsveiviserproxy/alleskjemaer', (req, res) => {
 });
 
 app.get('/soknadsveiviserproxy/samlet', (req, res) => {
-    client.fetch(sporringer.samleQuery())
+    sanityClient.fetch(sporringer.samleQuery())
         .then((docs) => {
             res.send(docs);
         })
