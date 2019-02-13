@@ -1,4 +1,5 @@
 # Soknadsveiviserproxy
+[![CircleCI](https://circleci.com/gh/navikt/soknadsveiviserproxy.svg?style=svg)](https://circleci.com/gh/navikt/soknadsveiviserproxy)
 
 Node.js Express applikasjon som mellomledd mellom [Soknadsveiviser](https://github.com/navikt/soknadsveiviser) og [Sanity](https://www.sanity.io/) som benyttes som database.
 
