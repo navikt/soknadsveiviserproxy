@@ -10,10 +10,11 @@ const underkategori =
     (kategoriUrlparam, underkategoriUrlparam) => {
     let locale = 'nb'; // temp, skal hente begge sprak
         return (
-            `*[_type == "kategori" && urlparam == ${kategoriUrlparam} 
+            `*[_type == "kategori" 
+            && urlparam == ${JSON.stringify(kategoriUrlparam)} 
             && !(_id in path("drafts.**"))]
             {"underkategori": underkategorier
-                [ urlparam == ${underkategoriUrlparam} ][0]
+                [ urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]
                     {"navn": navn.${locale}, inngangtilsoknadsdialog
                         {"soknadsdialogURL": soknadsdialogURL.${locale}, 
                         lenker[]{"lenke" : lenke.${locale}, 
@@ -25,9 +26,11 @@ const underkategori =
     };
 
 const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
-    return (`*[_type == "kategori" && urlparam == ${kategoriUrlparam} 
+    return (`*[_type == "kategori" 
+    && urlparam == ${JSON.stringify(kategoriUrlparam)} 
         && !(_id in path("drafts.**"))]{
-            underkategorier[ urlparam == ${underkategoriUrlparam} ][0]{
+            underkategorier[ 
+            urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]{
                 navn, inngangtilsoknadsdialog, soknadsobjekter[] -> {
                      inngangtilsoknadsdialog, hovedskjema ->, tema->, 
                      beskrivelse, dokumentinnsending, gosysid, 
