@@ -4,12 +4,10 @@ RUN ln -fs /usr/share/zoneinfo/Europe/Oslo /etc/localtime
 ENV NODE_ENV production
 ENV CI=true
 
+COPY app /app
 WORKDIR /app
 
 EXPOSE 8080
-
-COPY package*.json /app/
-COPY index.js /app/
 
 RUN npm install
 CMD ["node", "index.js"]

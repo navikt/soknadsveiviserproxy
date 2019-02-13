@@ -1,16 +1,34 @@
+# Soknadsveiviserproxy
 [![CircleCI](https://circleci.com/gh/navikt/soknadsveiviserproxy.svg?style=svg)](https://circleci.com/gh/navikt/soknadsveiviserproxy)
 
-# soknadsveiviserproxy
+Node.js Express applikasjon som mellomledd mellom [Soknadsveiviser](https://github.com/navikt/soknadsveiviser) og [Sanity](https://www.sanity.io/) som benyttes som database.
 
-Soknadsveiviserproxy er en Node.js Express applikasjon .
+### Kom i gang
 
-For lokal kjøring:
-`npm install` og
-`node index.js`
+```
+cd app && npm install
+```
+
+Kjør applikasjonen
+
+```
+node index.js
+```
+
+### Bygg
 
 For å laste opp til docker og deploye til preprod:
-`docker build -t navikt/soknadsveiviserproxy:VERSION .`
-`docker push navikt/soknadsveiviserproxy:VERSION`
-`kubectl apply -f app-config.yaml`
+
+```
+docker build -t navikt/soknadsveiviserproxy:VERSION .
+```
+
+```
+docker push navikt/soknadsveiviserproxy:VERSION
+```
+
+```
+npm run deploy-preprod
+```
 
 Applikasjonen ligger i default namespace i preprod-sbs.

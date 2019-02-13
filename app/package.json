@@ -9,9 +9,8 @@
     "lint": "eslint index.js",
     "docker-build": "docker build -t soknadsveiviserproxy .",
     "docker-run": "docker run --rm -p 8080:8080 soknadsveiviserproxy",
-    "deploy": "kubectl apply -f nais.yaml",
-    "test:coverage": "exit 0",
-    "build": "exit 0"
+    "deploy-preprod": "kubectl apply -f ../nais-preprod.yaml",
+    "deploy-prod": "kubectl apply -f ../nais-prod.yaml"
   },
   "repository": {
     "type": "git",
@@ -27,7 +26,6 @@
     "@sanity/client": "^0.140.7",
     "express": "^4.16.3",
     "file-system": "^2.2.2",
-    "request": "^2.88.0",
     "serve-static": "^1.13.2"
   },
   "devDependencies": {
