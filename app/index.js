@@ -23,7 +23,7 @@ app.get('/soknadsveiviserproxy/isReady', (req, res) => res.sendStatus(200));
 app.get('/soknadsveiviserproxy/allekategorier', (req, res) =>
   sanityClient
     .fetch(sporringer.alleKategorier())
-    .then(res.send.bind(res))
+    .then((docs) => res.send(docs))
     .catch(console.log)
 );
 
@@ -32,7 +32,7 @@ app.get('/soknadsveiviserproxy/underkategori', (req, res) =>
     .fetch(
       sporringer.underkategori(req.query.kategori, req.query.underkategori)
     )
-    .then(res.send.bind(res))
+    .then((docs) => res.send(docs))
     .catch(console.log)
 );
 
@@ -44,21 +44,21 @@ app.get('/soknadsveiviserproxy/soknadsobjekt', (req, res) =>
         req.query.underkategori
       )
     )
-    .then(res.send.bind(res))
+    .then((docs) => res.send(docs))
     .catch(console.log)
 );
 
 app.get('/soknadsveiviserproxy/alleskjemaer', (req, res) => {
   sanityClient
     .fetch(sporringer.alleskjemaerQuery())
-    .then(res.send.bind(res))
+    .then((docs) => res.send(docs))
     .catch(console.log);
 });
 
 app.get('/soknadsveiviserproxy/samlet', (req, res) => {
   sanityClient
     .fetch(sporringer.samleQuery())
-    .then(res.send.bind(res))
+    .then((docs) => res.send(docs))
     .catch(console.log);
 });
 
