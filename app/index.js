@@ -27,15 +27,6 @@ app.get('/soknadsveiviserproxy/allekategorier', (req, res) =>
     .catch(console.error)
 );
 
-app.get('/soknadsveiviserproxy/underkategori', (req, res) =>
-  sanityClient
-    .fetch(
-      sporringer.underkategori(req.query.kategori, req.query.underkategori)
-    )
-    .then((docs) => res.send(docs))
-    .catch(console.error)
-);
-
 app.get('/soknadsveiviserproxy/soknadsobjekt', (req, res) =>
   sanityClient
     .fetch(
