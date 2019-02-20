@@ -57,7 +57,6 @@ const samleQuery = () => {
 module.exports = {
   alleKategorier,
   soknadsobjektsQuery,
-  underkategori,
   alleskjemaerQuery,
   samleQuery,
 };
