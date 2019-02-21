@@ -1,24 +1,7 @@
 const alleKategorier = () => {
-  let locale = 'nb'; // temp, skal hente begge sprak
   return `*[_type == "kategori" && !(_id in path("drafts.**"))]
-    {"tittel": tittel.${locale}, urlparam, domene, underkategorier[]
-    {"navn": navn.${locale}, urlparam, lenketilhorlighet}}`;
-};
-
-const underkategori = (kategoriUrlparam, underkategoriUrlparam) => {
-  let locale = 'nb'; // temp, skal hente begge sprak
-  return `*[_type == "kategori"
-            && urlparam == ${JSON.stringify(kategoriUrlparam)}
-            && !(_id in path("drafts.**"))]
-            {"underkategori": underkategorier
-                [ urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]
-                    {"navn": navn.${locale}, inngangtilsoknadsdialog
-                        {"soknadsdialogURL": soknadsdialogURL.${locale},
-                        lenker[]{"lenke" : lenke.${locale},
-                        "tekst" : tekst.${locale}
-                    }, punktliste[]{"punkt" : ${locale}}
-                }, soknadsobjekter}
-            }.underkategori`;
+    {tittel, urlparam, domene, underkategorier[]
+    {navn, urlparam, lenketilhorlighet}}`;
 };
 
 const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
@@ -41,6 +24,13 @@ const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
             }
         }`;
 };
+
+const alleSoknadsobjekterQuery = () => {
+  return `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
+    {hovedskjema->{navn, skjemanummer, pdf{nb{asset->}, en{asset->}}},
+     tema->, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
+};
+
 
 const alleskjemaerQuery = () => {
   return `*[_type == "skjema" && !(_id in path("drafts.**"))]
@@ -74,7 +64,7 @@ const samleQuery = () => {
 module.exports = {
   alleKategorier,
   soknadsobjektsQuery,
-  underkategori,
+  alleSoknadsobjekterQuery,
   alleskjemaerQuery,
   samleQuery,
 };
