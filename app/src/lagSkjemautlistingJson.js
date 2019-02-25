@@ -10,7 +10,9 @@ const builder = imageUrlBuilder(createSanityClient());
 function lagSkjemautlistingJson(alleSoknadsobjekter) {
   const resultJson = alleSoknadsobjekter.reduce(
     (arrayAvJson, soknadsobjekt) => {
-      return arrayAvJson.concat(lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt));
+      return arrayAvJson.concat(
+        lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt)
+      );
     },
     []
   );
@@ -107,4 +109,4 @@ function lagJSON(skjema, tema, vedleggsID) {
   };
 }
 
-module.exports = lagSkjemautlistingJson;
+module.exports = { lagSkjemautlistingJson, lagJSON };

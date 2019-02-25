@@ -31,7 +31,6 @@ const alleSoknadsobjekterQuery = () => {
      tema->, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
 };
 
-
 const alleskjemaerQuery = () => {
   return `*[_type == "skjema" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, skjemanummer, "navn": navn.nb,
