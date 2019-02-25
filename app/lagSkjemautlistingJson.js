@@ -14,13 +14,12 @@ function lagSkjemautlistingJson(alleSoknadsobjekter) {
     },
     []
   );
-
   return { Skjemaer: resultJson };
 }
 
 /**
  * Genererer en url til valgt PDF-objekt gitt et asset-objekt fra sanity
- * @param {JSON} asset
+ * @param {Object} asset
  * @return {string}
  */
 function pdfUrl(asset) {
@@ -28,14 +27,19 @@ function pdfUrl(asset) {
 }
 
 /**
- * Genererer en JSON med alle skjemaer
- * @param {JSON} pdfObjekt
+ * Henter url til pdf, eller tom string dersom det ikke finnes noen pdf
+ * @param {Object} pdfObjekt
  * @return {string}
  */
 function hentUrlTilPDFEllerTomString(pdfObjekt) {
   return pdfObjekt ? pdfUrl(pdfObjekt.asset) : "";
 }
 
+/**
+ * Tar inn et søknadsobjekt og returnerer JSON for de vedleggene som har tilhørende skjema
+ * @param {Object} soknadsobjekt
+ * @return {JSON[]}
+ */
 function sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(soknadsobjekt) {
   return soknadsobjekt.vedleggtilsoknad
     .map(v => v.vedlegg)
@@ -52,6 +56,11 @@ function sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(soknadsobjekt) {
     }, []);
 }
 
+/**
+ * Tar inn et søknadsobjekt og returnerer JSON for de tilhørende skjemaene
+ * @param {Object} soknadsobjekt
+ * @return {JSON[]}
+ */
 function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
   const skjemaJson = lagJSON(
     soknadsobjekt.hovedskjema,
@@ -70,6 +79,13 @@ function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
   return skjemaJson;
 }
 
+/**
+ * Tar inn et informasjon om et skjema og generer JSON utfra det
+ * @param {Object} skjema
+ * @param {string} tema
+ * @param {string} vedleggsID
+ * @return {JSON}
+ */
 function lagJSON(skjema, tema, vedleggsID) {
   return {
     Skjemanummer: skjema.skjemanummer,
