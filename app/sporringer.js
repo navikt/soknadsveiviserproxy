@@ -1,6 +1,6 @@
 const alleKategorier = () => {
   return `*[_type == "kategori" && !(_id in path("drafts.**"))]
-    {tittel, urlparam, domene, underkategorier[]
+    {tittel, urlparam, domene, "domenefarge":domenefarge.hex, "kantfarge":kantfarge.hex, underkategorier[]
     {navn, urlparam, lenketilhorlighet}}`;
 };
 
