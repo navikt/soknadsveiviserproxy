@@ -6,7 +6,7 @@ metadata:
   labels:
     team: personbruker
 spec:
-  image: navikt/soknadsveiviserproxy:35
+  image: navikt/soknadsveiviserproxy:37
   team: personbruker
   port: 8080
   ingresses:
