@@ -10,8 +10,7 @@ const builder = imageUrlBuilder(createSanityClient());
 function lagSkjemautlistingJson(alleSoknadsobjekter) {
   const resultJson = alleSoknadsobjekter.reduce(
     (arrayAvJson, soknadsobjekt) => {
-      arrayAvJson.push(lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt));
-      return arrayAvJson;
+      return arrayAvJson.concat(lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt));
     },
     []
   );
@@ -64,9 +63,10 @@ function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
     const vedleggsJSON = sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(
       soknadsobjekt
     );
-    return vedleggsJSON.length > 0 ? vedleggsJSON.push(skjemaJson) : skjemaJson;
+    if (vedleggsJSON.length > 0) {
+      return vedleggsJSON.concat(skjemaJson);
+    }
   }
-
   return skjemaJson;
 }
 
