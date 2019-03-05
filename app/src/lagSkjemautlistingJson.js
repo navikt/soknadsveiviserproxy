@@ -34,7 +34,7 @@ function pdfUrl(asset) {
  * @return {string}
  */
 function hentUrlTilPDFEllerTomString(pdfObjekt) {
-  return pdfObjekt ? pdfUrl(pdfObjekt.asset) : "";
+  return pdfObjekt && pdfObjekt.asset ? pdfUrl(pdfObjekt.asset) : "";
 }
 
 /**
@@ -51,6 +51,7 @@ function sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(soknadsobjekt) {
         lagJSON(
           vedlegg.skjematilvedlegg,
           soknadsobjekt.tema.temakode,
+          soknadsobjekt.gosysid,
           vedlegg.vedleggsID
         )
       );
@@ -67,6 +68,7 @@ function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
   const skjemaJson = lagJSON(
     soknadsobjekt.hovedskjema,
     soknadsobjekt.tema.temakode,
+    soknadsobjekt.gosysid,
     ""
   );
 
@@ -85,10 +87,11 @@ function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
  * Tar inn et informasjon om et skjema og generer JSON utfra det
  * @param {Object} skjema
  * @param {string} tema
+ * @param {string} gosysid
  * @param {string} vedleggsID
  * @return {JSON}
  */
-function lagJSON(skjema, tema, vedleggsID) {
+function lagJSON(skjema, tema, gosysid, vedleggsID) {
   return {
     Skjemanummer: skjema.skjemanummer,
     VedleggsId: vedleggsID,
@@ -96,7 +99,7 @@ function lagJSON(skjema, tema, vedleggsID) {
     Tittel_en: skjema.navn.en,
     Tittel_nn: skjema.navn.nn,
     Tema: tema,
-    Gosysid: skjema.gosysid,
+    Gosysid: gosysid,
     "Beskrivelse (ID)": "000000",
     Lenke: hentUrlTilPDFEllerTomString(skjema.pdf.nb),
     "Lenke engelsk skjema": hentUrlTilPDFEllerTomString(skjema.pdf.en),
