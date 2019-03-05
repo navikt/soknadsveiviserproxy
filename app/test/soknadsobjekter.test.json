@@ -1,0 +1,1354 @@
+[
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+            "_rev": "4KPdxyeKLfFDx0f2UbNhbJ",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "67d50e474f74dc801438bbf8ffdcdce22eef824e",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 11-1305bm01-2018nett.pdf",
+            "path": "files/gx9wf39f/local-testset/67d50e474f74dc801438bbf8ffdcdce22eef824e.pdf",
+            "sha1hash": "67d50e474f74dc801438bbf8ffdcdce22eef824e",
+            "size": 864275,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/67d50e474f74dc801438bbf8ffdcdce22eef824e.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 11-13.05"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T15:22:40Z",
+      "_id": "05041dca-f9f4-4025-991d-9bcd9f7e3e0e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "KON",
+      "tematekst": "Kontantstøtte"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 480999,
+          "vedleggsid": "T3"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Dette er et navn",
+        "nn": "Dette er eit namn"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0HzKN",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "fea40c7da4961548932600bd2fc4a620607be880",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-1603bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf",
+            "sha1hash": "fea40c7da4961548932600bd2fc4a620607be880",
+            "size": 1707216,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 04-16.03"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T12:00:03Z",
+      "_id": "0b56ab8f-f263-40ef-82ee-85586f56f311",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S3",
+      "temakode": "GRU",
+      "tematekst": "Grunn- og hjelpestønad"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": -2,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-07-17T07:59:43Z",
+            "_id": "41e35ced-1349-483f-b5d5-c0a5e4352e88",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "1a26ecd8d712",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2019-01-17"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "Skjem2"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 10-07.50"
+          },
+          "vedleggsid": "F2"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": 100,
+          "vedleggsid": "L2"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": -1,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-08-10T12:49:42Z",
+            "_id": "26c65f2c-a310-478b-9866-c3589c3eafac",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "5e558526400b",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2018-10-01",
+              "nn": "2018-10-25"
+            },
+            "gyldigtil": {
+              "_type": "localeDate",
+              "nb": "2029-10-01",
+              "nn": "2029-10-01"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 11-13.05"
+          },
+          "vedleggsid": "H3"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+            "_rev": "4KPdxyeKLfFDx0f2UbNhbJ",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "67d50e474f74dc801438bbf8ffdcdce22eef824e",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 11-1305bm01-2018nett.pdf",
+            "path": "files/gx9wf39f/local-testset/67d50e474f74dc801438bbf8ffdcdce22eef824e.pdf",
+            "sha1hash": "67d50e474f74dc801438bbf8ffdcdce22eef824e",
+            "size": 864275,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/67d50e474f74dc801438bbf8ffdcdce22eef824e.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 11-13.05"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T11:59:24Z",
+      "_id": "6f904278-54dd-4675-84a5-c2000e33653e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "PEN",
+      "tematekst": "Pensjon"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 100,
+          "vedleggsid": "L2"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Dette er et navn",
+        "nn": "Dette er eit namn"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0HzKN",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "fea40c7da4961548932600bd2fc4a620607be880",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-1603bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf",
+            "sha1hash": "fea40c7da4961548932600bd2fc4a620607be880",
+            "size": 1707216,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 04-16.03"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T11:59:24Z",
+      "_id": "6f904278-54dd-4675-84a5-c2000e33653e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "PEN",
+      "tematekst": "Pensjon"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 654321,
+          "vedleggsid": "A4"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Krav − underholdsbidrag til ektefelle"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:15Z",
+            "_id": "file-e743c98220187dff663337c01e50584213123a71-pdf",
+            "_rev": "4KPdxyeKLfFDx0f2UbNmWp",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:15Z",
+            "assetId": "e743c98220187dff663337c01e50584213123a71",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 53-0005bm05-2015nettorienteringen (1).pdf",
+            "path": "files/gx9wf39f/local-testset/e743c98220187dff663337c01e50584213123a71.pdf",
+            "sha1hash": "e743c98220187dff663337c01e50584213123a71",
+            "size": 435620,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/e743c98220187dff663337c01e50584213123a71.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 53-00.05"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T15:22:40Z",
+      "_id": "05041dca-f9f4-4025-991d-9bcd9f7e3e0e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "KON",
+      "tematekst": "Kontantstøtte"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 480136,
+          "vedleggsid": "S7"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "en": "Application for unemployment benefits",
+        "nb": "Søknad om dagpenger (ikke permittert)"
+      },
+      "pdf": {
+        "en": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:15Z",
+            "_id": "file-8d653940c0a871ef4d8dff7f1ff684e3152011fe-pdf",
+            "_rev": "sq9L45nK3Q4RgaGoLMf2rD",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:15Z",
+            "assetId": "8d653940c0a871ef4d8dff7f1ff684e3152011fe",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-0103en06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/8d653940c0a871ef4d8dff7f1ff684e3152011fe.pdf",
+            "sha1hash": "8d653940c0a871ef4d8dff7f1ff684e3152011fe",
+            "size": 860946,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/8d653940c0a871ef4d8dff7f1ff684e3152011fe.pdf"
+          }
+        },
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:15Z",
+            "_id": "file-88b062debf87d140dcda6bd6b4414af16fa9db89-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0I0td",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:15Z",
+            "assetId": "88b062debf87d140dcda6bd6b4414af16fa9db89",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-0103bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/88b062debf87d140dcda6bd6b4414af16fa9db89.pdf",
+            "sha1hash": "88b062debf87d140dcda6bd6b4414af16fa9db89",
+            "size": 1407997,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/88b062debf87d140dcda6bd6b4414af16fa9db89.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 04-01.03"
+    },
+    "tema": {
+      "_createdAt": "2019-01-22T11:00:36Z",
+      "_id": "0e48f65f-d244-4f62-997b-fa4cfc172c68",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "28",
+      "temakode": "DAG",
+      "tematekst": "Dagpenger"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 0,
+          "skjematilvedlegg": {
+            "_createdAt": "2019-01-22T11:13:40Z",
+            "_id": "863ab9c3-d2be-4f28-a616-928da6a5a211",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "beskrivelse": {
+              "_type": "localeTextSkjema",
+              "nb": "??"
+            },
+            "emneord": [
+              {
+                "_key": "412717e35e96",
+                "_ref": "9cd0f4e5-c57f-446d-af39-854b18c9877b",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2019-01-22"
+            },
+            "malgruppe": "Privatpersoner",
+            "navn": {
+              "_type": "localeStringSkjema",
+              "nb": "Bekreftelse på sluttårsak/nedsatt arbeidstid (ikke permittert)"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-7eb368dde26ebf898357347d1971281eff68b577-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 04-08.03"
+          },
+          "vedleggsid": "G1"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": 0,
+          "skjematilvedlegg": {
+            "_createdAt": "2019-01-22T11:08:50Z",
+            "_id": "9fd213d8-b374-409f-b8fc-23995df08e7e",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "2a7354a2308d",
+                "_ref": "9cd0f4e5-c57f-446d-af39-854b18c9877b",
+                "_type": "reference"
+              },
+              {
+                "_key": "29d8e4326587",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "en": "2019-01-22",
+              "nb": "2019-01-22"
+            },
+            "navn": {
+              "_type": "localeString",
+              "en": "Application for unemployment benefits",
+              "nb": "Søknad om dagpenger (ikke permittert)"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "en": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-8d653940c0a871ef4d8dff7f1ff684e3152011fe-pdf",
+                  "_type": "reference"
+                }
+              },
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-88b062debf87d140dcda6bd6b4414af16fa9db89-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 04-01.03"
+          },
+          "vedleggsid": "A2"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": 0,
+          "vedleggsid": "X8"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": 480136,
+          "vedleggsid": "S7"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "tittel"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0HzKN",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "fea40c7da4961548932600bd2fc4a620607be880",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-1603bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf",
+            "sha1hash": "fea40c7da4961548932600bd2fc4a620607be880",
+            "size": 1707216,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 11-13.05"
+    },
+    "tema": {
+      "_createdAt": "2019-01-22T11:00:36Z",
+      "_id": "0e48f65f-d244-4f62-997b-fa4cfc172c68",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "28",
+      "temakode": "DAG",
+      "tematekst": "Dagpenger"
+    },
+    "vedleggtilsoknad": []
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Skjem2"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0HzKN",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "fea40c7da4961548932600bd2fc4a620607be880",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-1603bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf",
+            "sha1hash": "fea40c7da4961548932600bd2fc4a620607be880",
+            "size": 1707216,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 10-07.50"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T15:22:40Z",
+      "_id": "05041dca-f9f4-4025-991d-9bcd9f7e3e0e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "KON",
+      "tematekst": "Kontantstøtte"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 482286,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-08-16T06:51:31Z",
+            "_id": "f0e9e829-f87f-424f-a2d1-f044fb918828",
+            "_rev": "sq9L45nK3Q4RgaGoLMfyp1",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "a263bdd3fdad",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "en": "2018-10-25",
+              "nb": "2018-10-25"
+            },
+            "navn": {
+              "_type": "localeString",
+              "en": "Life certificate",
+              "nb": "Leveattest"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "en": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-ec21b05de651f218b6e4830e7dd54eb10e85bc6d-pdf",
+                  "_type": "reference"
+                }
+              },
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-ec21b05de651f218b6e4830e7dd54eb10e85bc6d-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 21-03.05"
+          },
+          "vedleggsid": "T8"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": 133,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-07-05T08:28:50Z",
+            "_id": "2549b3e9-f4e9-4391-ae5e-2e719ee0b0ce",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "97a786fe505a",
+                "_ref": "9cd0f4e5-c57f-446d-af39-854b18c9877b",
+                "_type": "reference"
+              },
+              {
+                "_key": "aec0bc984153",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2019-01-17"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "lkfdlbjej"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 34-00.08"
+          },
+          "vedleggsid": "B3"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": 480999,
+          "vedleggsid": "T3"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "lkfdlbjej"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0HzKN",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "fea40c7da4961548932600bd2fc4a620607be880",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-1603bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf",
+            "sha1hash": "fea40c7da4961548932600bd2fc4a620607be880",
+            "size": 1707216,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 34-00.08"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T11:59:24Z",
+      "_id": "6f904278-54dd-4675-84a5-c2000e33653e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "PEN",
+      "tematekst": "Pensjon"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 133,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-07-05T08:28:50Z",
+            "_id": "2549b3e9-f4e9-4391-ae5e-2e719ee0b0ce",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "97a786fe505a",
+                "_ref": "9cd0f4e5-c57f-446d-af39-854b18c9877b",
+                "_type": "reference"
+              },
+              {
+                "_key": "aec0bc984153",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2019-01-17"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "lkfdlbjej"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 34-00.08"
+          },
+          "vedleggsid": "B3"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": -1,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-08-10T12:49:42Z",
+            "_id": "26c65f2c-a310-478b-9866-c3589c3eafac",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "5e558526400b",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2018-10-01",
+              "nn": "2018-10-25"
+            },
+            "gyldigtil": {
+              "_type": "localeDate",
+              "nb": "2029-10-01",
+              "nn": "2029-10-01"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 11-13.05"
+          },
+          "vedleggsid": "H3"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+            "_rev": "4KPdxyeKLfFDx0f2UbNhbJ",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "67d50e474f74dc801438bbf8ffdcdce22eef824e",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 11-1305bm01-2018nett.pdf",
+            "path": "files/gx9wf39f/local-testset/67d50e474f74dc801438bbf8ffdcdce22eef824e.pdf",
+            "sha1hash": "67d50e474f74dc801438bbf8ffdcdce22eef824e",
+            "size": 864275,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/67d50e474f74dc801438bbf8ffdcdce22eef824e.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 11-13.05"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T11:59:24Z",
+      "_id": "6f904278-54dd-4675-84a5-c2000e33653e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "PEN",
+      "tematekst": "Pensjon"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": -1,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-08-10T12:49:42Z",
+            "_id": "26c65f2c-a310-478b-9866-c3589c3eafac",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "5e558526400b",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2018-10-01",
+              "nn": "2018-10-25"
+            },
+            "gyldigtil": {
+              "_type": "localeDate",
+              "nb": "2029-10-01",
+              "nn": "2029-10-01"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 11-13.05"
+          },
+          "vedleggsid": "H3"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+            "_rev": "4KPdxyeKLfFDx0f2UbNhbJ",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "67d50e474f74dc801438bbf8ffdcdce22eef824e",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 11-1305bm01-2018nett.pdf",
+            "path": "files/gx9wf39f/local-testset/67d50e474f74dc801438bbf8ffdcdce22eef824e.pdf",
+            "sha1hash": "67d50e474f74dc801438bbf8ffdcdce22eef824e",
+            "size": 864275,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/67d50e474f74dc801438bbf8ffdcdce22eef824e.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 11-13.05"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T12:00:03Z",
+      "_id": "0b56ab8f-f263-40ef-82ee-85586f56f311",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S3",
+      "temakode": "GRU",
+      "tematekst": "Grunn- og hjelpestønad"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": -1,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-08-10T12:49:42Z",
+            "_id": "26c65f2c-a310-478b-9866-c3589c3eafac",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "5e558526400b",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2018-10-01",
+              "nn": "2018-10-25"
+            },
+            "gyldigtil": {
+              "_type": "localeDate",
+              "nb": "2029-10-01",
+              "nn": "2029-10-01"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 11-13.05"
+          },
+          "vedleggsid": "H3"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "lkfdlbjej"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0HzKN",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "fea40c7da4961548932600bd2fc4a620607be880",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-1603bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf",
+            "sha1hash": "fea40c7da4961548932600bd2fc4a620607be880",
+            "size": 1707216,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 34-00.08"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T12:00:03Z",
+      "_id": "0b56ab8f-f263-40ef-82ee-85586f56f311",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S3",
+      "temakode": "GRU",
+      "tematekst": "Grunn- og hjelpestønad"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 100,
+          "vedleggsid": "L2"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Dette er et navn",
+        "nn": "Dette er eit namn"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0HzKN",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "fea40c7da4961548932600bd2fc4a620607be880",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-1603bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf",
+            "sha1hash": "fea40c7da4961548932600bd2fc4a620607be880",
+            "size": 1707216,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 04-16.03"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T11:59:24Z",
+      "_id": "6f904278-54dd-4675-84a5-c2000e33653e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "PEN",
+      "tematekst": "Pensjon"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 482286,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-08-16T06:51:31Z",
+            "_id": "f0e9e829-f87f-424f-a2d1-f044fb918828",
+            "_rev": "sq9L45nK3Q4RgaGoLMfyp1",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "a263bdd3fdad",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "en": "2018-10-25",
+              "nb": "2018-10-25"
+            },
+            "navn": {
+              "_type": "localeString",
+              "en": "Life certificate",
+              "nb": "Leveattest"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "en": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-ec21b05de651f218b6e4830e7dd54eb10e85bc6d-pdf",
+                  "_type": "reference"
+                }
+              },
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-ec21b05de651f218b6e4830e7dd54eb10e85bc6d-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 21-03.05"
+          },
+          "vedleggsid": "T8"
+        }
+      },
+      {
+        "vedlegg": {
+          "gosysid": 480999,
+          "vedleggsid": "T3"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "en": "Application for unemployment benefits",
+        "nb": "Søknad om dagpenger (ikke permittert)"
+      },
+      "pdf": {
+        "en": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:15Z",
+            "_id": "file-8d653940c0a871ef4d8dff7f1ff684e3152011fe-pdf",
+            "_rev": "sq9L45nK3Q4RgaGoLMf2rD",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:15Z",
+            "assetId": "8d653940c0a871ef4d8dff7f1ff684e3152011fe",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-0103en06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/8d653940c0a871ef4d8dff7f1ff684e3152011fe.pdf",
+            "sha1hash": "8d653940c0a871ef4d8dff7f1ff684e3152011fe",
+            "size": 860946,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/8d653940c0a871ef4d8dff7f1ff684e3152011fe.pdf"
+          }
+        },
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:15Z",
+            "_id": "file-88b062debf87d140dcda6bd6b4414af16fa9db89-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0I0td",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:15Z",
+            "assetId": "88b062debf87d140dcda6bd6b4414af16fa9db89",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-0103bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/88b062debf87d140dcda6bd6b4414af16fa9db89.pdf",
+            "sha1hash": "88b062debf87d140dcda6bd6b4414af16fa9db89",
+            "size": 1407997,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/88b062debf87d140dcda6bd6b4414af16fa9db89.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 04-01.03"
+    },
+    "tema": {
+      "_createdAt": "2019-01-22T11:00:36Z",
+      "_id": "0e48f65f-d244-4f62-997b-fa4cfc172c68",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "28",
+      "temakode": "DAG",
+      "tematekst": "Dagpenger"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": -1,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-08-10T12:49:42Z",
+            "_id": "26c65f2c-a310-478b-9866-c3589c3eafac",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "5e558526400b",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2018-10-01",
+              "nn": "2018-10-25"
+            },
+            "gyldigtil": {
+              "_type": "localeDate",
+              "nb": "2029-10-01",
+              "nn": "2029-10-01"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 11-13.05"
+          },
+          "vedleggsid": "H3"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "en": "Life certificate",
+        "nb": "Leveattest"
+      },
+      "pdf": {
+        "en": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:16Z",
+            "_id": "file-ec21b05de651f218b6e4830e7dd54eb10e85bc6d-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0I19b",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:16Z",
+            "assetId": "ec21b05de651f218b6e4830e7dd54eb10e85bc6d",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 21-0305bmengfrtyprosjekt01-2017nett (1).pdf",
+            "path": "files/gx9wf39f/local-testset/ec21b05de651f218b6e4830e7dd54eb10e85bc6d.pdf",
+            "sha1hash": "ec21b05de651f218b6e4830e7dd54eb10e85bc6d",
+            "size": 470331,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/ec21b05de651f218b6e4830e7dd54eb10e85bc6d.pdf"
+          }
+        },
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:16Z",
+            "_id": "file-ec21b05de651f218b6e4830e7dd54eb10e85bc6d-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0I19b",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:16Z",
+            "assetId": "ec21b05de651f218b6e4830e7dd54eb10e85bc6d",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 21-0305bmengfrtyprosjekt01-2017nett (1).pdf",
+            "path": "files/gx9wf39f/local-testset/ec21b05de651f218b6e4830e7dd54eb10e85bc6d.pdf",
+            "sha1hash": "ec21b05de651f218b6e4830e7dd54eb10e85bc6d",
+            "size": 470331,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/ec21b05de651f218b6e4830e7dd54eb10e85bc6d.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 21-03.05"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T11:59:24Z",
+      "_id": "6f904278-54dd-4675-84a5-c2000e33653e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "PEN",
+      "tematekst": "Pensjon"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": 100,
+          "vedleggsid": "L2"
+        }
+      }
+    ]
+  },
+  {
+    "hovedskjema": {
+      "navn": {
+        "_type": "localeString",
+        "nb": "Skjem2"
+      },
+      "pdf": {
+        "nb": {
+          "asset": {
+            "_createdAt": "2019-02-13T11:59:04Z",
+            "_id": "file-fea40c7da4961548932600bd2fc4a620607be880-pdf",
+            "_rev": "wf8XTxu14kfjWg5ti0HzKN",
+            "_type": "sanity.fileAsset",
+            "_updatedAt": "2019-02-13T11:59:04Z",
+            "assetId": "fea40c7da4961548932600bd2fc4a620607be880",
+            "extension": "pdf",
+            "mimeType": "application/pdf",
+            "originalFilename": "NAV 04-1603bm06-2017nett.pdf",
+            "path": "files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf",
+            "sha1hash": "fea40c7da4961548932600bd2fc4a620607be880",
+            "size": 1707216,
+            "url": "https://cdn.sanity.io/files/gx9wf39f/local-testset/fea40c7da4961548932600bd2fc4a620607be880.pdf"
+          }
+        }
+      },
+      "skjemanummer": "NAV 10-07.50"
+    },
+    "tema": {
+      "_createdAt": "2019-01-10T15:22:40Z",
+      "_id": "05041dca-f9f4-4025-991d-9bcd9f7e3e0e",
+      "_rev": "wf8XTxu14kfjWg5ti0HyMr",
+      "_type": "gosystema",
+      "_updatedAt": "2019-02-13T11:59:01Z",
+      "kategoridokument": "S2",
+      "temakode": "KON",
+      "tematekst": "Kontantstøtte"
+    },
+    "vedleggtilsoknad": [
+      {
+        "vedlegg": {
+          "gosysid": -1,
+          "skjematilvedlegg": {
+            "_createdAt": "2018-08-10T12:49:42Z",
+            "_id": "26c65f2c-a310-478b-9866-c3589c3eafac",
+            "_rev": "wf8XTxu14kfjWg5ti0IHTN",
+            "_type": "skjema",
+            "_updatedAt": "2019-02-13T11:59:41Z",
+            "emneord": [
+              {
+                "_key": "5e558526400b",
+                "_ref": "10103ca6-865d-4504-82c0-11ddb04be572",
+                "_type": "reference"
+              }
+            ],
+            "gyldigfra": {
+              "_type": "localeDate",
+              "nb": "2018-10-01",
+              "nn": "2018-10-25"
+            },
+            "gyldigtil": {
+              "_type": "localeDate",
+              "nb": "2029-10-01",
+              "nn": "2029-10-01"
+            },
+            "navn": {
+              "_type": "localeString",
+              "nb": "Søknad om arbeidsavklaringspenger (AAP)"
+            },
+            "pdf": {
+              "_type": "localeFile",
+              "nb": {
+                "_type": "file",
+                "asset": {
+                  "_ref": "file-67d50e474f74dc801438bbf8ffdcdce22eef824e-pdf",
+                  "_type": "reference"
+                }
+              }
+            },
+            "skjemanummer": "NAV 11-13.05"
+          },
+          "vedleggsid": "H3"
+        }
+      }
+    ]
+  }
+]

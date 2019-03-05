@@ -25,6 +25,12 @@ const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
         }`;
 };
 
+const alleSoknadsobjekterQuery = () => {
+  return `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
+    {hovedskjema->{navn, skjemanummer, pdf{nb{asset->}, en{asset->}}},
+     tema->, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
+};
+
 const alleskjemaerQuery = () => {
   return `*[_type == "skjema" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, skjemanummer, "navn": navn.nb,
@@ -57,6 +63,7 @@ const samleQuery = () => {
 module.exports = {
   alleKategorier,
   soknadsobjektsQuery,
+  alleSoknadsobjekterQuery,
   alleskjemaerQuery,
   samleQuery,
 };
