@@ -95,9 +95,9 @@ function lagJSON(skjema, tema, gosysid, vedleggsID) {
   return {
     Skjemanummer: skjema.skjemanummer,
     VedleggsId: vedleggsID,
-    Tittel: skjema.navn.nb,
-    Tittel_en: skjema.navn.en,
-    Tittel_nn: skjema.navn.nn,
+    Tittel: skjema.navn.nb ? skjema.navn.nb : "",
+    Tittel_en: skjema.navn.en ? skjema.navn.en : "",
+    Tittel_nn: skjema.navn.nn ? skjema.navn.nn : "",
     Tema: tema,
     Gosysid: gosysid,
     "Beskrivelse (ID)": "000000",
