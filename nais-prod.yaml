@@ -10,8 +10,8 @@ spec:
   team: personbruker
   port: 8080
   ingresses:
-    - https://soknadsveiviserproxy.nais.oera-q.local
-    - https://tjenester-q0.nav.no/soknadsveiviserproxy
+    - https://soknadsveiviserproxy.nais.oera.no
+    - https://tjenester.nav.no/soknadsveiviserproxy
   liveness:
     path: /soknadsveiviserproxy/isAlive
     initialDelay: 20
