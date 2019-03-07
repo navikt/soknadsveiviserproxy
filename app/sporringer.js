@@ -1,16 +1,16 @@
 const alleKategorier = () => {
   return `*[_type == "kategori" && !(_id in path("drafts.**"))]
     {tittel, urlparam, domene, "domenefarge":domenefarge.hex, "kantfarge":kantfarge.hex, underkategorier[]
-    {navn, urlparam, lenketilhorlighet}}`;
+    {navn, urlparam, lenketilhorlighet, inngangtilsoknadsdialog}}`;
 };
 
-const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
+const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) => {
   return `*[_type == "kategori"
     && urlparam == ${JSON.stringify(kategoriUrlparam)}
         && !(_id in path("drafts.**"))]{
             underkategorier[
             urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]{
-                navn, inngangtilsoknadsdialog, soknadsobjekter[] -> {
+                soknadsobjekter[] -> {
                      inngangtilsoknadsdialog, hovedskjema ->, tema->,
                      beskrivelse, dokumentinnsending, gosysid,
                      innsendingsmate, lenker[], navn,
@@ -25,13 +25,13 @@ const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
         }`;
 };
 
-const alleskjemaerQuery = () => {
+const alleSkjemaer = () => {
   return `*[_type == "skjema" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, skjemanummer, "navn": navn.nb,
         "pdf": pdf.nb}`;
 };
 
-const samleQuery = () => {
+const samlet = () => {
   return `*[_type == "kategori" && !(_id in path("drafts.**"))]
         {"tittel": tittel.nb, urlparam, _id,  underkategorier[]
             {_id, "navn": navn.nb, inngangtilsoknadsdialog, urlparam,
@@ -56,7 +56,7 @@ const samleQuery = () => {
 
 module.exports = {
   alleKategorier,
-  soknadsobjektsQuery,
-  alleskjemaerQuery,
-  samleQuery,
+  alleSkjemaer,
+  soknadsobjekter,
+  samlet,
 };
