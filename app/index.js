@@ -28,40 +28,36 @@ app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
     .catch(console.error)
 );
 
-app.get("/soknadsveiviserproxy/soknadsobjekt", (req, res) =>
+app.get("/soknadsveiviserproxy/soknadsobjekter", (req, res) =>
   sanityClient
     .fetch(
-      sporringer.soknadsobjektsQuery(
-        req.query.kategori,
-        req.query.underkategori
-      )
+      sporringer.soknadsobjekter(req.query.kategori, req.query.underkategori)
     )
-    .then(docs => res.send(docs))
+    .then(docs => res.send(docs[0].underkategorier.soknadsobjekter))
     .catch(console.error)
 );
 
 app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
   sanityClient
-    .fetch(sporringer.alleskjemaerQuery())
+    .fetch(sporringer.alleSkjemaer())
     .then(docs => res.send(docs))
     .catch(console.error);
 });
 
 app.get("/soknadsveiviserproxy/samlet", (req, res) => {
   sanityClient
-    .fetch(sporringer.samleQuery())
+    .fetch(sporringer.samlet())
     .then(docs => res.send(docs))
     .catch(console.error);
 });
 
-app.get("/soknadsveiviserproxy", (req, res) => res.sendStatus(200));
-
 app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
   sanityClient
-    .fetch(sporringer.alleSoknadsobjekterQuery())
+    .fetch(sporringer.alleSoknadsobjekter())
     .then(lagSkjemautlistingJson)
     .then(docs => res.send(docs))
     .catch(console.error);
 });
 
+app.get("/soknadsveiviserproxy", (req, res) => res.sendStatus(200));
 app.listen(8080, () => console.log(`App listening on port: 8080`));
