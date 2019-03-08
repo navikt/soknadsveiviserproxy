@@ -11,7 +11,7 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) => {
             underkategorier[
             urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]{
                 soknadsobjekter[] -> {
-                     inngangtilsoknadsdialog, hovedskjema ->, tema->,
+                     _id, inngangtilsoknadsdialog, hovedskjema ->, tema->,
                      beskrivelse, dokumentinnsending, gosysid,
                      innsendingsmate, lenker[], navn,
                     "vedleggtilsoknad": vedleggskjema[]{
