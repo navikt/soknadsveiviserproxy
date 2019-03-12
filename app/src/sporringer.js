@@ -13,7 +13,7 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) => {
                 soknadsobjekter[] -> {
                      _id, inngangtilsoknadsdialog, hovedskjema ->, tema->,
                      beskrivelse, dokumentinnsending, gosysid,
-                     innsendingsmate, lenker[], navn,
+                     innsendingsmate{spesifisertadresse->, skanning, visenheter}, lenker[], navn,
                     "vedleggtilsoknad": vedleggskjema[]{
                         pakrevd, situasjon, vedlegg->{
                             gosysid, kanskannes, skjematilvedlegg->,
@@ -43,7 +43,7 @@ const samlet = () => {
             {_id, "navn": navn.nb, inngangtilsoknadsdialog, urlparam,
                 soknadsobjekter[]->
                 {_id, dokumentinnsending, "navn": navn.nb, tema, urlparam,
-                    innsendingmate, hovedskjema->, "vedleggtilsoknad":
+                    innsendingmate{spesifisertadresse->, skanning, visenheter}, hovedskjema->, "vedleggtilsoknad":
                     vedleggskjema[]
                     {"beskrivelse": beskrivelse.nb, pakrevd, vedlegg->
                         {gosysid, kanskannes, vedleggsid,
