@@ -12,7 +12,7 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) => {
             urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]{
                 soknadsobjekter[] -> {
                      _id, inngangtilsoknadsdialog, hovedskjema ->, tema->,
-                     beskrivelse, dokumentinnsending, gosysid,
+                     beskrivelse, digitalinnsending, gosysid,
                      innsendingsmate{spesifisertadresse->, skanning, visenheter}, lenker[], navn,
                     "vedleggtilsoknad": vedleggskjema[]{
                         pakrevd, situasjon, vedlegg->{
@@ -42,7 +42,7 @@ const samlet = () => {
         {"tittel": tittel.nb, urlparam, _id,  underkategorier[]
             {_id, "navn": navn.nb, inngangtilsoknadsdialog, urlparam,
                 soknadsobjekter[]->
-                {_id, dokumentinnsending, "navn": navn.nb, tema, urlparam,
+                {_id, digitalinnsending, "navn": navn.nb, tema, urlparam,
                     innsendingmate{spesifisertadresse->, skanning, visenheter}, hovedskjema->, "vedleggtilsoknad":
                     vedleggskjema[]
                     {"beskrivelse": beskrivelse.nb, pakrevd, vedlegg->
