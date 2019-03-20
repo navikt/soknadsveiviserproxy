@@ -1,11 +1,10 @@
-const alleKategorier = () => {
-  return `*[_type == "kategori" && !(_id in path("drafts.**"))]
+const alleKategorier = () =>
+  `*[_type == "kategori" && !(_id in path("drafts.**"))]
     {tittel, urlparam, domene, "domenefarge":domenefarge.hex, "kantfarge":kantfarge.hex, underkategorier[]
     {navn, urlparam, lenketilhorlighet, inngangtilsoknadsdialog}}`;
-};
 
-const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) => {
-  return `*[_type == "kategori"
+const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) =>
+  `*[_type == "kategori"
     && urlparam == ${JSON.stringify(kategoriUrlparam)}
         && !(_id in path("drafts.**"))]{
             underkategorier[
@@ -23,22 +22,22 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) => {
                 }
             }
         }`;
-};
 
-const alleSoknadsobjekter = () => {
-  return `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
+const soknadsobjektKlageAnke = () =>
+  `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))]`;
+
+const alleSoknadsobjekter = () =>
+  `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
     {hovedskjema->{navn, skjemanummer, pdf{nb{asset->}, en{asset->}}},
      tema->, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
-};
 
-const alleSkjemaer = () => {
-  return `*[_type == "skjema" && !(_id in path("drafts.**"))]
+const alleSkjemaer = () =>
+  `*[_type == "skjema" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, skjemanummer, "navn": navn.nb,
         "pdf": pdf.nb}`;
-};
 
-const samlet = () => {
-  return `*[_type == "kategori" && !(_id in path("drafts.**"))]
+const samlet = () =>
+  `*[_type == "kategori" && !(_id in path("drafts.**"))]
         {"tittel": tittel.nb, urlparam, _id,  underkategorier[]
             {_id, "navn": navn.nb, inngangtilsoknadsdialog, urlparam,
                 soknadsobjekter[]->
@@ -58,12 +57,12 @@ const samlet = () => {
                 }
             }
         }`;
-};
 
 module.exports = {
   alleKategorier,
   alleSoknadsobjekter,
   alleSkjemaer,
   soknadsobjekter,
+  soknadsobjektKlageAnke,
   samlet
 };

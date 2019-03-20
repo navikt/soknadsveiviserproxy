@@ -37,6 +37,13 @@ app.get("/soknadsveiviserproxy/soknadsobjekter", (req, res) =>
     .catch(console.error)
 );
 
+app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
+  sanityClient
+    .fetch(sporringer.soknadsobjektKlageAnke())
+    .then(docs => res.send(docs))
+    .catch(console.error)
+);
+
 app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
   sanityClient
     .fetch(sporringer.alleSkjemaer())
