@@ -24,7 +24,7 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) =>
         }`;
 
 const soknadsobjektKlageAnke = () =>
-  `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))]`;
+  `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))][0]`;
 
 const alleSoknadsobjekter = () =>
   `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
