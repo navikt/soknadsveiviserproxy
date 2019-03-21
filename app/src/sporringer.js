@@ -25,7 +25,15 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) =>
 
 const soknadsobjektKlageAnke = () =>
   `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))][0]
-      {hovedskjema->, "vedleggtilsoknad": vedleggskjema[], ...}`;
+      {hovedskjema->, "vedleggtilsoknad": vedleggskjema[]{
+        vedlegg->{
+          skjematilvedlegg->,
+          ...
+        },
+        ...
+      },
+      ...
+    }`;
 
 const alleSoknadsobjekter = () =>
   `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
