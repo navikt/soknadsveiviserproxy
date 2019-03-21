@@ -19,12 +19,13 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) =>
                             vedleggsid, navn, beskrivelse
                        }
                     }
-                }
+                } 
             }
         }`;
 
 const soknadsobjektKlageAnke = () =>
-  `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))][0]`;
+  `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))][0]
+      {hovedskjema->, ...}`;
 
 const alleSoknadsobjekter = () =>
   `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
