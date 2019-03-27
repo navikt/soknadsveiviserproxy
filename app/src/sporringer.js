@@ -37,7 +37,9 @@ const soknadsobjektKlageAnke = () =>
 
 const alleSoknadsobjekter = () =>
   `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
-    {hovedskjema->{navn, skjemanummer, pdf{nb{asset->}, en{asset->}}},
+    {hovedskjema->{navn, skjemanummer, pdf
+        {nb{asset->}, en{asset->}, nn{asset->}, se{asset->}, fr{asset->}, de{asset->}, pl{asset->}, es{asset->}
+    }},
      tema->, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
 
 const alleSkjemaer = () =>

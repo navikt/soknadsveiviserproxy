@@ -4,18 +4,17 @@ const builder = imageUrlBuilder(createSanityClient());
 
 /**
  * Genererer en JSON med alle skjemaer
- * @param {JSON} alleSoknadsobjekter
+ * @param {array} alleSoknadsobjekter
  * @return {{Skjemaer: array}}
  */
 function lagSkjemautlistingJson(alleSoknadsobjekter) {
-  const resultJson = alleSoknadsobjekter.reduce(
-    (arrayAvJson, soknadsobjekt) => {
+  const resultJson = alleSoknadsobjekter
+    .filter(soknadsobjekt => soknadsobjekt.hovedskjema.pdf !== undefined)
+    .reduce((arrayAvJson, soknadsobjekt) => {
       return arrayAvJson.concat(
         lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt)
       );
-    },
-    []
-  );
+    }, []);
   return { Skjemaer: resultJson };
 }
 
@@ -46,6 +45,7 @@ function sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(soknadsobjekt) {
   return soknadsobjekt.vedleggtilsoknad
     .map(v => v.vedlegg)
     .filter(vedlegg => vedlegg.skjematilvedlegg !== undefined)
+    .filter(vedlegg => vedlegg.skjematilvedlegg.pdf !== undefined)
     .reduce((vedleggsskjemaJson, vedlegg) => {
       vedleggsskjemaJson.push(
         lagJSON(
