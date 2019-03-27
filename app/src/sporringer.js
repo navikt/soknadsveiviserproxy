@@ -40,7 +40,7 @@ const alleSoknadsobjekter = () =>
     {hovedskjema->{navn, skjemanummer, pdf
         {nb{asset->}, en{asset->}, nn{asset->}, se{asset->}, fr{asset->}, de{asset->}, pl{asset->}, es{asset->}
     }},
-     tema->, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
+     tema->, gosysid, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
 
 const alleSkjemaer = () =>
   `*[_type == "skjema" && !(_id in path("drafts.**"))]
