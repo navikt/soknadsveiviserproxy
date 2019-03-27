@@ -94,7 +94,7 @@ function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
 function lagJSON(skjema, tema, gosysid, vedleggsID) {
   return {
     Skjemanummer: skjema.skjemanummer,
-    VedleggsId: vedleggsID,
+    Vedleggsid: vedleggsID,
     Tittel: skjema.navn.nb ? skjema.navn.nb : "",
     Tittel_en: skjema.navn.en ? skjema.navn.en : "",
     Tittel_nn: skjema.navn.nn ? skjema.navn.nn : "",
