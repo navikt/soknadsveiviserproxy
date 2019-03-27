@@ -1,19 +1,18 @@
-const alleKategorier = () => {
-  return `*[_type == "kategori" && !(_id in path("drafts.**"))]
+const alleKategorier = () =>
+  `*[_type == "kategori" && !(_id in path("drafts.**"))]
     {tittel, urlparam, domene, "domenefarge":domenefarge.hex, "kantfarge":kantfarge.hex, underkategorier[]
-    {navn, urlparam, lenketilhorlighet}}`;
-};
+    {navn, urlparam, lenketilhorlighet, inngangtilsoknadsdialog}}`;
 
-const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
-  return `*[_type == "kategori"
+const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) =>
+  `*[_type == "kategori"
     && urlparam == ${JSON.stringify(kategoriUrlparam)}
         && !(_id in path("drafts.**"))]{
             underkategorier[
             urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]{
-                navn, inngangtilsoknadsdialog, soknadsobjekter[] -> {
-                     inngangtilsoknadsdialog, hovedskjema ->, tema->,
-                     beskrivelse, dokumentinnsending, gosysid,
-                     innsendingsmate, lenker[], navn,
+                soknadsobjekter[] -> {
+                     _id, inngangtilsoknadsdialog, hovedskjema ->, tema->,
+                     beskrivelse, digitalinnsending, gosysid,
+                     innsendingsmate{spesifisertadresse->, skanning, visenheter}, lenker[], navn,
                     "vedleggtilsoknad": vedleggskjema[]{
                         pakrevd, situasjon, vedlegg->{
                             gosysid, kanskannes, skjematilvedlegg->,
@@ -23,27 +22,36 @@ const soknadsobjektsQuery = (kategoriUrlparam, underkategoriUrlparam) => {
                 }
             }
         }`;
-};
 
-const alleSoknadsobjekterQuery = () => {
-  return `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
+const soknadsobjektKlageAnke = () =>
+  `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))][0]
+      {hovedskjema->, "vedleggtilsoknad": vedleggskjema[]{
+        vedlegg->{
+          skjematilvedlegg->,
+          ...
+        },
+        ...
+      },
+      ...
+    }`;
+
+const alleSoknadsobjekter = () =>
+  `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
     {hovedskjema->{navn, skjemanummer, pdf{nb{asset->}, en{asset->}}},
-     tema->, gosysid, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{skjematilvedlegg->, vedleggsid}}}`;
-};
+     tema->, gosysid, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
 
-const alleskjemaerQuery = () => {
-  return `*[_type == "skjema" && !(_id in path("drafts.**"))]
+const alleSkjemaer = () =>
+  `*[_type == "skjema" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, skjemanummer, "navn": navn.nb,
         "pdf": pdf.nb}`;
-};
 
-const samleQuery = () => {
-  return `*[_type == "kategori" && !(_id in path("drafts.**"))]
+const samlet = () =>
+  `*[_type == "kategori" && !(_id in path("drafts.**"))]
         {"tittel": tittel.nb, urlparam, _id,  underkategorier[]
             {_id, "navn": navn.nb, inngangtilsoknadsdialog, urlparam,
                 soknadsobjekter[]->
-                {_id, dokumentinnsending, "navn": navn.nb, tema, urlparam,
-                    innsendingmate, hovedskjema->, "vedleggtilsoknad":
+                {_id, digitalinnsending, "navn": navn.nb, tema, urlparam,
+                    innsendingmate{spesifisertadresse->, skanning, visenheter}, hovedskjema->, "vedleggtilsoknad":
                     vedleggskjema[]
                     {"beskrivelse": beskrivelse.nb, pakrevd, vedlegg->
                         {gosysid, kanskannes, vedleggsid,
@@ -58,12 +66,12 @@ const samleQuery = () => {
                 }
             }
         }`;
-};
 
 module.exports = {
   alleKategorier,
-  soknadsobjektsQuery,
-  alleSoknadsobjekterQuery,
-  alleskjemaerQuery,
-  samleQuery,
+  alleSoknadsobjekter,
+  alleSkjemaer,
+  soknadsobjekter,
+  soknadsobjektKlageAnke,
+  samlet
 };

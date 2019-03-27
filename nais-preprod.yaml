@@ -1,12 +1,12 @@
-apiVersion: 'nais.io/v1alpha1'
-kind: 'Application'
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
 metadata:
   name: soknadsveiviserproxy
   namespace: default
   labels:
     team: personbruker
 spec:
-  image: navikt/soknadsveiviserproxy:41
+  image: navikt/soknadsveiviserproxy:LATEST
   team: personbruker
   port: 8080
   ingresses:
