@@ -99,7 +99,7 @@ function lagJSON(skjema, tema, gosysid, vedleggsID) {
     Tittel_en: skjema.navn.en ? skjema.navn.en : "",
     Tittel_nn: skjema.navn.nn ? skjema.navn.nn : "",
     Tema: tema,
-    Gosysid: gosysid,
+    Gosysid: "000000", //Tester å sette denne til 00000
     "Beskrivelse (ID)": "000000",
     Lenke: hentUrlTilPDFEllerTomString(skjema.pdf.nb),
     "Lenke engelsk skjema": hentUrlTilPDFEllerTomString(skjema.pdf.en),
