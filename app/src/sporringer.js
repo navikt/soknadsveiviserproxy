@@ -14,9 +14,9 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) =>
                      beskrivelse, digitalinnsending, gosysid,
                      innsendingsmate{spesifisertadresse->, skanning, visenheter}, lenker[], navn,
                     "vedleggtilsoknad": vedleggskjema[]{
-                        pakrevd, situasjon, vedlegg->{
+                        pakrevd, situasjon, beskrivelse, vedlegg->{
                             gosysid, kanskannes, skjematilvedlegg->,
-                            vedleggsid, navn, beskrivelse
+                            vedleggsid, navn
                        }
                     }
                 }
