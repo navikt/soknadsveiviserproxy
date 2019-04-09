@@ -28,12 +28,15 @@ app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
     .catch(console.error)
 );
 
-app.get("/soknadsveiviserproxy/soknadsobjekter", (req, res) =>
+app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
   sanityClient
-    .fetch(
-      sporringer.soknadsobjekter(req.query.kategori, req.query.underkategori)
+    .fetch(sporringer.soknader(req.query.kategori, req.query.underkategori))
+    .then(docs =>
+      res.send({
+        soknadsobjekter: docs[0].underkategorier.soknadsobjekter || [],
+        soknadslenker: docs[0].underkategorier.soknadslenker || []
+      })
     )
-    .then(docs => res.send(docs[0].underkategorier.soknadsobjekter))
     .catch(console.error)
 );
 
