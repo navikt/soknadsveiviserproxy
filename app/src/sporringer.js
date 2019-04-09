@@ -3,7 +3,7 @@ const alleKategorier = () =>
     {tittel, urlparam, domene, "domenefarge":domenefarge.hex, "kantfarge":kantfarge.hex, underkategorier[]
     {navn, urlparam, lenketilhorlighet, inngangtilsoknadsdialog}}`;
 
-const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) =>
+const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
   `*[_type == "kategori"
     && urlparam == ${JSON.stringify(kategoriUrlparam)}
         && !(_id in path("drafts.**"))]{
@@ -19,6 +19,9 @@ const soknadsobjekter = (kategoriUrlparam, underkategoriUrlparam) =>
                             vedleggsid, navn, beskrivelse
                        }
                     }
+                },
+                soknadslenker[] -> {
+                    ...
                 }
             }
         }`;
@@ -71,7 +74,7 @@ module.exports = {
   alleKategorier,
   alleSoknadsobjekter,
   alleSkjemaer,
-  soknadsobjekter,
   soknadsobjektKlageAnke,
+  soknader,
   samlet
 };
