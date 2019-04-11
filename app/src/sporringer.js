@@ -14,7 +14,7 @@ const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
                      beskrivelse, digitalinnsending, gosysid,
                      innsendingsmate{spesifisertadresse->, skanning, visenheter}, lenker[], navn,
                     "vedleggtilsoknad": vedleggskjema[]{
-                        _id, pakrevd, situasjon, beskrivelse, vedlegg->{
+                        _key, pakrevd, situasjon, beskrivelse, vedlegg->{
                             gosysid, kanskannes, skjematilvedlegg->,
                             vedleggsid, navn
                        }
