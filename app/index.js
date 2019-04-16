@@ -6,6 +6,9 @@ const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
 const app = express();
 const sanityClient = createSanityClient();
 
+// Express settings
+app.use(express.json({ limit: "1mb", extended: true }));
+
 // Allow access from localhost in development
 if (process.env.NODE_ENV !== "production") {
   app.use(function(req, res, next) {
@@ -17,9 +20,6 @@ if (process.env.NODE_ENV !== "production") {
     next();
   });
 }
-
-app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
-app.get("/soknadsveiviserproxy/isReady", (req, res) => res.sendStatus(200));
 
 app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
   sanityClient
@@ -54,6 +54,11 @@ app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
     .catch(console.error);
 });
 
+app.post("/soknadsveiviserproxy/merge-pdf", (req, res) => {
+  console.log(req.body);
+  res.sendStatus(200);
+});
+
 app.get("/soknadsveiviserproxy/samlet", (req, res) => {
   sanityClient
     .fetch(sporringer.samlet())
@@ -69,5 +74,7 @@ app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
     .catch(console.error);
 });
 
+app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
+app.get("/soknadsveiviserproxy/isReady", (req, res) => res.sendStatus(200));
 app.get("/soknadsveiviserproxy", (req, res) => res.sendStatus(200));
 app.listen(8080, () => console.log(`App listening on port: 8080`));

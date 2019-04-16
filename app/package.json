@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/navikt/soknadsveiviserproxy#readme",
   "dependencies": {
-    "@sanity/client": "^0.140.7",
-    "@sanity/image-url": "^0.140.8",
+    "@sanity/client": "^0.140.11",
+    "@sanity/image-url": "^0.140.12",
     "express": "^4.16.3",
     "file-system": "^2.2.2",
     "serve-static": "^1.13.2"
