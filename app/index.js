@@ -1,5 +1,7 @@
 const sporringer = require("./src/sporringer");
 const express = require("express");
+const hummus = require("hummus");
+const memoryStreams = require("memory-streams");
 const createSanityClient = require("./src/createSanityClient");
 const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
 
@@ -55,8 +57,33 @@ app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
 });
 
 app.post("/soknadsveiviserproxy/merge-pdf", (req, res) => {
-  console.log(req.body);
-  res.sendStatus(200);
+  res.setHeader("Content-type", "application/pdf");
+  var outStream = new memoryStreams.WritableStream();
+
+  const foersteside = req.body.foersteside;
+  const pdfListe = req.body.pdfListe;
+
+  try {
+    //let filestream = new hummus.PDFRStreamForFile(req.body.pdfListe[0]);
+    var foerstesideBuffer = Buffer.from(foersteside, "base64");
+
+    var firstPDFStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
+    var secondPDFStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
+
+    var pdfWriter = hummus.createWriterToModify(
+      firstPDFStream,
+      new hummus.PDFStreamForResponse(outStream)
+    );
+    pdfWriter.appendPDFPagesFromPDF(secondPDFStream);
+    pdfWriter.end();
+    var newBuffer = outStream.toBuffer();
+    outStream.end();
+
+    res.send({ pdf: newBuffer.toString("base64") });
+  } catch (e) {
+    outStream.end();
+    throw new Error("Error during PDF combination: " + e.message);
+  }
 });
 
 app.get("/soknadsveiviserproxy/samlet", (req, res) => {
