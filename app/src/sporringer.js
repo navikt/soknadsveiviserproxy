@@ -1,7 +1,10 @@
 const alleKategorier = () =>
   `*[_type == "kategori" && !(_id in path("drafts.**"))]
-    {tittel, urlparam, domene, "domenefarge":domenefarge.hex, "kantfarge":kantfarge.hex, underkategorier[]
-    {navn, urlparam, lenketilhorlighet, inngangtilsoknadsdialog}}`;
+    {
+      "domenefarge":domenefarge.hex,
+      "kantfarge":kantfarge.hex,
+      ...
+    }`;
 
 const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
   `*[_type == "kategori"
