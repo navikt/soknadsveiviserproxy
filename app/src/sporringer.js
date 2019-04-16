@@ -52,18 +52,18 @@ const alleSkjemaer = () =>
 
 const samlet = () =>
   `*[_type == "kategori" && !(_id in path("drafts.**"))]
-        {"tittel": tittel.nb, urlparam, _id,  underkategorier[]
-            {_id, "navn": navn.nb, inngangtilsoknadsdialog, urlparam,
+        {"tittel": tittel, urlparam, _id,  underkategorier[]
+            {_id, "navn": navn, inngangtilsoknadsdialog, urlparam,
                 soknadsobjekter[]->
-                {_id, digitalinnsending, "navn": navn.nb, tema, urlparam,
+                {_id, digitalinnsending, "navn": navn, tema, urlparam,
                     innsendingmate{spesifisertadresse->, skanning, visenheter}, hovedskjema->, "vedleggtilsoknad":
                     vedleggskjema[]
-                    {"beskrivelse": beskrivelse.nb, pakrevd, vedlegg->
+                    {"beskrivelse": beskrivelse, pakrevd, vedlegg->
                         {gosysid, kanskannes, vedleggsid,
                         skjematilvedlegg->
-                            {emneord, "beskrivelse": beskrivelse.nb,
-                            "gyldigfra": gyldigfra.nb, "gyldigtil":
-                            gyldigtil.nb, "navn": navn.nb, pdf
+                            {emneord, "beskrivelse": beskrivelse,
+                            "gyldigfra": gyldigfra, "gyldigtil":
+                            gyldigtil, "navn": navn, pdf
                                 {asset->{url}
                             }, skjemanummer
                         }, vedleggsid, beskrivelse, navn}
