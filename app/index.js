@@ -11,20 +11,19 @@ const sanityClient = createSanityClient();
 
 // Express settings
 app.use(express.json({ limit: "1mb", extended: true }));
-
-// Allow access from localhost in development
-/*
-if (process.env.NODE_ENV !== "production") {
-  app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
-}
-*/
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    process.env.NODE_ENV === "production"
+      ? `/nav\.no/`
+      : `http://localhost:3000/`
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
   sanityClient
