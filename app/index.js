@@ -9,7 +9,9 @@ const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
 const app = express();
 const sanityClient = createSanityClient();
 const isProduction = process.env.NODE_ENV === "production";
-const allowedOrigin = isProduction ? `/nav\.no$/` : `http://localhost:3000/`;
+const allowedOrigin = isProduction
+  ? `(http|https)://(.*).nav.no`
+  : `http://localhost:3000/`;
 
 // Express settings
 app.use(express.json({ limit: "1mb", extended: true }));
@@ -32,6 +34,20 @@ app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
     .catch(console.error)
 );
 
+app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
+  sanityClient
+    .fetch(sporringer.alleSkjemaer())
+    .then(docs => res.send(docs))
+    .catch(console.error);
+});
+
+app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
+  sanityClient
+    .fetch(sporringer.soknadsobjektKlageAnke())
+    .then(docs => res.send(docs))
+    .catch(console.error)
+);
+
 app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
   sanityClient
     .fetch(sporringer.soknader(req.query.kategori, req.query.underkategori))
@@ -44,16 +60,17 @@ app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
     .catch(console.error)
 );
 
-app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
+app.get("/soknadsveiviserproxy/samlet", (req, res) => {
   sanityClient
-    .fetch(sporringer.soknadsobjektKlageAnke())
+    .fetch(sporringer.samlet())
     .then(docs => res.send(docs))
-    .catch(console.error)
-);
+    .catch(console.error);
+});
 
-app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
+app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
   sanityClient
-    .fetch(sporringer.alleSkjemaer())
+    .fetch(sporringer.alleSoknadsobjekter())
+    .then(lagSkjemautlistingJson)
     .then(docs => res.send(docs))
     .catch(console.error);
 });
@@ -101,21 +118,6 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
     outStream.end();
     throw new Error("Feil ved PDF sammenslåing: " + e.message);
   }
-});
-
-app.get("/soknadsveiviserproxy/samlet", (req, res) => {
-  sanityClient
-    .fetch(sporringer.samlet())
-    .then(docs => res.send(docs))
-    .catch(console.error);
-});
-
-app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
-  sanityClient
-    .fetch(sporringer.alleSoknadsobjekter())
-    .then(lagSkjemautlistingJson)
-    .then(docs => res.send(docs))
-    .catch(console.error);
 });
 
 app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
