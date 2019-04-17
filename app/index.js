@@ -58,6 +58,7 @@ app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
 });
 
 app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
+  console.log(`Starter sammenslåing`);
   const foersteside = req.body.foersteside;
   const pdfListe = req.body.pdfListe;
 
@@ -84,7 +85,7 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
 
     // Merge each pdf
     await pdfBuffers.forEach(pdfBuffer => {
-      console.log(`Sammenslår pdf`);
+      console.log(`Sammenslår PDF`);
       const pdfStream = new hummus.PDFRStreamForBuffer(pdfBuffer);
       pdfWriter.appendPDFPagesFromPDF(pdfStream);
     });
@@ -93,6 +94,7 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
     const newBuffer = outStream.toBuffer();
     outStream.end();
 
+    console.log(`Sender resultat`);
     res.send({ pdf: newBuffer.toString("base64") });
   } catch (e) {
     outStream.end();
