@@ -11,7 +11,7 @@ const sanityClient = createSanityClient();
 const isProduction = process.env.NODE_ENV === "production";
 const allowedOrigin = isProduction
   ? `(http|https)://(.*).nav.no`
-  : `http://localhost:3000/`;
+  : `http://localhost:3000`;
 
 // Express settings
 app.use(express.json({ limit: "1mb", extended: true }));
@@ -79,11 +79,11 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
   console.log(`Starter sammenslåing`);
   const foersteside = req.body.foersteside;
   const pdfListe = req.body.pdfListe;
+  const outStream = new memoryStreams.WritableStream();
 
   try {
     const foerstesideBuffer = Buffer.from(foersteside, "base64");
     const foerstesideStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
-    const outStream = new memoryStreams.WritableStream();
 
     // Download external pdfs from urls
     const pdfBuffers = await Promise.all(
