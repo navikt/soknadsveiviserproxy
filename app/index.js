@@ -8,16 +8,13 @@ const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
 
 const app = express();
 const sanityClient = createSanityClient();
+const isProduction = process.env.NODE_ENV === "production";
+const allowedOrigin = isProduction ? `/nav\.no/` : `http://localhost:3000/`;
 
 // Express settings
 app.use(express.json({ limit: "1mb", extended: true }));
 app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    process.env.NODE_ENV === "production"
-      ? `/nav\.no/`
-      : `http://localhost:3000/`
-  );
+  res.header("Access-Control-Allow-Origin", allowedOrigin);
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
