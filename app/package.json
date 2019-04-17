@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "npm run lint && node index.js",
+    "startDev": "npm run lint && nodemon index.js",
     "lint": "eslint index.js",
     "docker-build": "docker build -t soknadsveiviserproxy .",
     "docker-run": "docker run --rm -p 8080:8080 soknadsveiviserproxy",
@@ -29,6 +30,7 @@
     "file-system": "^2.2.2",
     "hummus": "^1.0.99",
     "memory-streams": "^0.1.3",
+    "node-fetch": "^2.3.0",
     "serve-static": "^1.13.2"
   },
   "devDependencies": {

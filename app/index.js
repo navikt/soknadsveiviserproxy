@@ -2,6 +2,7 @@ const sporringer = require("./src/sporringer");
 const express = require("express");
 const hummus = require("hummus");
 const memoryStreams = require("memory-streams");
+const fetch = require("node-fetch");
 const createSanityClient = require("./src/createSanityClient");
 const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
 
@@ -56,33 +57,46 @@ app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
     .catch(console.error);
 });
 
-app.post("/soknadsveiviserproxy/merge-pdf", (req, res) => {
-  res.setHeader("Content-type", "application/pdf");
-  var outStream = new memoryStreams.WritableStream();
-
+app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
   const foersteside = req.body.foersteside;
   const pdfListe = req.body.pdfListe;
 
   try {
-    //let filestream = new hummus.PDFRStreamForFile(req.body.pdfListe[0]);
-    var foerstesideBuffer = Buffer.from(foersteside, "base64");
+    const foerstesideBuffer = Buffer.from(foersteside, "base64");
+    const foerstesideStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
+    const outStream = new memoryStreams.WritableStream();
 
-    var firstPDFStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
-    var secondPDFStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
+    // Download external pdfs from urls
+    const pdfBuffers = await Promise.all(
+      pdfListe.map(
+        pdfUrl => (
+          console.log(`Laster ned ${pdfUrl}`),
+          fetch(pdfUrl).then(pdfRes => pdfRes.buffer())
+        )
+      )
+    );
 
-    var pdfWriter = hummus.createWriterToModify(
-      firstPDFStream,
+    // Initiate pdf writer with frontpage
+    const pdfWriter = hummus.createWriterToModify(
+      foerstesideStream,
       new hummus.PDFStreamForResponse(outStream)
     );
-    pdfWriter.appendPDFPagesFromPDF(secondPDFStream);
+
+    // Merge each pdf
+    await pdfBuffers.forEach(pdfBuffer => {
+      console.log(`Merging pdf`);
+      const pdfStream = new hummus.PDFRStreamForBuffer(pdfBuffer);
+      pdfWriter.appendPDFPagesFromPDF(pdfStream);
+    });
+
     pdfWriter.end();
-    var newBuffer = outStream.toBuffer();
+    const newBuffer = outStream.toBuffer();
     outStream.end();
 
     res.send({ pdf: newBuffer.toString("base64") });
   } catch (e) {
     outStream.end();
-    throw new Error("Error during PDF combination: " + e.message);
+    throw new Error("Feil ved PDF merging: " + e.message);
   }
 });
 
