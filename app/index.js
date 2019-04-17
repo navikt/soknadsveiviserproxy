@@ -102,7 +102,7 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
     );
 
     // Merge each pdf
-    await pdfBuffers.forEach(pdfBuffer => {
+    pdfBuffers.forEach(pdfBuffer => {
       console.log(`Sammenslår PDF`);
       const pdfStream = new hummus.PDFRStreamForBuffer(pdfBuffer);
       pdfWriter.appendPDFPagesFromPDF(pdfStream);
