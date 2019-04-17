@@ -84,7 +84,7 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
 
     // Merge each pdf
     await pdfBuffers.forEach(pdfBuffer => {
-      console.log(`Merging pdf`);
+      console.log(`Sammenslår pdf`);
       const pdfStream = new hummus.PDFRStreamForBuffer(pdfBuffer);
       pdfWriter.appendPDFPagesFromPDF(pdfStream);
     });
@@ -96,7 +96,7 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
     res.send({ pdf: newBuffer.toString("base64") });
   } catch (e) {
     outStream.end();
-    throw new Error("Feil ved PDF merging: " + e.message);
+    throw new Error("Feil ved PDF sammenslåing: " + e.message);
   }
 });
 
