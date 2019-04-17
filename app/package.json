@@ -8,7 +8,7 @@
     "start": "npm run lint && node index.js",
     "startDev": "npm run lint && nodemon index.js",
     "lint": "eslint index.js",
-    "docker-build": "docker build -t soknadsveiviserproxy .",
+    "docker-build": "docker build -t soknadsveiviserproxy ../.",
     "docker-run": "docker run --rm -p 8080:8080 soknadsveiviserproxy",
     "deploy-preprod": "kubectl apply -f ../nais-preprod.yaml",
     "deploy-prod": "kubectl apply -f ../nais-prod.yaml"

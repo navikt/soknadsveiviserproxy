@@ -7,7 +7,8 @@ ENV CI=true
 COPY app /app
 WORKDIR /app
 
-EXPOSE 8080
-
+RUN rm -rf node_modules
 RUN npm install
 CMD ["node", "index.js"]
+
+EXPOSE 8080
