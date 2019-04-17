@@ -13,6 +13,7 @@ const sanityClient = createSanityClient();
 app.use(express.json({ limit: "1mb", extended: true }));
 
 // Allow access from localhost in development
+/*
 if (process.env.NODE_ENV !== "production") {
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV !== "production") {
     next();
   });
 }
+*/
 
 app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
   sanityClient
