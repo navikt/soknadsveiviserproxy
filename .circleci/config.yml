@@ -20,7 +20,6 @@ jobs:
           name: Bygg React app
           command: |
             npm ci
-            npm run build
       - save_cache:
           paths:
             - ~/usr/local/lib/node_modules  # location depends on npm version
