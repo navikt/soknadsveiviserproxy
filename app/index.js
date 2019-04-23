@@ -2,7 +2,7 @@ const sporringer = require("./src/sporringer");
 const express = require("express");
 const hummus = require("hummus");
 const memoryStreams = require("memory-streams");
-const fetch = require("node-fetch");
+const request = require("request-promise");
 const createSanityClient = require("./src/createSanityClient");
 const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
 
@@ -86,15 +86,15 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
     const foerstesideStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
 
     // Download external pdfs from urls
+    // Download external pdfs from urls
     const pdfBuffers = await Promise.all(
       pdfListe.map(
         pdfUrl => (
           console.log(`Laster ned ${pdfUrl}`),
-          fetch(pdfUrl).then(pdfRes => pdfRes.buffer())
+          request.get({ url: pdfUrl, encoding: null }).then(res => res)
         )
       )
     );
-
     // Initiate pdf writer with frontpage
     const pdfWriter = hummus.createWriterToModify(
       foerstesideStream,
