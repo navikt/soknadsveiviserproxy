@@ -86,7 +86,6 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
     const foerstesideStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
 
     // Download external pdfs from urls
-    // Download external pdfs from urls
     const pdfBuffers = await Promise.all(
       pdfListe.map(
         pdfUrl => (
@@ -95,6 +94,7 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
         )
       )
     );
+
     // Initiate pdf writer with frontpage
     const pdfWriter = hummus.createWriterToModify(
       foerstesideStream,
