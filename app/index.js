@@ -5,7 +5,7 @@ const memoryStreams = require("memory-streams");
 const request = require("request-promise");
 const createSanityClient = require("./src/createSanityClient");
 const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
-
+const { appendPDFPageFromPDFWithAnnotations } = require("./src/utils/pdf");
 const app = express();
 const sanityClient = createSanityClient();
 const isProduction = process.env.NODE_ENV === "production";
@@ -105,7 +105,7 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
     pdfBuffers.forEach(pdfBuffer => {
       console.log(`Sammenslår PDF`);
       const pdfStream = new hummus.PDFRStreamForBuffer(pdfBuffer);
-      pdfWriter.appendPDFPagesFromPDF(pdfStream);
+      appendPDFPageFromPDFWithAnnotations(pdfWriter, pdfStream);
     });
 
     pdfWriter.end();
