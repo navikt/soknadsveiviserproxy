@@ -1,0 +1,13 @@
+{
+  "ref": "set_from_pipeline",
+  "description": "Automated deployment request for soknadsveiviserproxy from team personbruker",
+  "environment": "set_from_pipeline",
+  "required_contexts": [],
+  "payload": {
+    "version": [1, 0, 0],
+    "team": "personbruker",
+    "kubernetes": {
+      "resources": []
+    }
+  }
+}

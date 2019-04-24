@@ -29,6 +29,7 @@ jobs:
       - run:
           name: Setter miljøvariable
           command: |
+            echo 'export COMMIT_SHORT="$(git rev-parse --short HEAD)"' >> $BASH_ENV
             echo 'export RELEASE_VERSION="$(git rev-list --count $CIRCLE_SHA1)"' >> $BASH_ENV
             echo 'export BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"' >> $BASH_ENV
             echo 'export BRANCH_PREFIX=`[ $BRANCH_NAME == "master" ] && echo "" || echo $BRANCH_NAME\_`' >> $BASH_ENV
@@ -43,3 +44,20 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push "$DOCKER_IMAGE_VERSIONED"
             docker push "$DOCKER_IMAGE_UNVERSIONED"
+      - run:
+          name: Forbereder preprod deploy
+          command: |
+            PREPROD_RESOURCE=$(cat nais.json | jq '.spec.image = "$DOCKER_IMAGE_VERSIONED"')
+
+            PREPROD_DEPLOYMENT=$(cat deployment.json | jq '.payload.kubernetes.resources += ['$PREPROD_RESOURCE']')
+            PREPROD_DEPLOYMENT=$(echo $PREPROD_DEPLOYMENT | jq '.environment = "dev-sbs"')
+            PREPROD_DEPLOYMENT=$(echo $PREPROD_DEPLOYMENT | jq '.ref = "'$COMMIT_SHORT'"')
+      - run:
+          name: Deployer til preprod
+          command: |
+            curl \
+                -X POST \
+                -d "$PREPROD_DEPLOYMENT" \
+                -H "Accept: application/vnd.github.ant-man-preview+json" \
+                -u "$GH_USER":"$GH_TK" \
+                https://api.github.com/repos/navikt/soknadsveiviserproxy/deployments
