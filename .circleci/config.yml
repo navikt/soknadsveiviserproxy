@@ -47,9 +47,9 @@ jobs:
       - run:
           name: Forbereder preprod deploy
           command: |
-            PREPROD_RESOURCE=$(cat nais.json | jq '.spec.image = "$DOCKER_IMAGE_VERSIONED"')
+            PREPROD_RESOURCE=$(cat nais.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
 
-            PREPROD_DEPLOYMENT=$(cat deployment.json | jq '.payload.kubernetes.resources += ['$PREPROD_RESOURCE']')
+            PREPROD_DEPLOYMENT=$(cat deployment.json | jq --argjson resource "$PREPROD_RESOURCE" '.payload.kubernetes.resources += [$resource]')
             PREPROD_DEPLOYMENT=$(echo $PREPROD_DEPLOYMENT | jq '.environment = "dev-sbs"')
             PREPROD_DEPLOYMENT=$(echo $PREPROD_DEPLOYMENT | jq '.ref = "'$COMMIT_SHORT'"')
       - run:
