@@ -4,7 +4,10 @@ const hummus = require("hummus");
 const memoryStreams = require("memory-streams");
 const request = require("request-promise");
 const createSanityClient = require("./src/createSanityClient");
-const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
+const {
+  lagSkjemautlistingJson,
+  hentUrlTilPDFEllerTomString
+} = require("./src/lagSkjemautlistingJson");
 const { appendPDFPageFromPDFWithAnnotations } = require("./src/utils/pdf");
 const app = express();
 const sanityClient = createSanityClient();
@@ -87,12 +90,14 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
 
     // Download external pdfs from urls
     const pdfBuffers = await Promise.all(
-      pdfListe.map(
-        pdfUrl => (
-          console.log(`Laster ned ${pdfUrl}`),
-          request.get({ url: pdfUrl, encoding: null }).then(res => res)
+      pdfListe
+        .map(pdfAsset => hentUrlTilPDFEllerTomString(pdfAsset))
+        .map(
+          pdfUrl => (
+            console.log(`Laster ned ${pdfUrl}`),
+            request.get({ url: pdfUrl, encoding: null }).then(res => res)
+          )
         )
-      )
     );
 
     // Initiate pdf writer with frontpage

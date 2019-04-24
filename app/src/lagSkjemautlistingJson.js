@@ -33,6 +33,7 @@ function pdfUrl(asset) {
  * @return {string}
  */
 function hentUrlTilPDFEllerTomString(pdfObjekt) {
+  console.log(pdfObjekt);
   return pdfObjekt && pdfObjekt.asset ? pdfUrl(pdfObjekt.asset) : "";
 }
 
@@ -112,4 +113,8 @@ function lagJSON(skjema, tema, gosysid, vedleggsID) {
   };
 }
 
-module.exports = { lagSkjemautlistingJson, lagJSON };
+module.exports = {
+  hentUrlTilPDFEllerTomString,
+  lagSkjemautlistingJson,
+  lagJSON
+};

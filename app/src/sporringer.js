@@ -13,15 +13,44 @@ const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
             underkategorier[
             urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]{
                 soknadsobjekter[] -> {
-                     _id, inngangtilsoknadsdialog, hovedskjema ->, tema->,
-                     beskrivelse, digitalinnsending, gosysid,
-                     innsendingsmate{spesifisertadresse->, skanning, visenheter}, lenker[], navn,
-                    "vedleggtilsoknad": vedleggskjema[]{
-                        _key, pakrevd, situasjon, beskrivelse, vedlegg->{
-                            gosysid, kanskannes, skjematilvedlegg->,
-                            vedleggsid, navn
-                       }
-                    }
+                     hovedskjema ->{
+                       pdf{
+                         nb{asset->},
+                         en{asset->},
+                         nn{asset->},
+                         se{asset->},
+                         fr{asset->},
+                         de{asset->},
+                         pl{asset->},
+                         es{asset->}
+                       },
+                       ...
+                     },
+                     tema->,
+                     innsendingsmate{
+                       spesifisertadresse->,
+                       ...
+                     },
+                     "vedleggtilsoknad": vedleggskjema[]{
+                      vedlegg->{
+                        skjematilvedlegg->{
+                              pdf{
+                                nb{asset->},
+                                en{asset->},
+                                nn{asset->},
+                                se{asset->},
+                                fr{asset->},
+                                de{asset->},
+                                pl{asset->},
+                                es{asset->}
+                              },
+                              ...
+                            },
+                            ...
+                          },
+                          ...
+                    },
+                    ...
                 },
                 soknadslenker[] -> {
                     ...
@@ -31,22 +60,42 @@ const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
 
 const soknadsobjektKlageAnke = () =>
   `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))][0]
-      {hovedskjema->, "vedleggtilsoknad": vedleggskjema[]{
-        vedlegg->{
-          skjematilvedlegg->,
+      {
+        hovedskjema->,
+        "vedleggtilsoknad": vedleggskjema[]{
+          vedlegg->{
+            skjematilvedlegg->,
+            ...
+          },
           ...
         },
         ...
-      },
-      ...
-    }`;
+      }`;
 
 const alleSoknadsobjekter = () =>
-  `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]
-    {hovedskjema->{navn, skjemanummer, pdf
-        {nb{asset->}, en{asset->}, nn{asset->}, se{asset->}, fr{asset->}, de{asset->}, pl{asset->}, es{asset->}
-    }},
-     tema->, gosysid, "vedleggtilsoknad": vedleggskjema[]{vedlegg->{gosysid, skjematilvedlegg->, vedleggsid}}}`;
+  `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]{
+  hovedskjema->{
+      navn,
+      skjemanummer,
+      pdf{
+        nb{asset->},
+        en{asset->},
+        nn{asset->},
+        se{asset->},
+        fr{asset->},
+        de{asset->},
+        pl{asset->},
+        es{asset->}
+      },
+      ...
+    },
+    tema->, gosysid, "vedleggtilsoknad": vedleggskjema[]{
+      vedlegg->{
+        gosysid,
+        skjematilvedlegg->,
+        vedleggsid}
+      }
+  }`;
 
 const alleSkjemaer = () =>
   `*[_type == "skjema" && !(_id in path("drafts.**"))]
@@ -66,8 +115,8 @@ const samlet = () =>
                         skjematilvedlegg->
                             {emneord, "beskrivelse": beskrivelse,
                             "gyldigfra": gyldigfra, "gyldigtil":
-                            gyldigtil, "navn": navn, pdf
-                                {asset->{url}
+                            gyldigtil, "navn": navn, pdf{
+                              asset->{url}
                             }, skjemanummer
                         }, vedleggsid, beskrivelse, navn}
                     }
