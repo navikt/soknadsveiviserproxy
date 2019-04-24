@@ -90,14 +90,12 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
 
     // Download external pdfs from urls
     const pdfBuffers = await Promise.all(
-      pdfListe
-        .map(pdfAsset => hentUrlTilPDFEllerTomString(pdfAsset))
-        .map(
-          pdfUrl => (
-            console.log(`Laster ned ${pdfUrl}`),
-            request.get({ url: pdfUrl, encoding: null }).then(res => res)
-          )
+      pdfListe.map(
+        pdfUrl => (
+          console.log(`Laster ned ${pdfUrl}`),
+          request.get({ url: pdfUrl, encoding: null }).then(res => res)
         )
+      )
     );
 
     // Initiate pdf writer with frontpage

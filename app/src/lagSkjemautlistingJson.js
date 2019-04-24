@@ -33,7 +33,6 @@ function pdfUrl(asset) {
  * @return {string}
  */
 function hentUrlTilPDFEllerTomString(pdfObjekt) {
-  console.log(pdfObjekt);
   return pdfObjekt && pdfObjekt.asset ? pdfUrl(pdfObjekt.asset) : "";
 }
 
