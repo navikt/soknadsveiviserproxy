@@ -48,20 +48,24 @@ jobs:
           name: Forbereder preprod deploy
           command: |
             PREPROD_RESOURCE=$(cat nais.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
-
-            PREPROD_DEPLOYMENT=$(cat deployment.json | jq --argjson resource "$PREPROD_RESOURCE" '.payload.kubernetes.resources += [$resource]')
-            PREPROD_DEPLOYMENT=$(echo $PREPROD_DEPLOYMENT | jq '.environment = "dev-sbs"')
-            PREPROD_DEPLOYMENT=$(echo $PREPROD_DEPLOYMENT | jq '.ref = "'$COMMIT_SHORT'"')
-
-            echo WILL DEPLOY
-            echo ================================
-            echo "$PREPROD_DEPLOYMENT"
       - run:
           name: Deployer til preprod
           command: |
-            curl \
+            curl -i \
                 -X POST \
-                -d "$PREPROD_DEPLOYMENT" \
+                -d '{
+                     "ref": "'"$COMMIT_SHORT"'",
+                     "description": "Automated deployment request for soknadsveiviserproxy from team personbruker",
+                     "environment": "dev-sbs",
+                     "required_contexts": [],
+                     "payload": {
+                       "version": [1, 0, 0],
+                       "team": "personbruker",
+                       "kubernetes": {
+                         "resources": ['"$PREPROD_RESOURCE"']
+                       }
+                     }
+                   }' \
                 -H "Accept: application/vnd.github.ant-man-preview+json" \
                 -u "$GH_USER":"$GH_TK" \
                 https://api.github.com/repos/navikt/soknadsveiviserproxy/deployments
