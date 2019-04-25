@@ -54,21 +54,23 @@ jobs:
       - run:
           name: Deployer til preprod
           command: |
-            curl \
-                -X POST \
-                -d '{
-                     "ref": "'"$COMMIT_SHORT"'",
-                     "description": "Automated deployment request for soknadsveiviserproxy from team personbruker",
-                     "environment": "dev-sbs",
-                     "required_contexts": [],
-                     "payload": {
-                       "version": [1, 0, 0],
-                       "team": "personbruker",
-                       "kubernetes": {
-                         "resources": ['"$PREPROD_RESOURCE"']
+            if [ "$BRANCH_NAME" = "master" ]; then
+              curl -i \
+                  -X POST \
+                  -d '{
+                       "ref": "'"$COMMIT_SHORT"'",
+                       "description": "Automated deployment request for soknadsveiviserproxy from team personbruker",
+                       "environment": "dev-sbs",
+                       "required_contexts": [],
+                       "payload": {
+                         "version": [1, 0, 0],
+                         "team": "personbruker",
+                         "kubernetes": {
+                           "resources": ['"$PREPROD_RESOURCE"']
+                         }
                        }
-                     }
-                   }' \
-                -H "Accept: application/vnd.github.ant-man-preview+json" \
-                -u "$GH_USER":"$GH_TK" \
-                https://api.github.com/repos/navikt/soknadsveiviserproxy/deployments
+                     }' \
+                  -H "Accept: application/vnd.github.ant-man-preview+json" \
+                  -u "$GH_USER":"$GH_TK" \
+                  https://api.github.com/repos/navikt/soknadsveiviserproxy/deployments
+            fi
