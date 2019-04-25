@@ -52,6 +52,10 @@ jobs:
             PREPROD_DEPLOYMENT=$(cat deployment.json | jq --argjson resource "$PREPROD_RESOURCE" '.payload.kubernetes.resources += [$resource]')
             PREPROD_DEPLOYMENT=$(echo $PREPROD_DEPLOYMENT | jq '.environment = "dev-sbs"')
             PREPROD_DEPLOYMENT=$(echo $PREPROD_DEPLOYMENT | jq '.ref = "'$COMMIT_SHORT'"')
+
+            echo WILL DEPLOY
+            echo ================================
+            echo "$PREPROD_DEPLOYMENT"
       - run:
           name: Deployer til preprod
           command: |
