@@ -6,7 +6,7 @@ metadata:
   labels:
     team: personbruker
 spec:
-  image: navikt/soknadsveiviserproxy:71
+  image: navikt/soknadsveiviserproxy:72
   team: personbruker
   port: 8080
   ingresses:
@@ -20,8 +20,8 @@ spec:
     initialDelay: 20
   secrets: true
   replicas:
-    min: 1
-    max: 2
+    min: 2
+    max: 4
     cpuThresholdPercentage: 90
   webproxy: true
   env:
