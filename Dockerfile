@@ -1,4 +1,4 @@
-FROM node:10.15.0
+FROM node:11.7.0
 
 RUN ln -fs /usr/share/zoneinfo/Europe/Oslo /etc/localtime
 ENV NODE_ENV production

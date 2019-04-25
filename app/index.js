@@ -1,14 +1,11 @@
 const sporringer = require("./src/sporringer");
 const express = require("express");
-const hummus = require("hummus");
-const memoryStreams = require("memory-streams");
-const request = require("request-promise");
+const { Worker } = require("worker_threads");
 const createSanityClient = require("./src/createSanityClient");
 const {
   lagSkjemautlistingJson,
   hentUrlTilPDFEllerTomString
 } = require("./src/lagSkjemautlistingJson");
-const { appendPDFPageFromPDFWithAnnotations } = require("./src/utils/pdf");
 const app = express();
 const sanityClient = createSanityClient();
 const isProduction = process.env.NODE_ENV === "production";
@@ -79,48 +76,12 @@ app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
 });
 
 app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
-  console.log(`Starter sammenslåing`);
   const foersteside = req.body.foersteside;
   const pdfListe = req.body.pdfListe;
-  const outStream = new memoryStreams.WritableStream();
-
-  try {
-    const foerstesideBuffer = Buffer.from(foersteside, "base64");
-    const foerstesideStream = new hummus.PDFRStreamForBuffer(foerstesideBuffer);
-
-    // Download external pdfs from urls
-    const pdfBuffers = await Promise.all(
-      pdfListe.map(
-        pdfUrl => (
-          console.log(`Laster ned ${pdfUrl}`),
-          request.get({ url: pdfUrl, encoding: null }).then(res => res)
-        )
-      )
-    );
-
-    // Initiate pdf writer with frontpage
-    const pdfWriter = hummus.createWriterToModify(
-      foerstesideStream,
-      new hummus.PDFStreamForResponse(outStream)
-    );
-
-    // Merge each pdf
-    pdfBuffers.forEach(pdfBuffer => {
-      console.log(`Sammenslår PDF`);
-      const pdfStream = new hummus.PDFRStreamForBuffer(pdfBuffer);
-      appendPDFPageFromPDFWithAnnotations(pdfWriter, pdfStream);
-    });
-
-    pdfWriter.end();
-    const newBuffer = outStream.toBuffer();
-    outStream.end();
-
-    console.log(`Sender resultat`);
-    res.send({ pdf: newBuffer.toString("base64") });
-  } catch (e) {
-    outStream.end();
-    throw new Error("Feil ved PDF sammenslåing: " + e.message);
-  }
+  const worker = new Worker("./src/workers/pdfMerger.js");
+  worker.postMessage({ foersteside, pdfListe });
+  worker.once("message", mergedPDF => res.send(mergedPDF));
+  worker.on("exit", code => console.log("Terminerte arbeideren"));
 });
 
 app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
