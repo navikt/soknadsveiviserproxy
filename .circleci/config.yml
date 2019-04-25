@@ -24,7 +24,10 @@ jobs:
           paths:
             - ~/usr/local/lib/node_modules  # location depends on npm version
           key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-
+      - run:
+          name: Tester
+          command: |
+            npm run test
       - setup_remote_docker
       - run:
           name: Setter miljøvariable
@@ -51,7 +54,7 @@ jobs:
       - run:
           name: Deployer til preprod
           command: |
-            curl -i \
+            curl \
                 -X POST \
                 -d '{
                      "ref": "'"$COMMIT_SHORT"'",
