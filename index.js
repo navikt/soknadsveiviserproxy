@@ -1,29 +1,49 @@
 const sporringer = require("./src/sporringer");
 const express = require("express");
+const { Worker } = require("worker_threads");
 const createSanityClient = require("./src/createSanityClient");
-const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
-
+const {
+  lagSkjemautlistingJson,
+  hentUrlTilPDFEllerTomString
+} = require("./src/lagSkjemautlistingJson");
 const app = express();
 const sanityClient = createSanityClient();
+const isProduction = process.env.NODE_ENV === "production";
+const allowedOrigin = isProduction
+  ? `(http|https)://(.*).nav.no`
+  : `http://localhost:3000`;
 
-// Allow access from localhost in development
-if (process.env.NODE_ENV !== "production") {
-  app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+// Express settings
+app.use(express.json({ limit: "1mb", extended: true }));
+app.use((req, res, next) => {
+  const origin = req.get("origin");
+  if (origin && origin.match(allowedOrigin)) {
+    res.header("Access-Control-Allow-Origin", origin);
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
     );
-    next();
-  });
-}
-
-app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
-app.get("/soknadsveiviserproxy/isReady", (req, res) => res.sendStatus(200));
+  }
+  next();
+});
 
 app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
   sanityClient
     .fetch(sporringer.alleKategorier())
+    .then(docs => res.send(docs))
+    .catch(console.error)
+);
+
+app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
+  sanityClient
+    .fetch(sporringer.alleSkjemaer())
+    .then(docs => res.send(docs))
+    .catch(console.error);
+});
+
+app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
+  sanityClient
+    .fetch(sporringer.soknadsobjektKlageAnke())
     .then(docs => res.send(docs))
     .catch(console.error)
 );
@@ -40,20 +60,6 @@ app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
     .catch(console.error)
 );
 
-app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
-  sanityClient
-    .fetch(sporringer.soknadsobjektKlageAnke())
-    .then(docs => res.send(docs))
-    .catch(console.error)
-);
-
-app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
-  sanityClient
-    .fetch(sporringer.alleSkjemaer())
-    .then(docs => res.send(docs))
-    .catch(console.error);
-});
-
 app.get("/soknadsveiviserproxy/samlet", (req, res) => {
   sanityClient
     .fetch(sporringer.samlet())
@@ -69,5 +75,16 @@ app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
     .catch(console.error);
 });
 
+app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
+  const foersteside = req.body.foersteside;
+  const pdfListe = req.body.pdfListe;
+  const worker = new Worker("./src/workers/pdfMerger.js");
+  worker.postMessage({ foersteside, pdfListe });
+  worker.once("message", mergedPDF => res.send(mergedPDF));
+  worker.on("exit", code => console.log("Terminerte arbeideren"));
+});
+
+app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
+app.get("/soknadsveiviserproxy/isReady", (req, res) => res.sendStatus(200));
 app.get("/soknadsveiviserproxy", (req, res) => res.sendStatus(200));
 app.listen(8080, () => console.log(`App listening on port: 8080`));

@@ -112,4 +112,8 @@ function lagJSON(skjema, tema, gosysid, vedleggsID) {
   };
 }
 
-module.exports = { lagSkjemautlistingJson, lagJSON };
+module.exports = {
+  hentUrlTilPDFEllerTomString,
+  lagSkjemautlistingJson,
+  lagJSON
+};
