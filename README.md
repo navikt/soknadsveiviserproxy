@@ -32,4 +32,5 @@ docker build -t soknadsveiviserproxy .
 docker run --name soknadsveiviserproxy -p 8080:8080 -t -d soknadsveiviserproxy
 ```
 
+### Nais-cluster
 Applikasjonen ligger i default namespace i dev-sbs og prod-sbs.
