@@ -3,10 +3,12 @@
 
 Node.js Express applikasjon som mellomledd mellom [Soknadsveiviser](https://github.com/navikt/soknadsveiviser) og [Sanity](https://www.sanity.io/) som benyttes som database.
 
+Appen kjører på NAIS i en dockercontainer.
+
 ### Kom i gang
 
 ```
-cd app && npm install
+npm install
 ```
 
 Kjør applikasjonen
@@ -17,18 +19,17 @@ node index.js
 
 ### Bygg
 
-For å laste opp til docker og deploye til preprod:
+Soknadsveiviserproxy har et pipelinebygg på circleci:
+https://circleci.com/gh/navikt/soknadsveiviserproxy
 
+Ved merge til master kjører bygget på circleci automatisk, 
+som laster opp et image til dockerhub og deployer til preprod. Planen er at man videre skal få en
+manuell godkjenning for å dytte videre til produksjon.
+
+For å kjøre opp docker lokalt:
 ```
-docker build -t navikt/soknadsveiviserproxy:VERSION .
+docker build -t soknadsveiviserproxy .
+docker run --name soknadsveiviserproxy -p 8080:8080 -t -d soknadsveiviserproxy
 ```
 
-```
-docker push navikt/soknadsveiviserproxy:VERSION
-```
-
-```
-npm run deploy-preprod
-```
-
-Applikasjonen ligger i default namespace i preprod-sbs.
+Applikasjonen ligger i default namespace i dev-sbs og prod-sbs.
