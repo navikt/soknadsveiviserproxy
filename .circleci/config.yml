@@ -24,11 +24,15 @@ jobs:
           paths:
             - ~/usr/local/lib/node_modules  # location depends on npm version
           key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-
+      - run:
+          name: Tester
+          command: |
+            npm run test
       - setup_remote_docker
       - run:
           name: Setter miljøvariable
           command: |
+            echo 'export COMMIT_SHORT="$(git rev-parse --short HEAD)"' >> $BASH_ENV
             echo 'export RELEASE_VERSION="$(git rev-list --count $CIRCLE_SHA1)"' >> $BASH_ENV
             echo 'export BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"' >> $BASH_ENV
             echo 'export BRANCH_PREFIX=`[ $BRANCH_NAME == "master" ] && echo "" || echo $BRANCH_NAME\_`' >> $BASH_ENV
@@ -43,3 +47,30 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push "$DOCKER_IMAGE_VERSIONED"
             docker push "$DOCKER_IMAGE_UNVERSIONED"
+      - run:
+          name: Forbereder preprod deploy
+          command: |
+            PREPROD_RESOURCE=$(cat nais.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
+      - run:
+          name: Deployer til preprod
+          command: |
+            if [ "$BRANCH_NAME" = "master" ]; then
+              curl -i \
+                  -X POST \
+                  -d '{
+                       "ref": "'"$COMMIT_SHORT"'",
+                       "description": "Automated deployment request for soknadsveiviserproxy from team personbruker",
+                       "environment": "dev-sbs",
+                       "required_contexts": [],
+                       "payload": {
+                         "version": [1, 0, 0],
+                         "team": "personbruker",
+                         "kubernetes": {
+                           "resources": ['"$PREPROD_RESOURCE"']
+                         }
+                       }
+                     }' \
+                  -H "Accept: application/vnd.github.ant-man-preview+json" \
+                  -u "$GH_USER":"$GH_TK" \
+                  https://api.github.com/repos/navikt/soknadsveiviserproxy/deployments
+            fi
