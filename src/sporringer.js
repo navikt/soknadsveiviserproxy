@@ -61,10 +61,34 @@ const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
 const soknadsobjektKlageAnke = () =>
   `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))][0]
       {
-        hovedskjema->,
+        hovedskjema->{
+          pdf{
+            nb{asset->},
+            en{asset->},
+            nn{asset->},
+            se{asset->},
+            fr{asset->},
+            de{asset->},
+            pl{asset->},
+            es{asset->}
+          },
+          ...
+        },
         "vedleggtilsoknad": vedleggskjema[]{
           vedlegg->{
-            skjematilvedlegg->,
+            skjematilvedlegg->{
+                  pdf{
+                    nb{asset->},
+                    en{asset->},
+                    nn{asset->},
+                    se{asset->},
+                    fr{asset->},
+                    de{asset->},
+                    pl{asset->},
+                    es{asset->}
+                  },
+                  ...
+                },
             ...
           },
           ...

@@ -13,22 +13,21 @@
     "team": "personbruker",
     "port": 8080,
     "ingresses": [
-      "https://soknadsveiviserproxy.nais.oera-q.local",
-      "https://tjenester-q0.nav.no/soknadsveiviserproxy"
+      "https://soknadsveiviserproxy.nais.oera.no",
+      "https://tjenester.nav.no/soknadsveiviserproxy"
     ],
     "liveness": {
       "path": "/soknadsveiviserproxy/isAlive",
-      "initialDelay": 20
+      "initialDelay": 10
     },
     "readiness": {
       "path": "/soknadsveiviserproxy/isReady",
-      "initialDelay": 20
+      "initialDelay": 10
     },
     "secrets": true,
     "replicas": {
-      "min": 1,
-      "max": 2,
-      "cpuThresholdPercentage": 90
+      "min": 2,
+      "max": 4
     },
     "webproxy": true,
     "env": [
@@ -36,6 +35,15 @@
         "name": "NODE_EXTRA_CA_CERTS",
         "value": "/etc/ssl/ca-bundle.pem"
       }
-    ]
+    ],
+    "resources": {
+      "limits": {
+        "cpu": 3,
+        "memory": "768Mi"
+      },
+      "requests": {
+        "memory": "512Mi"
+      }
+    }
   }
 }
