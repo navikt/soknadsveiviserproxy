@@ -48,10 +48,6 @@ jobs:
       - checkout
       - sett-miljovariabler
       - run:
-          name: Forbereder deploy til dev
-          command: |
-            export PREPROD_RESOURCE=$(cat nais-dev.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
-      - run:
           name: Deployer til dev
           command: |
             curl -i \
@@ -65,7 +61,7 @@ jobs:
                        "version": [1, 0, 0],
                        "team": "personbruker",
                        "kubernetes": {
-                         "resources": ["'"$PREPROD_RESOURCE"'"]
+                         "resources": ['"$(cat nais-dev.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')"']
                        }
                      }
                    }' \
@@ -81,10 +77,6 @@ jobs:
       - checkout
       - sett-miljovariabler
       - run:
-          name: Forbereder deploy til prod
-          command: |
-            export PROD_RESOURCE=$(cat nais-prod.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
-      - run:
           name: Deployer til prod
           command: |
             curl -i \
@@ -98,7 +90,7 @@ jobs:
                        "version": [1, 0, 0],
                        "team": "personbruker",
                        "kubernetes": {
-                         "resources": ["'"$PROD_RESOURCE"'"]
+                         "resources": ['"$(cat nais-prod.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')"']
                        }
                      }
                    }' \
@@ -127,6 +119,10 @@ workflows:
       - deploy-til-dev:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - master
       - godkjenn-til-prod:
           type: approval
           requires:
