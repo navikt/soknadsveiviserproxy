@@ -65,7 +65,7 @@ jobs:
                        "version": [1, 0, 0],
                        "team": "personbruker",
                        "kubernetes": {
-                         "resources": ['"$PREPROD_RESOURCE"']
+                         "resources": ["'"$PREPROD_RESOURCE"'"]
                        }
                      }
                    }' \
@@ -98,7 +98,7 @@ jobs:
                        "version": [1, 0, 0],
                        "team": "personbruker",
                        "kubernetes": {
-                         "resources": ['"$PROD_RESOURCE"']
+                         "resources": ["'"$PROD_RESOURCE"'"]
                        }
                      }
                    }' \
@@ -127,10 +127,6 @@ workflows:
       - deploy-til-dev:
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - master
       - godkjenn-til-prod:
           type: approval
           requires:
