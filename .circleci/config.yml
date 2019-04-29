@@ -85,14 +85,14 @@ jobs:
           command: |
             PROD_RESOURCE=$(cat nais-prod.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
       - run:
-          name: Deployer til dev
+          name: Deployer til prod
           command: |
             curl -i \
                 -X POST \
                 -d '{
                      "ref": "'"$COMMIT_SHORT"'",
                      "description": "Automated deployment request for soknadsveiviserproxy from team personbruker",
-                     "environment": "dev-sbs",
+                     "environment": "prod-sbs",
                      "required_contexts": [],
                      "payload": {
                        "version": [1, 0, 0],
@@ -130,7 +130,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - circleci-test
       - godkjenn-til-prod:
           type: approval
           requires:
@@ -138,11 +138,11 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - circleci-test
       - deploy-til-prod:
           requires:
             - godkjenn-til-prod
           filters:
             branches:
               only:
-                - master
+                - circleci-test
