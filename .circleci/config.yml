@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Forbereder deploy til dev
           command: |
-            PREPROD_RESOURCE=$(cat nais-dev.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
+            export PREPROD_RESOURCE=$(cat nais-dev.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
       - run:
           name: Deployer til dev
           command: |
@@ -83,7 +83,7 @@ jobs:
       - run:
           name: Forbereder deploy til prod
           command: |
-            PROD_RESOURCE=$(cat nais-prod.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
+            export PROD_RESOURCE=$(cat nais-prod.json | jq '.spec.image = "'$DOCKER_IMAGE_VERSIONED'"')
       - run:
           name: Deployer til prod
           command: |
