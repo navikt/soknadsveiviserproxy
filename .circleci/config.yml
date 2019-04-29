@@ -130,7 +130,7 @@ workflows:
           filters:
             branches:
               only:
-                - circleci-test
+                - master
       - godkjenn-til-prod:
           type: approval
           requires:
@@ -138,11 +138,11 @@ workflows:
           filters:
             branches:
               only:
-                - circleci-test
+                - master
       - deploy-til-prod:
           requires:
             - godkjenn-til-prod
           filters:
             branches:
               only:
-                - circleci-test
+                - master
