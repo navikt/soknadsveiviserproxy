@@ -5,6 +5,7 @@ const request = require("request-promise");
 const { appendPDFPageFromPDFWithAnnotations } = require("../utils/pdf");
 
 parentPort.on("message", async data => {
+  console.log(`${threadId}: Starter sammenslåing`);
   const foersteside = data.foersteside;
   const pdfListe = data.pdfListe;
   const outStream = new memoryStreams.WritableStream();
@@ -15,8 +16,11 @@ parentPort.on("message", async data => {
 
     // Download external pdfs from urls
     const pdfBuffers = await Promise.all(
-      pdfListe.map(pdfUrl =>
-        request.get({ url: pdfUrl, encoding: null }).then(res => res)
+      pdfListe.map(
+        pdfUrl => (
+          console.log(`${threadId}: Laster ned ${pdfUrl}`),
+          request.get({ url: pdfUrl, encoding: null }).then(res => res)
+        )
       )
     );
 
@@ -28,6 +32,7 @@ parentPort.on("message", async data => {
 
     // Merge each pdf
     pdfBuffers.forEach(pdfBuffer => {
+      console.log(`${threadId}: Sammenslår PDF`);
       const pdfStream = new hummus.PDFRStreamForBuffer(pdfBuffer);
       appendPDFPageFromPDFWithAnnotations(pdfWriter, pdfStream);
     });
@@ -36,6 +41,7 @@ parentPort.on("message", async data => {
     const newBuffer = outStream.toBuffer();
     outStream.end();
 
+    console.log(`${threadId}: Sender resultat`);
     parentPort.postMessage({ pdf: newBuffer.toString("base64") });
     parentPort.close();
   } catch (e) {
