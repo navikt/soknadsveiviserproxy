@@ -81,7 +81,6 @@ app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
   const worker = new Worker("./src/workers/pdfMerger.js");
   worker.postMessage({ foersteside, pdfListe });
   worker.once("message", mergedPDF => res.send(mergedPDF));
-  worker.on("exit", code => console.log("Terminerte arbeideren"));
 });
 
 app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
