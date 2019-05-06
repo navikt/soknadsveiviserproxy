@@ -3,6 +3,9 @@ const express = require("express");
 const { Worker } = require("worker_threads");
 const createSanityClient = require("./src/createSanityClient");
 const {
+  lagSoknadsobjekterListe
+} = require("./src/adminrapporter/lagSoknadsobjekterListe");
+const {
   lagSkjemautlistingJson,
   hentUrlTilPDFEllerTomString
 } = require("./src/lagSkjemautlistingJson");
@@ -73,6 +76,13 @@ app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
     .then(lagSkjemautlistingJson)
     .then(docs => res.send(docs))
     .catch(console.error);
+});
+
+app.get("/soknadsveiviserproxy/utlisting/soknadsobjekter", (req, res) => {
+  lagSoknadsobjekterListe(
+    sporringer.alleSoknadsobjekter(),
+    sporringer.alleKategorierOgUnderkategorier()
+  ).then(docs => res.send(docs));
 });
 
 app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {

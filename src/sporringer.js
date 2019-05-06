@@ -6,6 +6,22 @@ const alleKategorier = () =>
       ...
     }`;
 
+const alleKategorierOgUnderkategorier = () =>
+  `*[_type == "kategori" && !(_id in path("drafts.**"))]
+    {
+      tittel,
+      underkategorier[]{
+        navn, 
+        soknadsobjekter[]->{
+          _id,
+          navn,
+          hovedskjema->{skjemanummer},
+          tema->{temakode},
+          digitalinnsending
+        }
+      }
+    }`;
+
 const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
   `*[_type == "kategori"
     && urlparam == ${JSON.stringify(kategoriUrlparam)}
@@ -98,6 +114,7 @@ const soknadsobjektKlageAnke = () =>
 
 const alleSoknadsobjekter = () =>
   `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]{
+  _id,
   hovedskjema->{
       navn,
       skjemanummer,
@@ -154,5 +171,6 @@ module.exports = {
   alleSkjemaer,
   soknadsobjektKlageAnke,
   soknader,
-  samlet
+  samlet,
+  alleKategorierOgUnderkategorier
 };
