@@ -115,6 +115,7 @@ const soknadsobjektKlageAnke = () =>
 const alleSoknadsobjekter = () =>
   `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]{
   _id,
+  navn,
   hovedskjema->{
       navn,
       skjemanummer,

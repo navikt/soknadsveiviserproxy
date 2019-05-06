@@ -8,32 +8,32 @@ async function lagSoknadsobjekterListe(
   try {
     const soknadsobjekter = await sanityClient.fetch(soknadsobjektsporring);
     const kategorier = await sanityClient.fetch(kategorisporring);
-    return prosesserDataOgListUt(soknadsobjekter, kategorier);
+    return prosesserDataOgListUt(
+      kategorier,
+      hentGjenvarendeSoknadsobjekter(kategorier, soknadsobjekter)
+    );
   } catch (e) {
     console.error("Klarte ikke å hente fra Sanity ", e);
     return { kategorier: "Det skjedde en feil med uthenting og prosessering" };
   }
 }
 
-function prosesserDataOgListUt(soknadsobjekter, kategorier) {
+function prosesserDataOgListUt(kategorier, soknadsobjekter) {
   const resultJson = kategorier.reduce((arrayAvJson, kategori) => {
-    return arrayAvJson.concat(lagKategoriutlisting(
-        kategori,
-        soknadsobjekter
-    ));
+    return arrayAvJson.concat(lagKategoriutlisting(kategori));
   }, []);
+  resultJson.push(gjenvarendeSoknadsobjekter(soknadsobjekter));
   return { kategorier: resultJson };
 }
 
 function lagKategoriutlisting(kategori) {
   return {
     kategori: kategori.tittel ? kategori.tittel.nb || "" : "",
-    underkategorier: kategori.underkategorier.reduce(
-      (arrayAvJson, underkategori) => {
-        return arrayAvJson.concat(lagUnderkategoriutlisting(underkategori));
-      },
-      []
-    )
+    underkategorier: kategori.underkategorier
+      ? kategori.underkategorier.reduce((arrayAvJson, underkategori) => {
+          return arrayAvJson.concat(lagUnderkategoriutlisting(underkategori));
+        }, [])
+      : []
   };
 }
 
@@ -58,6 +58,40 @@ function lagSoknadsobjektutlisting(soknadsobjekt) {
     tema: soknadsobjekt.tema ? soknadsobjekt.tema.temakode : "",
     dokumentinnsending: harDokumentinnsending(soknadsobjekt),
     soknadsdialog: harSoknadsdialog(soknadsobjekt)
+  };
+}
+
+function hentGjenvarendeSoknadsobjekter(kategorier, soknadsobjekter) {
+  kategorier.map(kategori => {
+    kategori.underkategorier
+      ? kategori.underkategorier.map(underkategori => {
+          underkategori.soknadsobjekter
+            ? underkategori.soknadsobjekter.map(soknadsobj => {
+                soknadsobjekter = soknadsobjekter.filter(
+                  soknadsobjekt => soknadsobj._id !== soknadsobjekt._id
+                );
+              })
+            : null;
+        })
+      : null;
+  });
+  return soknadsobjekter;
+}
+
+function gjenvarendeSoknadsobjekter(soknadsobjekter) {
+  return {
+    kategori: "IKKE PUBLISERT UNDER MENYPUNKT",
+    underkategorier: [
+      {
+        underkategori: "IKKE PUBLISERT UNDER MENYPUNKT",
+        soknadsobjekter: soknadsobjekter.reduce(
+          (arrayAvJson, soknadsobjekt) => {
+            return arrayAvJson.concat(lagSoknadsobjektutlisting(soknadsobjekt));
+          },
+          []
+        )
+      }
+    ]
   };
 }
 
