@@ -20,7 +20,7 @@ async function lagSkjemaogVedleggsliste() {
   } catch (e) {
     console.error("Klarte ikke å hente fra Sanity ", e);
     return {
-      soknadsobjekter: "Det skjedde en feil med uthenting og prosessering"
+      skjemaerogvedlegg: "Det skjedde en feil med uthenting og prosessering"
     };
   }
 }
@@ -43,7 +43,7 @@ function prosesserDataOgListUt(soknadsobjekter, skjemaobjekter, vedlegg) {
     });
   });
 
-  return { soknadsobjekter: resultJson };
+  return { skjemaerogvedlegg: resultJson };
 }
 
 function lagSoknadsobjektUtlisting(soknadsobjekt) {
