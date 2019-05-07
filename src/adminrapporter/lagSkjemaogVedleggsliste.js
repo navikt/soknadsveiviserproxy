@@ -1,6 +1,6 @@
 const createSanityClient = require("../createSanityClient");
 const sanityClient = createSanityClient();
-const sporringer = require("./src/sporringer");
+const sporringer = require("../sporringer");
 
 async function lagSkjemaogVedleggsliste() {
   try {
