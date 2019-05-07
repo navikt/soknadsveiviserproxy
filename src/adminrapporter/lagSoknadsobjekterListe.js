@@ -12,11 +12,16 @@ async function lagSoknadsobjekterListe() {
     );
     return prosesserDataOgListUt(
       kategorier,
-      hentGjenvarendeSoknadsobjekter(kategorier, soknadsobjekter)
+      hentSoknadsobjekterSomIkkeErTilknyttetEnUnderkategori(
+        kategorier,
+        soknadsobjekter
+      )
     );
   } catch (e) {
     console.error("Klarte ikke å hente fra Sanity ", e);
-    return { kategorier: "Det skjedde en feil med uthenting og prosessering" };
+    return {
+      soknadsobjekter: "Det skjedde en feil med uthenting og prosessering"
+    };
   }
 }
 
@@ -24,34 +29,52 @@ function prosesserDataOgListUt(kategorier, soknadsobjekter) {
   const resultJson = kategorier.reduce((arrayAvJson, kategori) => {
     return arrayAvJson.concat(lagKategoriutlisting(kategori));
   }, []);
-  resultJson.push(gjenvarendeSoknadsobjekter(soknadsobjekter));
-  return { kategorier: resultJson };
+
+  soknadsobjekter.map(soknadsobjekt => {
+    resultJson.push(
+      lagSoknadsobjektutlisting(soknadsobjekt, "UDEFINERT", "UDEFINERT")
+    );
+  });
+
+  return { soknadsobjekter: resultJson };
 }
 
 function lagKategoriutlisting(kategori) {
-  return {
-    kategori: kategori.tittel ? kategori.tittel.nb || "" : "",
-    underkategorier: kategori.underkategorier
-      ? kategori.underkategorier.reduce((arrayAvJson, underkategori) => {
-          return arrayAvJson.concat(lagUnderkategoriutlisting(underkategori));
-        }, [])
-      : []
-  };
+  const kategorinavn = kategori.tittel ? kategori.tittel.nb || "" : "";
+  return kategori.underkategorier
+    ? kategori.underkategorier.reduce((arrayAvJson, underkategori) => {
+        return arrayAvJson.concat(
+          lagUnderkategoriutlisting(underkategori, kategorinavn)
+        );
+      }, [])
+    : [{ kategori: kategorinavn }];
 }
 
-function lagUnderkategoriutlisting(underkategori) {
-  return {
-    underkategori: underkategori.navn ? underkategori.navn.nb || "" : "",
-    soknadsobjekter: underkategori.soknadsobjekter
-      ? underkategori.soknadsobjekter.reduce((arrayAvJson, soknadsobjekt) => {
-          return arrayAvJson.concat(lagSoknadsobjektutlisting(soknadsobjekt));
-        }, [])
-      : []
-  };
+function lagUnderkategoriutlisting(underkategori, kategorinavn) {
+  const underkategorinavn = underkategori.navn
+    ? underkategori.navn.nb || ""
+    : "";
+  return underkategori.soknadsobjekter
+    ? underkategori.soknadsobjekter.reduce((arrayAvJson, soknadsobjekt) => {
+        return arrayAvJson.concat(
+          lagSoknadsobjektutlisting(
+            soknadsobjekt,
+            kategorinavn,
+            underkategorinavn
+          )
+        );
+      }, [])
+    : [{ kategori: kategorinavn, underkategori: underkategorinavn }];
 }
 
-function lagSoknadsobjektutlisting(soknadsobjekt) {
+function lagSoknadsobjektutlisting(
+  soknadsobjekt,
+  kategorinavn,
+  underkategorinavn
+) {
   return {
+    kategori: kategorinavn,
+    underkategori: underkategorinavn,
     navn: soknadsobjekt.navn ? soknadsobjekt.navn.nb || "" : "",
     navnEN: soknadsobjekt.navn ? soknadsobjekt.navn.en || "" : "",
     hovedskjema: soknadsobjekt.hovedskjema
@@ -63,7 +86,10 @@ function lagSoknadsobjektutlisting(soknadsobjekt) {
   };
 }
 
-function hentGjenvarendeSoknadsobjekter(kategorier, soknadsobjekter) {
+function hentSoknadsobjekterSomIkkeErTilknyttetEnUnderkategori(
+  kategorier,
+  soknadsobjekter
+) {
   kategorier.map(kategori => {
     kategori.underkategorier
       ? kategori.underkategorier.map(underkategori => {
@@ -78,23 +104,6 @@ function hentGjenvarendeSoknadsobjekter(kategorier, soknadsobjekter) {
       : null;
   });
   return soknadsobjekter;
-}
-
-function gjenvarendeSoknadsobjekter(soknadsobjekter) {
-  return {
-    kategori: "IKKE PUBLISERT UNDER MENYPUNKT",
-    underkategorier: [
-      {
-        underkategori: "IKKE PUBLISERT UNDER MENYPUNKT",
-        soknadsobjekter: soknadsobjekter.reduce(
-          (arrayAvJson, soknadsobjekt) => {
-            return arrayAvJson.concat(lagSoknadsobjektutlisting(soknadsobjekt));
-          },
-          []
-        )
-      }
-    ]
-  };
 }
 
 function harDokumentinnsending(soknadsobjekt) {

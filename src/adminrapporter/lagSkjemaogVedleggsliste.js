@@ -27,44 +27,65 @@ async function lagSkjemaogVedleggsliste() {
 
 function prosesserDataOgListUt(soknadsobjekter, skjemaobjekter, vedlegg) {
   const resultJson = soknadsobjekter.reduce((arrayAvJson, soknadsobjekt) => {
-    return arrayAvJson.concat(lagSoknadsobjektlisting(soknadsobjekt));
+    return arrayAvJson.concat(lagSoknadsobjektUtlisting(soknadsobjekt));
   }, []);
-  resultJson.push(gjenvarendeSkjema(skjemaobjekter));
-  resultJson.push(gjenvarendeVedlegg(vedlegg));
+
+  skjemaobjekter.map(skjema => {
+    resultJson.push({
+      soknadsobjekt: "UDEFINERT",
+      ...lagSkjemautlisting(skjema)
+    });
+  });
+
+  vedlegg.map(v => {
+    resultJson.push({
+      ...lagVedleggsutlisting(v, "UDEFINERT")
+    });
+  });
+
   return { soknadsobjekter: resultJson };
 }
 
-function lagSoknadsobjektlisting(soknadsobjekt) {
-  return {
-    soknadsobjekt: soknadsobjekt.navn
-      ? soknadsobjekt.navn.nb || soknadsobjekt.navn.en
-      : "",
-    hovedskjema: lagSkjemautlisting(soknadsobjekt.hovedskjema || null),
-    vedleggsliste: soknadsobjekt.vedleggtilsoknad
-      ? soknadsobjekt.vedleggtilsoknad.reduce((arrayAvJson, vedlegg) => {
-          if (vedlegg.vedlegg) {
-            return arrayAvJson.concat(lagVedleggsutlisting(vedlegg.vedlegg));
-          }
-        }, [])
-      : []
-  };
+function lagSoknadsobjektUtlisting(soknadsobjekt) {
+  const soknadsobjektnavn = soknadsobjekt.navn
+    ? soknadsobjekt.navn.nb || soknadsobjekt.navn.en
+    : "";
+  const skjema = soknadsobjekt.hovedskjema || null;
+  return soknadsobjekt.vedleggtilsoknad
+    ? soknadsobjekt.vedleggtilsoknad.reduce((arrayAvJson, vedlegg) => {
+        if (vedlegg.vedlegg) {
+          return arrayAvJson.concat(
+            lagVedleggsutlisting(vedlegg.vedlegg, soknadsobjektnavn, skjema)
+          );
+        }
+      }, [])
+    : [
+        {
+          soknadsobjekt: soknadsobjektnavn,
+          ...lagSkjemautlisting(skjema)
+        }
+      ];
 }
 
 function lagSkjemautlisting(skjema) {
-  return {
-    skjemanummer: skjema.skjemanummer,
-    navn: skjema.navn.nb ? skjema.navn.nb : "",
-    navnEN: skjema.navn.en ? skjema.navn.en : "",
-    navnNN: skjema.navn.nn ? skjema.navn.nn : ""
-  };
+  return skjema
+    ? {
+        skjemanummer: skjema.skjemanummer,
+        skjemanavn: skjema.navn.nb ? skjema.navn.nb : "",
+        skjemanavnEN: skjema.navn.en ? skjema.navn.en : "",
+        skjemanavnNN: skjema.navn.nn ? skjema.navn.nn : ""
+      }
+    : {};
 }
 
-function lagVedleggsutlisting(vedlegg) {
+function lagVedleggsutlisting(vedlegg, soknadsobjektnavn, skjema) {
   return {
-    navn: vedlegg.navn ? vedlegg.navn.nb || "" : "",
-    navnEN: vedlegg.navn ? vedlegg.navn.en || "" : "",
-    ID: vedlegg.vedleggsid,
-    skjema: vedlegg.skjematilvedlegg
+    soknadsobjekt: soknadsobjektnavn,
+    ...lagSkjemautlisting(skjema),
+    vedleggsnavn: vedlegg.navn ? vedlegg.navn.nb || "" : "",
+    vedleggsnavnEN: vedlegg.navn ? vedlegg.navn.en || "" : "",
+    vedleggsID: vedlegg.vedleggsid,
+    vedleggsskjema: vedlegg.skjematilvedlegg
       ? vedlegg.skjematilvedlegg.skjemanummer
       : ""
   };
@@ -84,18 +105,6 @@ function hentSkjemaerSomIkkeErTilknyttetEtSoknadsobjekt(
   return skjemaer;
 }
 
-function gjenvarendeSkjema(skjemaobjekter) {
-  return {
-    soknadsobjekt: "IKKE PUBLISERT UNDER SOKNADSOBJEKT",
-    hovedskjema: skjemaobjekter.reduce((arrayAvJson, skjema) => {
-      return arrayAvJson.concat({
-        navn: skjema.navn,
-        skjemanummer: skjema.skjemanummer
-      });
-    }, [])
-  };
-}
-
 function hentVedleggSomIkkeErTilknyttetEtSoknadsobjekt(
   soknadsobjekter,
   vedleggsliste
@@ -112,15 +121,6 @@ function hentVedleggSomIkkeErTilknyttetEtSoknadsobjekt(
       : null;
   });
   return vedleggsliste;
-}
-
-function gjenvarendeVedlegg(vedlegg) {
-  return {
-    soknadsobjekt: "IKKE PUBLISERT UNDER SOKNADSOBJEKT",
-    vedleggsliste: vedlegg.reduce((arrayAvJson, vedleggsobjekt) => {
-      return arrayAvJson.concat(lagVedleggsutlisting(vedleggsobjekt));
-    }, [])
-  };
 }
 
 module.exports = { lagSkjemaogVedleggsliste };
