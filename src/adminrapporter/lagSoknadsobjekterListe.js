@@ -1,13 +1,15 @@
 const createSanityClient = require("../createSanityClient");
 const sanityClient = createSanityClient();
+const sporringer = require("./src/sporringer");
 
-async function lagSoknadsobjekterListe(
-  soknadsobjektsporring,
-  kategorisporring
-) {
+async function lagSoknadsobjekterListe() {
   try {
-    const soknadsobjekter = await sanityClient.fetch(soknadsobjektsporring);
-    const kategorier = await sanityClient.fetch(kategorisporring);
+    const soknadsobjekter = await sanityClient.fetch(
+      sporringer.alleSoknadsobjekter()
+    );
+    const kategorier = await sanityClient.fetch(
+      sporringer.alleKategorierOgUnderkategorier()
+    );
     return prosesserDataOgListUt(
       kategorier,
       hentGjenvarendeSoknadsobjekter(kategorier, soknadsobjekter)

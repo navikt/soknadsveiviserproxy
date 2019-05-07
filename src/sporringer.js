@@ -117,6 +117,7 @@ const alleSoknadsobjekter = () =>
   _id,
   navn,
   hovedskjema->{
+      _id,
       navn,
       skjemanummer,
       pdf{
@@ -133,16 +134,22 @@ const alleSoknadsobjekter = () =>
     },
     tema->, gosysid, "vedleggtilsoknad": vedleggskjema[]{
       vedlegg->{
+        _id,
         gosysid,
         skjematilvedlegg->,
-        vedleggsid}
+        vedleggsid,
+        navn}
       }
   }`;
 
 const alleSkjemaer = () =>
   `*[_type == "skjema" && !(_id in path("drafts.**"))]
-        {"emneord": emneord[]->{emneord}, skjemanummer, "navn": navn.nb,
+        {"emneord": emneord[]->{emneord}, _id, skjemanummer, "navn": navn.nb,
         "pdf": pdf.nb}`;
+
+const alleVedlegg = () =>
+  `*[_type == "vedlegg" && !(_id in path("drafts.**"))]
+        {_id, skjematilvedlegg->, navn, vedleggsid}`;
 
 const samlet = () =>
   `*[_type == "kategori" && !(_id in path("drafts.**"))]
@@ -173,5 +180,6 @@ module.exports = {
   soknadsobjektKlageAnke,
   soknader,
   samlet,
-  alleKategorierOgUnderkategorier
+  alleKategorierOgUnderkategorier,
+  alleVedlegg
 };
