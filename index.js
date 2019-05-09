@@ -86,14 +86,6 @@ app.get("/soknadsveiviserproxy/utlisting/skjemaerogvedlegg", (req, res) => {
   lagSkjemaogVedleggsliste().then(docs => res.send(docs));
 });
 
-app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
-  const foersteside = req.body.foersteside;
-  const pdfListe = req.body.pdfListe;
-  const worker = new Worker("./src/workers/pdfMerger.js");
-  worker.postMessage({ foersteside, pdfListe });
-  worker.once("message", mergedPDF => res.send(mergedPDF));
-});
-
 app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
 app.get("/soknadsveiviserproxy/isReady", (req, res) => res.sendStatus(200));
 app.get("/soknadsveiviserproxy", (req, res) => res.sendStatus(200));
