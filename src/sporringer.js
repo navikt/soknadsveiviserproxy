@@ -6,6 +6,22 @@ const alleKategorier = () =>
       ...
     }`;
 
+const alleKategorierOgUnderkategorier = () =>
+  `*[_type == "kategori" && !(_id in path("drafts.**"))]
+    {
+      tittel,
+      underkategorier[]{
+        navn, 
+        soknadsobjekter[]->{
+          _id,
+          navn,
+          hovedskjema->{skjemanummer},
+          tema->{temakode},
+          digitalinnsending
+        }
+      }
+    }`;
+
 const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
   `*[_type == "kategori"
     && urlparam == ${JSON.stringify(kategoriUrlparam)}
@@ -98,7 +114,10 @@ const soknadsobjektKlageAnke = () =>
 
 const alleSoknadsobjekter = () =>
   `*[_type == "soknadsobjekt" && !(_id in path("drafts.**"))]{
+  _id,
+  navn,
   hovedskjema->{
+      _id,
       navn,
       skjemanummer,
       pdf{
@@ -115,16 +134,22 @@ const alleSoknadsobjekter = () =>
     },
     tema->, gosysid, "vedleggtilsoknad": vedleggskjema[]{
       vedlegg->{
+        _id,
         gosysid,
         skjematilvedlegg->,
-        vedleggsid}
+        vedleggsid,
+        navn}
       }
   }`;
 
 const alleSkjemaer = () =>
   `*[_type == "skjema" && !(_id in path("drafts.**"))]
-        {"emneord": emneord[]->{emneord}, skjemanummer, "navn": navn.nb,
+        {"emneord": emneord[]->{emneord}, _id, skjemanummer, "navn": navn.nb,
         "pdf": pdf.nb}`;
+
+const alleVedlegg = () =>
+  `*[_type == "vedlegg" && !(_id in path("drafts.**"))]
+        {_id, skjematilvedlegg->, navn, vedleggsid}`;
 
 const samlet = () =>
   `*[_type == "kategori" && !(_id in path("drafts.**"))]
@@ -154,5 +179,7 @@ module.exports = {
   alleSkjemaer,
   soknadsobjektKlageAnke,
   soknader,
-  samlet
+  samlet,
+  alleKategorierOgUnderkategorier,
+  alleVedlegg
 };

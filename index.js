@@ -3,9 +3,12 @@ const express = require("express");
 const { Worker } = require("worker_threads");
 const createSanityClient = require("./src/createSanityClient");
 const {
-  lagSkjemautlistingJson,
-  hentUrlTilPDFEllerTomString
-} = require("./src/lagSkjemautlistingJson");
+  lagSoknadsobjekterListe
+} = require("./src/adminrapporter/lagSoknadsobjekterListe");
+const {
+  lagSkjemaogVedleggsliste
+} = require("./src/adminrapporter/lagSkjemaogVedleggsliste");
+const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
 const app = express();
 const sanityClient = createSanityClient();
 const isProduction = process.env.NODE_ENV === "production";
@@ -73,6 +76,14 @@ app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
     .then(lagSkjemautlistingJson)
     .then(docs => res.send(docs))
     .catch(console.error);
+});
+
+app.get("/soknadsveiviserproxy/utlisting/soknadsobjekter", (req, res) => {
+  lagSoknadsobjekterListe().then(docs => res.send(docs));
+});
+
+app.get("/soknadsveiviserproxy/utlisting/skjemaerogvedlegg", (req, res) => {
+  lagSkjemaogVedleggsliste().then(docs => res.send(docs));
 });
 
 app.post("/soknadsveiviserproxy/merge-pdf", async (req, res) => {
