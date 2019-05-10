@@ -71,9 +71,14 @@ function lagSkjemautlisting(skjema) {
   return skjema
     ? {
         skjemanummer: skjema.skjemanummer,
-        skjemanavn: skjema.navn.nb ? skjema.navn.nb : "",
-        skjemanavnEN: skjema.navn.en ? skjema.navn.en : "",
-        skjemanavnNN: skjema.navn.nn ? skjema.navn.nn : ""
+        NBskjemanavn: skjema.navn.nb ? skjema.navn.nb : "",
+        NNskjemanavn: skjema.navn.nn ? skjema.navn.nn : "",
+        ENskjemanavn: skjema.navn.en ? skjema.navn.en : "",
+        SEskjemanavn: skjema.navn.se ? skjema.navn.se : "",
+        DEskjemanavn: skjema.navn.de ? skjema.navn.de : "",
+        FRskjemanavn: skjema.navn.fr ? skjema.navn.fr : "",
+        ESskjemanavn: skjema.navn.es ? skjema.navn.es : "",
+        PLskjemanavn: skjema.navn.pl ? skjema.navn.pl : ""
       }
     : {};
 }
@@ -82,12 +87,18 @@ function lagVedleggsutlisting(vedlegg, soknadsobjektnavn, skjema) {
   return {
     soknadsobjekt: soknadsobjektnavn,
     ...lagSkjemautlisting(skjema),
-    vedleggsnavn: vedlegg.navn ? vedlegg.navn.nb || "" : "",
-    vedleggsnavnEN: vedlegg.navn ? vedlegg.navn.en || "" : "",
     vedleggsID: vedlegg.vedleggsid,
     vedleggsskjema: vedlegg.skjematilvedlegg
       ? vedlegg.skjematilvedlegg.skjemanummer
-      : ""
+      : "",
+    NBvedleggsnavn: vedlegg.navn.nb ? vedlegg.navn.nb : "",
+    NNvedleggsnavn: vedlegg.navn.nn ? vedlegg.navn.nn : "",
+    ENvedleggsnavn: vedlegg.navn.en ? vedlegg.navn.en : "",
+    SEvedleggsnavn: vedlegg.navn.se ? vedlegg.navn.se : "",
+    DEvedleggsnavn: vedlegg.navn.de ? vedlegg.navn.de : "",
+    FRvedleggsnavn: vedlegg.navn.fr ? vedlegg.navn.fr : "",
+    ESvedleggsnavn: vedlegg.navn.es ? vedlegg.navn.es : "",
+    PLvedleggsnavn: vedlegg.navn.pl ? vedlegg.navn.pl : ""
   };
 }
 
