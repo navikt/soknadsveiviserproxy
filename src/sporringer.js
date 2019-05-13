@@ -30,16 +30,7 @@ const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
             urlparam == ${JSON.stringify(underkategoriUrlparam)} ][0]{
                 soknadsobjekter[] -> {
                      hovedskjema ->{
-                       pdf{
-                         nb{asset->},
-                         en{asset->},
-                         nn{asset->},
-                         se{asset->},
-                         fr{asset->},
-                         de{asset->},
-                         pl{asset->},
-                         es{asset->}
-                       },
+                       ${pdfAlleSprak()},
                        ...
                      },
                      tema->,
@@ -50,16 +41,7 @@ const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
                      "vedleggtilsoknad": vedleggskjema[]{
                       vedlegg->{
                         skjematilvedlegg->{
-                              pdf{
-                                nb{asset->},
-                                en{asset->},
-                                nn{asset->},
-                                se{asset->},
-                                fr{asset->},
-                                de{asset->},
-                                pl{asset->},
-                                es{asset->}
-                              },
+                              ${pdfAlleSprak()},
                               ...
                             },
                             ...
@@ -78,31 +60,13 @@ const soknadsobjektKlageAnke = () =>
   `*[_type == "soknadsobjekt" && navn.nb == "Klage/anke" && !(_id in path("drafts.**"))][0]
       {
         hovedskjema->{
-          pdf{
-            nb{asset->},
-            en{asset->},
-            nn{asset->},
-            se{asset->},
-            fr{asset->},
-            de{asset->},
-            pl{asset->},
-            es{asset->}
-          },
+          ${pdfAlleSprak()},
           ...
         },
         "vedleggtilsoknad": vedleggskjema[]{
           vedlegg->{
             skjematilvedlegg->{
-                  pdf{
-                    nb{asset->},
-                    en{asset->},
-                    nn{asset->},
-                    se{asset->},
-                    fr{asset->},
-                    de{asset->},
-                    pl{asset->},
-                    es{asset->}
-                  },
+                  ${pdfAlleSprak()},
                   ...
                 },
             ...
@@ -120,16 +84,7 @@ const alleSoknadsobjekter = () =>
       _id,
       navn,
       skjemanummer,
-      pdf{
-        nb{asset->},
-        en{asset->},
-        nn{asset->},
-        se{asset->},
-        fr{asset->},
-        de{asset->},
-        pl{asset->},
-        es{asset->}
-      },
+      ${pdfAlleSprak()},
       ...
     },
     tema->, gosysid, "vedleggtilsoknad": vedleggskjema[]{
@@ -145,44 +100,17 @@ const alleSoknadsobjekter = () =>
 const alleSkjemaer = () =>
   `*[_type == "skjema" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
-        pdf{
-        nb{asset->},
-        en{asset->},
-        nn{asset->},
-        se{asset->},
-        fr{asset->},
-        de{asset->},
-        pl{asset->},
-        es{asset->}
-      }}`;
+        ${pdfAlleSprak()}}`;
 
 const alleInterneSkjemaer = () =>
   `*[_type == "interneskjema" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
-        pdf{
-        nb{asset->},
-        en{asset->},
-        nn{asset->},
-        se{asset->},
-        fr{asset->},
-        de{asset->},
-        pl{asset->},
-        es{asset->}
-      }}`;
+        ${pdfAlleSprak()}}`;
 
 const alleEESSISkjemaer = () =>
   `*[_type == "eessiskjema" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
-        pdf{
-        nb{asset->},
-        en{asset->},
-        nn{asset->},
-        se{asset->},
-        fr{asset->},
-        de{asset->},
-        pl{asset->},
-        es{asset->}
-      }}`;
+        ${pdfAlleSprak()}}`;
 
 const alleVedlegg = () =>
   `*[_type == "vedlegg" && !(_id in path("drafts.**"))]
@@ -209,6 +137,18 @@ const samlet = () =>
                 }
             }
         }`;
+
+const pdfAlleSprak = () =>
+  `pdf{
+  nb{asset->},
+  en{asset->},
+  nn{asset->},
+  se{asset->},
+  fr{asset->},
+  de{asset->},
+  pl{asset->},
+  es{asset->}
+}`;
 
 module.exports = {
   alleKategorier,
