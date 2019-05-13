@@ -97,18 +97,8 @@ const alleSoknadsobjekter = () =>
       }
   }`;
 
-const alleSkjemaer = () =>
-  `*[_type == "skjema" && !(_id in path("drafts.**"))]
-        {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
-        ${pdfAlleSprak()}}`;
-
-const alleInterneSkjemaer = () =>
-  `*[_type == "interneskjema" && !(_id in path("drafts.**"))]
-        {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
-        ${pdfAlleSprak()}}`;
-
-const alleEESSISkjemaer = () =>
-  `*[_type == "eessiskjema" && !(_id in path("drafts.**"))]
+const alleSkjemaer = skjematype =>
+  `*[_type == "${skjematype}" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
         ${pdfAlleSprak()}}`;
 
@@ -154,8 +144,6 @@ module.exports = {
   alleKategorier,
   alleSoknadsobjekter,
   alleSkjemaer,
-  alleInterneSkjemaer,
-  alleEESSISkjemaer,
   soknadsobjektKlageAnke,
   soknader,
   samlet,

@@ -4,7 +4,9 @@ const sporringer = require("../sporringer");
 
 async function lagSkjemaogVedleggsliste() {
   try {
-    const skjemaobjekter = await sanityClient.fetch(sporringer.alleSkjemaer());
+    const skjemaobjekter = await sanityClient.fetch(
+      sporringer.alleSkjemaer("skjema")
+    );
     const soknadsobjekter = await sanityClient.fetch(
       sporringer.alleSoknadsobjekter()
     );
