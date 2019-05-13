@@ -1,4 +1,4 @@
-const createSanityClient = require("../createSanityClient");
+const createSanityClient = require("../utils/createSanityClient");
 const sanityClient = createSanityClient();
 const sporringer = require("../sporringer");
 

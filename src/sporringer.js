@@ -144,8 +144,45 @@ const alleSoknadsobjekter = () =>
 
 const alleSkjemaer = () =>
   `*[_type == "skjema" && !(_id in path("drafts.**"))]
-        {"emneord": emneord[]->{emneord}, _id, skjemanummer, "navn": navn.nb,
-        "pdf": pdf.nb}`;
+        {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
+        pdf{
+        nb{asset->},
+        en{asset->},
+        nn{asset->},
+        se{asset->},
+        fr{asset->},
+        de{asset->},
+        pl{asset->},
+        es{asset->}
+      }}`;
+
+const alleInterneSkjemaer = () =>
+  `*[_type == "interneskjema" && !(_id in path("drafts.**"))]
+        {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
+        pdf{
+        nb{asset->},
+        en{asset->},
+        nn{asset->},
+        se{asset->},
+        fr{asset->},
+        de{asset->},
+        pl{asset->},
+        es{asset->}
+      }}`;
+
+const alleEESSISkjemaer = () =>
+  `*[_type == "eessiskjema" && !(_id in path("drafts.**"))]
+        {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
+        pdf{
+        nb{asset->},
+        en{asset->},
+        nn{asset->},
+        se{asset->},
+        fr{asset->},
+        de{asset->},
+        pl{asset->},
+        es{asset->}
+      }}`;
 
 const alleVedlegg = () =>
   `*[_type == "vedlegg" && !(_id in path("drafts.**"))]
@@ -177,6 +214,8 @@ module.exports = {
   alleKategorier,
   alleSoknadsobjekter,
   alleSkjemaer,
+  alleInterneSkjemaer,
+  alleEESSISkjemaer,
   soknadsobjektKlageAnke,
   soknader,
   samlet,

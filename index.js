@@ -1,7 +1,7 @@
 const sporringer = require("./src/sporringer");
 const express = require("express");
 const { Worker } = require("worker_threads");
-const createSanityClient = require("./src/createSanityClient");
+const createSanityClient = require("./src/utils/createSanityClient");
 const {
   lagSoknadsobjekterListe
 } = require("./src/adminrapporter/lagSoknadsobjekterListe");
@@ -9,6 +9,7 @@ const {
   lagSkjemaogVedleggsliste
 } = require("./src/adminrapporter/lagSkjemaogVedleggsliste");
 const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
+const { hentOgReturnerSkjemaerTilNavet } = require("./src/utils/hentOgReturnerSkjemaerTilNavet");
 const app = express();
 const sanityClient = createSanityClient();
 const isProduction = process.env.NODE_ENV === "production";
@@ -38,10 +39,7 @@ app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
 );
 
 app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
-  sanityClient
-    .fetch(sporringer.alleSkjemaer())
-    .then(docs => res.send(docs))
-    .catch(console.error);
+  hentOgReturnerSkjemaerTilNavet().then(docs => res.send(docs));
 });
 
 app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
