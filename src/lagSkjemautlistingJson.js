@@ -1,5 +1,5 @@
 const imageUrlBuilder = require("@sanity/image-url");
-const createSanityClient = require("./createSanityClient");
+const createSanityClient = require("./utils/createSanityClient");
 const builder = imageUrlBuilder(createSanityClient());
 
 /**
