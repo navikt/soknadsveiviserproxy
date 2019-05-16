@@ -10,11 +10,8 @@ async function hentOgReturnerSkjemaerTilNavet() {
     const interneskjemaobjekter = await sanityClient.fetch(
       sporringer.alleSkjemaer("interneskjema")
     );
-    const eessiskjemaobjekter = await sanityClient.fetch(
-      sporringer.alleSkjemaer("eessiskjema")
-    );
 
-    return skjemaobjekter.concat(interneskjemaobjekter, eessiskjemaobjekter);
+    return skjemaobjekter.concat(interneskjemaobjekter);
   } catch (e) {
     console.error("Klarte ikke å hente fra Sanity ", e);
     return {
