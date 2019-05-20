@@ -9,7 +9,9 @@ const {
   lagSkjemaogVedleggsliste
 } = require("./src/adminrapporter/lagSkjemaogVedleggsliste");
 const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
-const { hentOgReturnerSkjemaerTilNavet } = require("./src/utils/hentOgReturnerSkjemaerTilNavet");
+const {
+  hentOgReturnerSkjemaerTilNavet
+} = require("./src/utils/hentOgReturnerSkjemaerTilNavet");
 const app = express();
 const sanityClient = createSanityClient();
 const isProduction = process.env.NODE_ENV === "production";
