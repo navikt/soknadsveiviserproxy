@@ -51,8 +51,8 @@ function sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(soknadsobjekt) {
         lagJSON(
           vedlegg.skjematilvedlegg,
           soknadsobjekt.tema.temakode,
-          soknadsobjekt.gosysid,
-          vedlegg.vedleggsID
+          vedlegg.gosysid,
+          vedlegg.vedleggsid
         )
       );
       return vedleggsskjemaJson;
@@ -94,12 +94,12 @@ function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
 function lagJSON(skjema, tema, gosysid, vedleggsID) {
   return {
     Skjemanummer: skjema.skjemanummer,
-    Vedleggsid: vedleggsID,
+    Vedleggsid: vedleggsID || "",
     Tittel: skjema.navn.nb ? skjema.navn.nb : "",
     Tittel_en: skjema.navn.en ? skjema.navn.en : "",
     Tittel_nn: skjema.navn.nn ? skjema.navn.nn : "",
     Tema: tema,
-    Gosysid: "000000", //Tester å sette denne til 00000
+    Gosysid: gosysid,
     "Beskrivelse (ID)": "000000",
     Lenke: hentUrlTilPDFEllerTomString(skjema.pdf.nb),
     "Lenke engelsk skjema": hentUrlTilPDFEllerTomString(skjema.pdf.en),
@@ -113,7 +113,6 @@ function lagJSON(skjema, tema, gosysid, vedleggsID) {
 }
 
 module.exports = {
-  hentUrlTilPDFEllerTomString,
   lagSkjemautlistingJson,
   lagJSON
 };
