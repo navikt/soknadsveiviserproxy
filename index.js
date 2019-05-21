@@ -44,6 +44,13 @@ app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
   hentOgReturnerSkjemaerTilNavet().then(docs => res.send(docs));
 });
 
+app.get("/soknadsveiviserproxy/sedskjemaer", (req, res) => {
+  sanityClient
+    .fetch(sporringer.alleSkjemaer("sedskjema"))
+    .then(docs => res.send(docs))
+    .catch(console.error);
+});
+
 app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
   sanityClient
     .fetch(sporringer.soknadsobjektKlageAnke())
