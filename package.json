@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "npm run lint && npm run test && node index.js",
+    "startDev": "npm run lint && nodemon index.js",
     "lint": "eslint index.js",
     "docker-build": "docker build -t soknadsveiviserproxy .",
     "docker-run": "docker run --rm -p 8080:8080 soknadsveiviserproxy"
