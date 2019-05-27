@@ -8,14 +8,14 @@ const builder = imageUrlBuilder(createSanityClient());
  * @return {{Skjemaer: array}}
  */
 function lagSkjemautlistingJson(alleSoknadsobjekter) {
-  const resultJson = alleSoknadsobjekter
+  const jsonMedDuplikater = alleSoknadsobjekter
     .filter(soknadsobjekt => soknadsobjekt.hovedskjema.pdf !== undefined)
     .reduce((arrayAvJson, soknadsobjekt) => {
       return arrayAvJson.concat(
         lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt)
       );
     }, []);
-  return { Skjemaer: resultJson };
+  return { Skjemaer: filtrerJsonOgFjernDuplikater(jsonMedDuplikater) };
 }
 
 /**
@@ -24,7 +24,7 @@ function lagSkjemautlistingJson(alleSoknadsobjekter) {
  * @return {string}
  */
 function pdfUrl(asset) {
-  return builder.image(asset).options.source.url;
+  return builder.image(asset).options.source.url || "";
 }
 
 /**
@@ -44,17 +44,19 @@ function hentUrlTilPDFEllerTomString(pdfObjekt) {
 function sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(soknadsobjekt) {
   return soknadsobjekt.vedleggtilsoknad
     .map(v => v.vedlegg)
-    .filter(vedlegg => vedlegg.skjematilvedlegg !== undefined)
-    .filter(vedlegg => vedlegg.skjematilvedlegg.pdf !== undefined)
     .reduce((vedleggsskjemaJson, vedlegg) => {
-      vedleggsskjemaJson.push(
-        lagJSON(
-          vedlegg.skjematilvedlegg,
-          soknadsobjekt.tema.temakode,
-          vedlegg.gosysid,
-          vedlegg.vedleggsid
-        )
-      );
+      vedlegg.skjematilvedlegg && vedlegg.skjematilvedlegg.pdf
+        ? vedleggsskjemaJson.push(
+            lagJSONForSkjema(
+              vedlegg.skjematilvedlegg,
+              soknadsobjekt.tema.temakode,
+              vedlegg.gosysid,
+              vedlegg.vedleggsid
+            )
+          )
+        : vedleggsskjemaJson.push(
+            lagJSONForVedleggUtenSkjema(vedlegg, soknadsobjekt.tema.temakode)
+          );
       return vedleggsskjemaJson;
     }, []);
 }
@@ -65,7 +67,7 @@ function sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(soknadsobjekt) {
  * @return {JSON[]}
  */
 function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
-  const skjemaJson = lagJSON(
+  const skjemaJson = lagJSONForSkjema(
     soknadsobjekt.hovedskjema,
     soknadsobjekt.tema.temakode,
     soknadsobjekt.gosysid,
@@ -91,13 +93,13 @@ function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
  * @param {string} vedleggsID
  * @return {JSON}
  */
-function lagJSON(skjema, tema, gosysid, vedleggsID) {
+function lagJSONForSkjema(skjema, tema, gosysid, vedleggsID) {
   return {
     Skjemanummer: skjema.skjemanummer,
     Vedleggsid: vedleggsID || "",
-    Tittel: skjema.navn.nb ? skjema.navn.nb : "",
-    Tittel_en: skjema.navn.en ? skjema.navn.en : "",
-    Tittel_nn: skjema.navn.nn ? skjema.navn.nn : "",
+    Tittel: skjema.navn ? skjema.navn.nb || "" : "",
+    Tittel_en: skjema.navn ? skjema.navn.en || "" : "",
+    Tittel_nn: skjema.navn ? skjema.navn.nn || "" : "",
     Tema: tema,
     Gosysid: gosysid,
     "Beskrivelse (ID)": "000000",
@@ -112,7 +114,56 @@ function lagJSON(skjema, tema, gosysid, vedleggsID) {
   };
 }
 
+function lagJSONForVedleggUtenSkjema(vedlegg, tema) {
+  return {
+    Skjemanummer: vedlegg.vedleggsid || "",
+    Tittel: vedlegg.navn ? vedlegg.navn.nb || "" : "",
+    Tittel_en: vedlegg.navn ? vedlegg.navn.en || "" : "",
+    Tittel_nn: vedlegg.navn ? vedlegg.navn.nn || "" : "",
+    Tema: tema,
+    Gosysid: vedlegg.gosysid,
+    "Beskrivelse (ID)": "000000"
+  };
+}
+
+function filtrerJsonOgFjernDuplikater(jsonMedDuplikater) {
+  const endeligJsonUtenDuplikater = [];
+  jsonMedDuplikater.forEach(json => {
+    if (
+      skjemaAlleredeBehandlet(endeligJsonUtenDuplikater, json["Skjemanummer"])
+    ) {
+      return;
+    }
+
+    let duplicates = jsonMedDuplikater.filter(
+      resJson => resJson["Skjemanummer"] === json["Skjemanummer"]
+    );
+    duplicates.length > 1
+      ? endeligJsonUtenDuplikater.push(
+          hentVersjonMedVedleggsidHvisDetFinnes(duplicates)
+        )
+      : endeligJsonUtenDuplikater.push(duplicates[0]);
+  });
+  return endeligJsonUtenDuplikater;
+}
+
+function hentVersjonMedVedleggsidHvisDetFinnes(skjemaer) {
+  const skjemaerSomErVedlegg = skjemaer.filter(skjema => skjema["Vedleggsid"]);
+  if (skjemaerSomErVedlegg.length > 0) {
+    return skjemaerSomErVedlegg[0];
+  }
+  return skjemaer[0];
+}
+
+function skjemaAlleredeBehandlet(listeOverSkjemaer, skjemanummer) {
+  return (
+    listeOverSkjemaer.filter(skjema => skjema["Skjemanummer"] === skjemanummer)
+      .length > 0
+  );
+}
+
 module.exports = {
   lagSkjemautlistingJson,
-  lagJSON
+  lagJSON: lagJSONForSkjema,
+  filtrerJsonOgFjernDuplikater
 };
