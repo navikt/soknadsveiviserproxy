@@ -99,7 +99,7 @@ const alleSoknadsobjekter = () =>
 
 const alleSkjemaer = skjematype =>
   `*[_type == "${skjematype}" && !(_id in path("drafts.**"))]
-        {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, "navn": navn.nb,
+        {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, navn,
         ${pdfAlleSprak()}}`;
 
 const alleVedlegg = () =>
