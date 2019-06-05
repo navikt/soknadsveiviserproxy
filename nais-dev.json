@@ -24,7 +24,9 @@
       "path": "/soknadsveiviserproxy/isReady",
       "initialDelay": 10
     },
-    "secrets": true,
+    "vault": {
+      "enabled": true
+    },
     "replicas": {
       "min": 2,
       "max": 4
