@@ -14,7 +14,7 @@ npm install
 Kjør applikasjonen
 
 ```
-node index.js
+npm start
 ```
 
 ### Bygg
