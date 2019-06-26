@@ -21,9 +21,7 @@ npm start
 
 Soknadsveiviserproxy har et pipelinebygg på [CircleCI](https://circleci.com/gh/navikt/soknadsveiviserproxy)
 
-Ved merge til master kjører bygget på CircleCI automatisk, 
-som laster opp et image til dockerhub og deployer til preprod. Planen er at man videre skal få en
-manuell godkjenning for å dytte videre til produksjon.
+Ved merge til master kjører bygget på CircleCI automatisk, som laster opp et image til dockerhub og deployer til preprod. Videre må man gå inn i workflowen og godkjenne manuelt dersom man ønsker at den skal deploye videre til produksjon.
 
 For å kjøre opp docker lokalt:
 ```
