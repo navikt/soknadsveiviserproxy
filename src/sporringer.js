@@ -111,7 +111,7 @@ const samlet = () =>
         {"tittel": tittel, urlparam, _id, domene, underkategorier[]
             {_id, "navn": navn, inngangtilsoknadsdialog, urlparam, soknadslenker[]->{lenke, navn, _id},
                 soknadsobjekter[]->
-                {_id, digitalinnsending, "navn": navn, tema, urlparam,
+                {_id, digitalinnsending, "navn": navn, tema, urlparam, beskrivelse,
                     innsendingmate{spesifisertadresse->, skanning, visenheter}, hovedskjema->, "vedleggtilsoknad":
                     vedleggskjema[]
                     {"beskrivelse": beskrivelse, pakrevd, vedlegg->
