@@ -109,9 +109,9 @@ const alleVedlegg = () =>
 const samlet = () =>
   `*[_type == "kategori" && !(_id in path("drafts.**"))]
         {"tittel": tittel, urlparam, _id, domene, underkategorier[]
-            {_id, "navn": navn, inngangtilsoknadsdialog, urlparam, soknadslenker[]->{lenke, navn, _id},
+            {_id, "navn": navn, inngangtilsoknadsdialog, urlparam, soknadslenker[]->{lenke, navn, _id, beskrivelse},
                 soknadsobjekter[]->
-                {_id, digitalinnsending, "navn": navn, tema, urlparam,
+                {_id, digitalinnsending, "navn": navn, tema, urlparam, beskrivelse,
                     innsendingmate{spesifisertadresse->, skanning, visenheter}, hovedskjema->, "vedleggtilsoknad":
                     vedleggskjema[]
                     {"beskrivelse": beskrivelse, pakrevd, vedlegg->
