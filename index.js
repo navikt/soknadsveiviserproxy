@@ -93,7 +93,7 @@ app.get("/soknadsveiviserproxy/utlisting/skjemaerogvedlegg", (req, res) => {
   lagSkjemaogVedleggsliste().then(docs => res.send(docs));
 });
 
-app.get("/soknadsveiviserproxy/isAlive", (req, res) => res.sendStatus(200));
-app.get("/soknadsveiviserproxy/isReady", (req, res) => res.sendStatus(200));
+app.get("/soknadsveiviserproxy/internal/isAlive", (req, res) => res.sendStatus(200));
+app.get("/soknadsveiviserproxy/internal/isReady", (req, res) => res.sendStatus(200));
 app.get("/soknadsveiviserproxy", (req, res) => res.sendStatus(200));
 app.listen(8080, () => console.log(`App listening on port: 8080`));
