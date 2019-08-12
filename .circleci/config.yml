@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build-react-app:
+  build:
     docker:
       - image: circleci/node:11.7.0
     steps:
