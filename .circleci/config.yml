@@ -35,8 +35,8 @@ jobs:
             docker push $IMAGE_NAME
       - deploy:
           til: dev-sbs
-          ingress1: https://$REPO_NAME.nais.oera-q.local/$BASE_URL
-          ingress2: https://www-q0.nav.no/$BASE_URL
+          ingress1: https://$REPO_NAME.nais.oera-q.local/person/$REPO_NAME
+          ingress2: https://www-q0.nav.no/person/$REPO_NAME
 
   deploy-til-prod:
     docker:
@@ -46,8 +46,8 @@ jobs:
       - sett-miljovariabler
       - deploy:
           til: prod-sbs
-          ingress1: https://$REPO_NAME.nais.oera.no/$BASE_URL
-          ingress2: https://www.nav.no/$BASE_URL
+          ingress1: https://$REPO_NAME.nais.oera.no/person/$REPO_NAME
+          ingress2: https://www.nav.no/person/$REPO_NAME
 
 commands:
   deploy:
@@ -68,10 +68,10 @@ commands:
                 --resource=nais.config.yaml \
                 --cluster=<< parameters.til >> \
                 --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
+                --var baseurl=/person/$REPO_NAME \
                 --var ingress1=<< parameters.ingress1 >> \
                 --var ingress2=<< parameters.ingress2 >> \
                 --var reponame=$REPO_NAME \
-                --var baseurl=/$BASE_URL \
                 --var version=$IMAGE_VERSION \
                 --key=gh_deploy_key.pem \
                 --ref=$COMMIT_SHORT \
@@ -85,7 +85,6 @@ commands:
             echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
             echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
             echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
-            echo "export BASE_URL='soknader'" >> $BASH_ENV
       - run:
           name: Definerer navn på docker-image
           command: |
