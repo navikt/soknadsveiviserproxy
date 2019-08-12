@@ -36,7 +36,7 @@ jobs:
       - deploy:
           til: dev-sbs
           ingress1: https://$REPO_NAME.nais.oera-q.local
-          ingress2: https://www-q0.nav.no/person/$REPO_NAME
+          ingress2: https://tjenester-q0.nav.no/$REPO_NAME
 
   deploy-til-prod:
     docker:
