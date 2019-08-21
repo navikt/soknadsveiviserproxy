@@ -91,7 +91,13 @@ const alleSoknadsobjekter = () =>
       vedlegg->{
         _id,
         gosysid,
-        skjematilvedlegg->,
+        skjematilvedlegg->{
+          _id,
+          navn,
+          skjemanummer,
+          ${pdfAlleSprak()},
+          ...
+        },
         vedleggsid,
         navn}
       }

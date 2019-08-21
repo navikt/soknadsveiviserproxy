@@ -1,7 +1,8 @@
 const {
   lagSkjemautlistingJson,
   lagJSON,
-  filtrerJsonOgFjernDuplikater
+  filtrerJsonOgFjernDuplikater,
+  sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema
 } = require("../src/lagSkjemautlistingJson");
 const alleSoknadsobjekter = require("./soknadsobjekter.test");
 const jsonMedDuplikater = require("./skjemautlisting.test");
@@ -15,7 +16,7 @@ test("Sjekk at opprettet Json får riktig skjemanummer, tittel og tema", () => {
 });
 
 test("Sjekk at skjemautlisting får riktig format og riktig antall innslag", () => {
-  expect(lagSkjemautlistingJson(alleSoknadsobjekter).Skjemaer.length).toBe(13);
+  expect(lagSkjemautlistingJson(alleSoknadsobjekter).Skjemaer.length).toBe(16);
 });
 
 test("Sjekk at blant duplikater er det skjema med vedleggsid som blir valgt", () => {
@@ -24,4 +25,14 @@ test("Sjekk at blant duplikater er det skjema med vedleggsid som blir valgt", ()
   );
   expect(json.length === 1);
   expect(json["Vedleggsid"] === "H3");
+});
+
+test("Sjekk at vedlegg som er skjema får med lenker", () => {
+  const { vedleggtilsoknad } = alleSoknadsobjekter[1];
+  const resultat = sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(
+    alleSoknadsobjekter[1]
+  );
+  expect(vedleggtilsoknad[0].vedlegg.skjematilvedlegg.pdf.nb.asset.url).toEqual(
+    resultat[0].Lenke
+  );
 });

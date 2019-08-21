@@ -165,5 +165,6 @@ function skjemaAlleredeBehandlet(listeOverSkjemaer, skjemanummer) {
 module.exports = {
   lagSkjemautlistingJson,
   lagJSON: lagJSONForSkjema,
-  filtrerJsonOgFjernDuplikater
+  filtrerJsonOgFjernDuplikater,
+  sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema
 };
