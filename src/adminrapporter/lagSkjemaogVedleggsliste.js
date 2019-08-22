@@ -114,6 +114,18 @@ function hentSkjemaerSomIkkeErTilknyttetEtSoknadsobjekt(
         skjema => soknadsobjekt.hovedskjema._id !== skjema._id
       );
     }
+    soknadsobjekt.vedleggtilsoknad
+      ? soknadsobjekt.vedleggtilsoknad.map(vedleggsobjekt => {
+          if (vedleggsobjekt.vedlegg) {
+            if (vedleggsobjekt.vedlegg.skjematilvedlegg) {
+              skjemaer = skjemaer.filter(
+                skjema =>
+                  vedleggsobjekt.vedlegg.skjematilvedlegg._id !== skjema._id
+              );
+            }
+          }
+        })
+      : null;
   });
   return skjemaer;
 }
