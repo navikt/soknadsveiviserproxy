@@ -23,7 +23,7 @@ spec:
     enabled: true
   replicas:
     min: 2
-    max: 4
+    max: 6
   webproxy: true
   env:
     - name: NODE_EXTRA_CA_CERTS
