@@ -30,8 +30,8 @@ spec:
       value: "/etc/ssl/ca-bundle.pem"
   resources:
     limits:
-      cpu: 3 # app will have its cpu usage throttled if exceeding this limit
+      cpu: '3' # app will have its cpu usage throttled if exceeding this limit
       memory: 2Gi  # app will be killed if exceeding these limits
     requests: # app will be scheduled on nodes with at least this amount resources available
-      cpu: 1.5
+      cpu: '1.5'
       memory: 2Gi
