@@ -22,7 +22,7 @@ spec:
   vault:
     enabled: true
   replicas:
-    min: 2
+    min: 3
     max: 6
   webproxy: true
   env:
@@ -31,7 +31,6 @@ spec:
   resources:
     limits:
       cpu: '3'
-      memory: 2000Mi
+      memory: 768Mi
     requests:
-      cpu: '1.5'
-      memory: 2000Mi
+      memory: 512Mi
