@@ -2,6 +2,7 @@ const sporringer = require("./src/sporringer");
 const express = require("express");
 const { Worker } = require("worker_threads");
 const createSanityClient = require("./src/utils/createSanityClient");
+const handleErrors = require("./src/utils/handleErrors");
 const {
   lagSoknadsobjekterListe
 } = require("./src/adminrapporter/lagSoknadsobjekterListe");
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
   sanityClient
     .fetch(sporringer.alleKategorier())
+    .then(handleErrors)
     .then(docs => res.send(docs))
     .catch(console.error)
 );
@@ -47,6 +49,7 @@ app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
 app.get("/soknadsveiviserproxy/sedskjemaer", (req, res) => {
   sanityClient
     .fetch(sporringer.alleSkjemaer("sedskjema"))
+    .then(handleErrors)
     .then(docs => res.send(docs))
     .catch(console.error);
 });
@@ -54,6 +57,7 @@ app.get("/soknadsveiviserproxy/sedskjemaer", (req, res) => {
 app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
   sanityClient
     .fetch(sporringer.soknadsobjektKlageAnke())
+    .then(handleErrors)
     .then(docs => res.send(docs))
     .catch(console.error)
 );
@@ -83,6 +87,7 @@ app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
 app.get("/soknadsveiviserproxy/samlet", (req, res) => {
   sanityClient
     .fetch(sporringer.samlet())
+    .then(handleErrors)
     .then(docs => res.send(docs))
     .catch(console.error);
 });
@@ -90,6 +95,7 @@ app.get("/soknadsveiviserproxy/samlet", (req, res) => {
 app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
   sanityClient
     .fetch(sporringer.alleSoknadsobjekter())
+    .then(handleErrors)
     .then(lagSkjemautlistingJson)
     .then(docs => res.send(docs))
     .catch(console.error);
