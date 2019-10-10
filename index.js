@@ -61,13 +61,23 @@ app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
 app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
   sanityClient
     .fetch(sporringer.soknader(req.query.kategori, req.query.underkategori))
-    .then(docs =>
-      res.send({
-        soknadsobjekter: docs[0].underkategorier.soknadsobjekter || [],
-        soknadslenker: docs[0].underkategorier.soknadslenker || []
-      })
-    )
-    .catch(console.error)
+    .then(docs => {
+      if (docs !== []) {
+        res.send({
+          soknadsobjekter: docs[0].underkategorier.soknadsobjekter || [],
+          soknadslenker: docs[0].underkategorier.soknadslenker || []
+        });
+      } else res.send(docs);
+    })
+    .catch(error => {
+      console.error(
+        "Feil ved henting av søknadsobjektene med kategori: %s og underkategori: %s, melding: %s",
+        req.query.kategori,
+        req.query.underkategori,
+        error
+      );
+      res.send({ soknadsobjekter: [], soknadslenker: [] });
+    })
 );
 
 app.get("/soknadsveiviserproxy/samlet", (req, res) => {
