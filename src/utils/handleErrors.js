@@ -5,4 +5,4 @@ function handleErrors(response) {
   return response;
 }
 
-module.exports = { handleErrors };
+module.exports = handleErrors;
