@@ -21,6 +21,8 @@ spec:
     initialDelay: 10
   vault:
     enabled: true
+  prometheus:
+    enabled: true
   replicas:
     min: 3
     max: 6
