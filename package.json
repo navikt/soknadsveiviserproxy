@@ -23,7 +23,7 @@
   "homepage": "https://github.com/navikt/soknadsveiviserproxy#readme",
   "dependencies": {
     "@sanity/client": "^0.140.36",
-    "@sanity/image-url": "^0.140.15",
+    "@sanity/image-url": "^0.140.17",
     "express": "^4.17.1",
     "file-system": "^2.2.2",
     "jest": "^24.9.0",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-prettier": "^3.1.2",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1"
   }
