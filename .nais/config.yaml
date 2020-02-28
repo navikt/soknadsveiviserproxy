@@ -2,22 +2,23 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  name: {{reponame}}
-  namespace: default
+  name: soknadsveiviserproxy
+  namespace: {{namespace}}
   labels:
-    team: {{team}}
+    team: skjemadigitalisering
 spec:
-  image: navikt/{{reponame}}:{{version}}
-  team: {{team}}
+  image: {{image}}:{{version}}
+  team: skjemadigitalisering
   port: 8080
   ingresses:
-    - {{ingress1}}
-    - {{ingress2}}
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
   liveness:
-    path: {{baseurl}}/internal/isAlive
+    path: /soknadsveiviserproxy/internal/isAlive
     initialDelay: 10
   readiness:
-    path: {{baseurl}}/internal/isReady
+    path: /soknadsveiviserproxy/internal/isReady
     initialDelay: 10
   vault:
     enabled: true
