@@ -65,7 +65,8 @@ app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
       if (docs !== []) {
         res.send({
           soknadsobjekter: docs[0].underkategorier.soknadsobjekter || [],
-          soknadslenker: docs[0].underkategorier.soknadslenker || []
+          soknadslenker: docs[0].underkategorier.soknadslenker || [],
+          skjemalenker: docs[0].underkategorier.skjemalenker || []
         });
       } else res.send(docs);
     })

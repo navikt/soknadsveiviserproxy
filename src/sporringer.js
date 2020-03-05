@@ -52,6 +52,13 @@ const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
                 },
                 soknadslenker[] -> {
                     ...
+                },
+                skjemalenker[] -> {
+                    hovedskjema ->{
+                       ${pdfAlleSprak()},
+                       ...
+                     },
+                    ...
                 }
             }
         }`;
