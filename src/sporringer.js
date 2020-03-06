@@ -111,7 +111,7 @@ const alleSoknadsobjekter = () =>
   }`;
 
 const alleSkjemaer = skjematype =>
-  `*[_type == "${skjematype}" && !(_id in path("drafts.**"))]
+  `*[_type == "${JSON.stringify(skjematype)}" && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, navn,
         ${pdfAlleSprak()}}`;
 
@@ -141,6 +141,11 @@ const samlet = () =>
             }
         }`;
 
+const fil = (skjemanummer, locale) =>
+  `*[_type in ["skjema", "interneskjema", "sedskjema"] && !(_id in path("drafts.**")) && skjemanummer == ${JSON.stringify(
+    skjemanummer
+  )}]{"url": pdf.[${JSON.stringify(locale)}].asset->url}[0]`;
+
 const pdfAlleSprak = () =>
   `pdf{
   nb{asset->},
@@ -161,5 +166,6 @@ module.exports = {
   soknader,
   samlet,
   alleKategorierOgUnderkategorier,
-  alleVedlegg
+  alleVedlegg,
+  fil
 };

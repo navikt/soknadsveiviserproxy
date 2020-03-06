@@ -104,6 +104,13 @@ app.get("/soknadsveiviserproxy/utlisting/skjemaerogvedlegg", (req, res) => {
   lagSkjemaogVedleggsliste().then(docs => res.send(docs));
 });
 
+app.get("/soknadsveiviserproxy/skjemafil", (req, res) => {
+  sanityClient
+    .fetch(sporringer.fil(req.query.skjemanummer, req.query.locale))
+    .then(docs => res.send(docs))
+    .catch(console.error);
+});
+
 app.get("/soknadsveiviserproxy/internal/isAlive", (req, res) =>
   res.sendStatus(200)
 );
