@@ -111,7 +111,7 @@ const alleSoknadsobjekter = () =>
   }`;
 
 const alleSkjemaer = skjematype =>
-  `*[_type == "${JSON.stringify(skjematype)}" && !(_id in path("drafts.**"))]
+  `*[_type == ${JSON.stringify(skjematype)} && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, navn,
         ${pdfAlleSprak()}}`;
 
