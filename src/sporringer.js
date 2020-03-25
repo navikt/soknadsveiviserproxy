@@ -38,6 +38,7 @@ const soknader = (kategoriUrlparam, underkategoriUrlparam) =>
                        spesifisertadresse->,
                        ...
                      },
+                     muligeEnheterForInnsending[]->,
                      "vedleggtilsoknad": vedleggskjema[]{
                       vedlegg->{
                         skjematilvedlegg->{
