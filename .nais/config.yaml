@@ -24,6 +24,7 @@ spec:
     enabled: true
   prometheus:
     enabled: true
+    path: /soknadsveiviserproxy/metrics
   replicas:
     min: 3
     max: 6
