@@ -111,7 +111,7 @@ const alleSoknadsobjekter = () =>
       }
   }`;
 
-const alleSkjemaer = skjematype =>
+const alleSkjemaer = (skjematype) =>
   `*[_type == ${JSON.stringify(skjematype)} && !(_id in path("drafts.**"))]
         {"emneord": emneord[]->{emneord}, _id, _type, skjemanummer, navn,
         ${pdfAlleSprak()}}`;
@@ -168,5 +168,5 @@ module.exports = {
   samlet,
   alleKategorierOgUnderkategorier,
   alleVedlegg,
-  fil
+  fil,
 };

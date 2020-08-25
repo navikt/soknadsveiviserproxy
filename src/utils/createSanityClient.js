@@ -16,7 +16,7 @@ function createSanityClient() {
     projectId: projectID || "gx9wf39f",
     dataset: dataset || "local-testset",
     token: token || undefined,
-    useCdn: token === undefined
+    useCdn: token === undefined,
   });
 }
 

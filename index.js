@@ -3,14 +3,14 @@ const express = require("express");
 const { Worker } = require("worker_threads");
 const createSanityClient = require("./src/utils/createSanityClient");
 const {
-  lagSoknadsobjekterListe
+  lagSoknadsobjekterListe,
 } = require("./src/adminrapporter/lagSoknadsobjekterListe");
 const {
-  lagSkjemaogVedleggsliste
+  lagSkjemaogVedleggsliste,
 } = require("./src/adminrapporter/lagSkjemaogVedleggsliste");
 const { lagSkjemautlistingJson } = require("./src/lagSkjemautlistingJson");
 const {
-  hentOgReturnerSkjemaerTilNavet
+  hentOgReturnerSkjemaerTilNavet,
 } = require("./src/utils/hentOgReturnerSkjemaerTilNavet");
 const app = express();
 const sanityClient = createSanityClient();
@@ -36,41 +36,41 @@ app.use((req, res, next) => {
 app.get("/soknadsveiviserproxy/allekategorier", (req, res) =>
   sanityClient
     .fetch(sporringer.alleKategorier())
-    .then(docs => res.send(docs))
+    .then((docs) => res.send(docs))
     .catch(console.error)
 );
 
 app.get("/soknadsveiviserproxy/alleskjemaer", (req, res) => {
-  hentOgReturnerSkjemaerTilNavet().then(docs => res.send(docs));
+  hentOgReturnerSkjemaerTilNavet().then((docs) => res.send(docs));
 });
 
 app.get("/soknadsveiviserproxy/sedskjemaer", (req, res) => {
   sanityClient
     .fetch(sporringer.alleSkjemaer("sedskjema"))
-    .then(docs => res.send(docs))
+    .then((docs) => res.send(docs))
     .catch(console.error);
 });
 
 app.get("/soknadsveiviserproxy/soknadsobjekt/klage-og-anke", (req, res) =>
   sanityClient
     .fetch(sporringer.soknadsobjektKlageAnke())
-    .then(docs => res.send(docs))
+    .then((docs) => res.send(docs))
     .catch(console.error)
 );
 
 app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
   sanityClient
     .fetch(sporringer.soknader(req.query.kategori, req.query.underkategori))
-    .then(docs => {
+    .then((docs) => {
       if (docs !== []) {
         res.send({
           soknadsobjekter: docs[0].underkategorier.soknadsobjekter || [],
           soknadslenker: docs[0].underkategorier.soknadslenker || [],
-          skjemalenker: docs[0].underkategorier.skjemalenker || []
+          skjemalenker: docs[0].underkategorier.skjemalenker || [],
         });
       } else res.send(docs);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(
         "Feil ved henting av søknadsobjektene med kategori: %s og underkategori: %s, melding: %s",
         req.query.kategori,
@@ -84,7 +84,7 @@ app.get("/soknadsveiviserproxy/soknadsobjekter-og-soknadslenker", (req, res) =>
 app.get("/soknadsveiviserproxy/samlet", (req, res) => {
   sanityClient
     .fetch(sporringer.samlet())
-    .then(docs => res.send(docs))
+    .then((docs) => res.send(docs))
     .catch(console.error);
 });
 
@@ -92,22 +92,22 @@ app.get("/soknadsveiviserproxy/skjemautlisting", (req, res) => {
   sanityClient
     .fetch(sporringer.alleSoknadsobjekter())
     .then(lagSkjemautlistingJson)
-    .then(docs => res.send(docs))
+    .then((docs) => res.send(docs))
     .catch(console.error);
 });
 
 app.get("/soknadsveiviserproxy/utlisting/soknadsobjekter", (req, res) => {
-  lagSoknadsobjekterListe().then(docs => res.send(docs));
+  lagSoknadsobjekterListe().then((docs) => res.send(docs));
 });
 
 app.get("/soknadsveiviserproxy/utlisting/skjemaerogvedlegg", (req, res) => {
-  lagSkjemaogVedleggsliste().then(docs => res.send(docs));
+  lagSkjemaogVedleggsliste().then((docs) => res.send(docs));
 });
 
 app.get("/soknadsveiviserproxy/skjemafil", (req, res) => {
   sanityClient
     .fetch(sporringer.fil(req.query.skjemanummer, req.query.locale))
-    .then(docs => res.send(docs))
+    .then((docs) => res.send(docs))
     .catch(console.error);
 });
 
