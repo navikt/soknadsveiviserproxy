@@ -10,8 +10,8 @@ COPY src/ ./src
 COPY index.js ./
 COPY package.json ./
 COPY package-lock.json ./
+COPY start.sh ./
 
 RUN npm install
-CMD ["node", "index.js"]
-
 EXPOSE 8080
+ENTRYPOINT ["/bin/sh", "start.sh"]
