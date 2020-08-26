@@ -22,7 +22,7 @@ async function lagSkjemaogVedleggsliste() {
   } catch (e) {
     console.error("Klarte ikke å hente fra Sanity ", e);
     return {
-      skjemaerogvedlegg: "Det skjedde en feil med uthenting og prosessering"
+      skjemaerogvedlegg: "Det skjedde en feil med uthenting og prosessering",
     };
   }
 }
@@ -32,16 +32,16 @@ function prosesserDataOgListUt(soknadsobjekter, skjemaobjekter, vedlegg) {
     return arrayAvJson.concat(lagSoknadsobjektUtlisting(soknadsobjekt));
   }, []);
 
-  skjemaobjekter.map(skjema => {
+  skjemaobjekter.map((skjema) => {
     resultJson.push({
       soknadsobjekt: "UDEFINERT",
-      ...lagSkjemautlisting(skjema)
+      ...lagSkjemautlisting(skjema),
     });
   });
 
-  vedlegg.map(v => {
+  vedlegg.map((v) => {
     resultJson.push({
-      ...lagVedleggsutlisting(v, "UDEFINERT")
+      ...lagVedleggsutlisting(v, "UDEFINERT"),
     });
   });
 
@@ -64,8 +64,8 @@ function lagSoknadsobjektUtlisting(soknadsobjekt) {
     : [
         {
           soknadsobjekt: soknadsobjektnavn,
-          ...lagSkjemautlisting(skjema)
-        }
+          ...lagSkjemautlisting(skjema),
+        },
       ];
 }
 
@@ -80,7 +80,7 @@ function lagSkjemautlisting(skjema) {
         DEskjemanavn: skjema.navn.de ? skjema.navn.de : "",
         FRskjemanavn: skjema.navn.fr ? skjema.navn.fr : "",
         ESskjemanavn: skjema.navn.es ? skjema.navn.es : "",
-        PLskjemanavn: skjema.navn.pl ? skjema.navn.pl : ""
+        PLskjemanavn: skjema.navn.pl ? skjema.navn.pl : "",
       }
     : {};
 }
@@ -100,7 +100,7 @@ function lagVedleggsutlisting(vedlegg, soknadsobjektnavn, skjema) {
     DEvedleggsnavn: vedlegg.navn.de ? vedlegg.navn.de : "",
     FRvedleggsnavn: vedlegg.navn.fr ? vedlegg.navn.fr : "",
     ESvedleggsnavn: vedlegg.navn.es ? vedlegg.navn.es : "",
-    PLvedleggsnavn: vedlegg.navn.pl ? vedlegg.navn.pl : ""
+    PLvedleggsnavn: vedlegg.navn.pl ? vedlegg.navn.pl : "",
   };
 }
 
@@ -108,18 +108,18 @@ function hentSkjemaerSomIkkeErTilknyttetEtSoknadsobjekt(
   soknadsobjekter,
   skjemaer
 ) {
-  soknadsobjekter.map(soknadsobjekt => {
+  soknadsobjekter.map((soknadsobjekt) => {
     if (soknadsobjekt.hovedskjema) {
       skjemaer = skjemaer.filter(
-        skjema => soknadsobjekt.hovedskjema._id !== skjema._id
+        (skjema) => soknadsobjekt.hovedskjema._id !== skjema._id
       );
     }
     soknadsobjekt.vedleggtilsoknad
-      ? soknadsobjekt.vedleggtilsoknad.map(vedleggsobjekt => {
+      ? soknadsobjekt.vedleggtilsoknad.map((vedleggsobjekt) => {
           if (vedleggsobjekt.vedlegg) {
             if (vedleggsobjekt.vedlegg.skjematilvedlegg) {
               skjemaer = skjemaer.filter(
-                skjema =>
+                (skjema) =>
                   vedleggsobjekt.vedlegg.skjematilvedlegg._id !== skjema._id
               );
             }
@@ -134,12 +134,12 @@ function hentVedleggSomIkkeErTilknyttetEtSoknadsobjekt(
   soknadsobjekter,
   vedleggsliste
 ) {
-  soknadsobjekter.map(soknadsobjekt => {
+  soknadsobjekter.map((soknadsobjekt) => {
     soknadsobjekt.vedleggtilsoknad
-      ? soknadsobjekt.vedleggtilsoknad.map(vedleggsobjekt => {
+      ? soknadsobjekt.vedleggtilsoknad.map((vedleggsobjekt) => {
           if (vedleggsobjekt.vedlegg) {
             vedleggsliste = vedleggsliste.filter(
-              vedlegg => vedlegg._id !== vedleggsobjekt.vedlegg._id
+              (vedlegg) => vedlegg._id !== vedleggsobjekt.vedlegg._id
             );
           }
         })

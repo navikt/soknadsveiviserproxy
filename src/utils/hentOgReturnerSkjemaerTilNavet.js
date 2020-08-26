@@ -15,7 +15,7 @@ async function hentOgReturnerSkjemaerTilNavet() {
   } catch (e) {
     console.error("Klarte ikke å hente fra Sanity ", e);
     return {
-      feil: "Det skjedde en feil med uthenting og prosessering"
+      feil: "Det skjedde en feil med uthenting og prosessering",
     };
   }
 }

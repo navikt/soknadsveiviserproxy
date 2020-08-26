@@ -20,7 +20,7 @@ async function lagSoknadsobjekterListe() {
   } catch (e) {
     console.error("Klarte ikke å hente fra Sanity ", e);
     return {
-      soknadsobjekter: "Det skjedde en feil med uthenting og prosessering"
+      soknadsobjekter: "Det skjedde en feil med uthenting og prosessering",
     };
   }
 }
@@ -30,7 +30,7 @@ function prosesserDataOgListUt(kategorier, soknadsobjekter) {
     return arrayAvJson.concat(lagKategoriutlisting(kategori));
   }, []);
 
-  soknadsobjekter.map(soknadsobjekt => {
+  soknadsobjekter.map((soknadsobjekt) => {
     resultJson.push(
       lagSoknadsobjektutlisting(soknadsobjekt, "UDEFINERT", "UDEFINERT")
     );
@@ -82,7 +82,7 @@ function lagSoknadsobjektutlisting(
       : "",
     tema: soknadsobjekt.tema ? soknadsobjekt.tema.temakode : "",
     dokumentinnsending: harDokumentinnsending(soknadsobjekt),
-    soknadsdialog: harSoknadsdialog(soknadsobjekt)
+    soknadsdialog: harSoknadsdialog(soknadsobjekt),
   };
 }
 
@@ -90,13 +90,13 @@ function hentSoknadsobjekterSomIkkeErTilknyttetEnUnderkategori(
   kategorier,
   soknadsobjekter
 ) {
-  kategorier.map(kategori => {
+  kategorier.map((kategori) => {
     kategori.underkategorier
-      ? kategori.underkategorier.map(underkategori => {
+      ? kategori.underkategorier.map((underkategori) => {
           underkategori.soknadsobjekter
-            ? underkategori.soknadsobjekter.map(soknadsobj => {
+            ? underkategori.soknadsobjekter.map((soknadsobj) => {
                 soknadsobjekter = soknadsobjekter.filter(
-                  soknadsobjekt => soknadsobj._id !== soknadsobjekt._id
+                  (soknadsobjekt) => soknadsobj._id !== soknadsobjekt._id
                 );
               })
             : null;

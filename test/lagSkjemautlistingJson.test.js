@@ -2,7 +2,7 @@ const {
   lagSkjemautlistingJson,
   lagJSON,
   filtrerJsonOgFjernDuplikater,
-  sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema
+  sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema,
 } = require("../src/lagSkjemautlistingJson");
 const alleSoknadsobjekter = require("./soknadsobjekter.test");
 const jsonMedDuplikater = require("./skjemautlisting.test");
@@ -21,7 +21,7 @@ test("Sjekk at skjemautlisting får riktig format og riktig antall innslag", () 
 
 test("Sjekk at blant duplikater er det skjema med vedleggsid som blir valgt", () => {
   const json = filtrerJsonOgFjernDuplikater(jsonMedDuplikater).filter(
-    skjema => skjema["Skjemanummer"] === "NAV 11-13.05"
+    (skjema) => skjema["Skjemanummer"] === "NAV 11-13.05"
   );
   expect(json.length === 1);
   expect(json["Vedleggsid"] === "H3");
