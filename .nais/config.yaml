@@ -22,9 +22,6 @@ spec:
     initialDelay: 10
   vault:
     enabled: true
-  prometheus:
-    enabled: true
-    path: /soknadsveiviserproxy/metrics
   replicas:
     min: 3
     max: 6
