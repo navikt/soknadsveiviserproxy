@@ -36,8 +36,8 @@ jobs:
           cat > .nais/vars.yaml <<EOF
           namespace: default
           ingresses:
-            - https://soknadsveiviserproxy.nais.oera-q.local
             - https://tjenester-q0.nav.no/soknadsveiviserproxy
+            - https://soknadsveiviserproxy.dev.nav.no
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
