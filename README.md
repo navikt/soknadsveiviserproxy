@@ -18,7 +18,7 @@ npm start
 
 ### Bygg
 
-Soknadsveiviserproxy bruker github actions
+Soknadsveiviserproxy bruker github actions.
 
 ### Nais-cluster
 Applikasjonen ligger i default namespace i dev-sbs og prod-sbs.
