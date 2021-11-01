@@ -1,6 +1,6 @@
 # Soknadsveiviserproxy
 
-Node.js Express applikasjon som fungerer som et mellomledd mellom [Soknadsveiviser](https://github.com/navikt/soknadsveiviser) og [Sanity](https://www.sanity.io/) som benyttes som database.
+Node.js Express applikasjon som fungerer som et mellomledd mellom [Søknadsveiviser](https://github.com/navikt/soknadsveiviser) og [Sanity](https://www.sanity.io/) som benyttes som database.
 
 Appen kjører på NAIS i en dockercontainer.
 
