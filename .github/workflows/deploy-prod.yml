@@ -30,7 +30,7 @@ jobs:
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
-          namespace: default
+          namespace: skjemadigitalisering
           ingresses:
             - https://soknadsveiviserproxy.nais.oera.no
             - https://tjenester.nav.no/soknadsveiviserproxy
