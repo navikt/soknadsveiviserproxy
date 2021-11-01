@@ -34,6 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-package
     steps:
+      - uses: actions/checkout@v1
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
@@ -56,6 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy-to-dev
     steps:
+      - uses: actions/checkout@v1
       - name: Generate nais variables
         run: |
           cat > .nais/vars.yaml <<EOF
