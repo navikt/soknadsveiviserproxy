@@ -41,14 +41,13 @@ jobs:
           cat > .nais/vars.yaml <<EOF
           namespace: skjemadigitalisering
           ingresses:
-            - https://tjenester-q0.nav.no/soknadsveiviserproxy
-            - https://soknadsveiviserproxy.dev.nav.no
+            - https://soknadsveiviserproxy-test.dev.nav.no
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
       - uses: nais/deploy/actions/deploy@master
         env:
-          CLUSTER: dev-sbs
+          CLUSTER: dev-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
           VARS: .nais/vars.yaml
@@ -71,7 +70,7 @@ jobs:
           EOF
       - uses: nais/deploy/actions/deploy@master
         env:
-          CLUSTER: prod-sbs
+          CLUSTER: prod-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
           VARS: .nais/vars.yaml

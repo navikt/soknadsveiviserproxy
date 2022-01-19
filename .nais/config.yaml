@@ -20,8 +20,6 @@ spec:
   readiness:
     path: /soknadsveiviserproxy/internal/isReady
     initialDelay: 10
-  vault:
-    enabled: true
   replicas:
     min: 3
     max: 6
@@ -29,6 +27,8 @@ spec:
   env:
     - name: NODE_EXTRA_CA_CERTS
       value: "/etc/ssl/ca-bundle.pem"
+  envFrom:
+    - secret: soknadsveiviserproxy
   resources:
     limits:
       cpu: '3'
