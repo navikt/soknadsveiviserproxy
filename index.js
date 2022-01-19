@@ -1,6 +1,5 @@
 const sporringer = require("./src/sporringer");
 const express = require("express");
-const { Worker } = require("worker_threads");
 const createSanityClient = require("./src/utils/createSanityClient");
 const {
   lagSoknadsobjekterListe,
@@ -14,10 +13,10 @@ const {
 } = require("./src/utils/hentOgReturnerSkjemaerTilNavet");
 const app = express();
 const sanityClient = createSanityClient();
-const isProduction = process.env.NODE_ENV === "production";
-const allowedOrigin = isProduction
-  ? `(http|https)://(.*).nav.no`
-  : `http://localhost:3000`;
+const isProdGcp = process.env.NAIS_CLUSTER_NAME === "prod-gcp";
+const allowedOrigin = isProdGcp
+  ? "(http|https)://(.*).nav.no"
+  : "*";
 
 // Express settings
 app.use(express.json({ limit: "1mb", extended: true }));
