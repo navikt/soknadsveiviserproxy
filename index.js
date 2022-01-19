@@ -16,7 +16,7 @@ const sanityClient = createSanityClient();
 const isProdGcp = process.env.NAIS_CLUSTER_NAME === "prod-gcp";
 const allowedOrigin = isProdGcp
   ? "(http|https)://(.*).nav.no"
-  : "*";
+  : ".*";
 
 // Express settings
 app.use(express.json({ limit: "1mb", extended: true }));
