@@ -115,4 +115,6 @@ app.get("/soknadsveiviserproxy/internal/isReady", (req, res) =>
   res.sendStatus(200)
 );
 app.get("/soknadsveiviserproxy", (req, res) => res.sendStatus(200));
-app.listen(8080, () => console.log(`App listening on port: 8080`));
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`App listening on port: ${PORT}`));
