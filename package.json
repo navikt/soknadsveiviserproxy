@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "npm run lint && npm run test && node index.js",
-    "startDev": "npm run lint && nodemon index.js",
+    "start": "npm run lint && npm run test && cross-env-shell PORT=8081 node index.js",
+    "startDev": "npm run lint && cross-env-shell PORT=8081 nodemon index.js",
     "lint": "eslint index.js && eslint ./src && eslint ./test ",
     "docker-build": "docker build -t soknadsveiviserproxy .",
     "docker-run": "docker run --rm -p 8080:8080 soknadsveiviserproxy"
@@ -31,6 +31,7 @@
     "serve-static": "^1.14.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
