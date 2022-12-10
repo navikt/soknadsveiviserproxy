@@ -24,7 +24,7 @@
   "dependencies": {
     "@sanity/client": "^1.150.1",
     "@sanity/image-url": "^0.140.19",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jest": "^26.4.2",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
