@@ -41,7 +41,7 @@ jobs:
           cat > .nais/vars.yaml <<EOF
           namespace: skjemadigitalisering
           ingresses:
-            - https://soknadsveiviserproxy-test.dev.nav.no
+            - https://soknadsveiviserproxy-test.intern.dev.nav.no
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
