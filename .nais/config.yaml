@@ -21,6 +21,11 @@ spec:
     inbound:
       rules:
         - application: soknadsveiviser
+    outbound:
+      external: 
+      {{#each externalHosts as |url|}}
+        - host: {{url}}
+      {{/each}}
   liveness:
     path: /soknadsveiviserproxy/internal/isAlive
     initialDelay: 10
