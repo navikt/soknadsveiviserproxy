@@ -40,8 +40,11 @@ jobs:
         run: |
           cat > .nais/vars.yaml <<EOF
           namespace: skjemadigitalisering
+          externalHosts:
+            - gx9wf39f.api.sanity.io
+            - gx9wf39f.apicdn.sanity.io
           ingresses:
-            - https://soknadsveiviserproxy-test.dev.nav.no
+            - https://soknadsveiviserproxy-test.intern.dev.nav.no
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
@@ -62,6 +65,9 @@ jobs:
         run: |
           cat > .nais/vars.yaml <<EOF
           namespace: skjemadigitalisering
+          externalHosts:
+            - gx9wf39f.api.sanity.io
+            - gx9wf39f.apicdn.sanity.io
           ingresses:
             - https://soknadsveiviserproxy.intern.nav.no
           image: $IMAGE_REGISTRY/$IMAGE_NAME
