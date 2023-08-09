@@ -6,30 +6,27 @@ on:
       - master
 env:
   CI: "true"
-  IMAGE_REGISTRY: docker.pkg.github.com/${{ github.repository }}
-  IMAGE_VERSION: ${{ github.sha }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  GITHUB_REPO: ${{ github.repository }}
-  IMAGE_NAME: soknadsveiviserproxy
 
 jobs:
   build-and-package:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/cache@v1
+      - uses: actions/setup-node@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "18"
+          cache: "npm"
       - run: npm ci
       - run: npm test
-      - name: Docker build and push
-        run: |
-          echo ${GITHUB_TOKEN} | docker login --username ${GITHUB_REPO} --password-stdin https://docker.pkg.github.com
-          docker build --pull --tag ${IMAGE_REGISTRY}/${IMAGE_NAME}:${IMAGE_VERSION} .
-          docker push ${IMAGE_REGISTRY}/${IMAGE_NAME}:${IMAGE_VERSION}
+      - name: Build and push Docker image
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
+        with:
+          team: skjemadigitalisering
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy-to-dev:
     runs-on: ubuntu-latest
@@ -45,8 +42,6 @@ jobs:
             - gx9wf39f.apicdn.sanity.io
           ingresses:
             - https://soknadsveiviserproxy-test.intern.dev.nav.no
-          image: $IMAGE_REGISTRY/$IMAGE_NAME
-          version: $IMAGE_VERSION
           EOF
       - uses: nais/deploy/actions/deploy@master
         env:
@@ -54,6 +49,7 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
           VARS: .nais/vars.yaml
+          VAR: image=${{ needs.build-and-push.outputs.image }}
 
   deploy-to-prod:
     if: github.ref == 'refs/heads/master'
@@ -70,8 +66,6 @@ jobs:
             - gx9wf39f.apicdn.sanity.io
           ingresses:
             - https://soknadsveiviserproxy.intern.nav.no
-          image: $IMAGE_REGISTRY/$IMAGE_NAME
-          version: $IMAGE_VERSION
           EOF
       - uses: nais/deploy/actions/deploy@master
         env:
@@ -79,3 +73,4 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
           VARS: .nais/vars.yaml
+          VAR: image=${{ needs.build-and-push.outputs.image }}
