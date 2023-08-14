@@ -75,9 +75,8 @@ function lagSkjemautlistingJsonForSoknadsobjekt(soknadsobjekt) {
   );
 
   if (soknadsobjekt.vedleggtilsoknad) {
-    const vedleggsJSON = sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(
-      soknadsobjekt
-    );
+    const vedleggsJSON =
+      sjekkOmVedleggHarSkjemaOgReturnerVedleggskjema(soknadsobjekt);
     if (vedleggsJSON.length > 0) {
       return vedleggsJSON.concat(skjemaJson);
     }
