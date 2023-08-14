@@ -1,0 +1,71 @@
+# This workflow can be used to manually trigger a build and deploy of any branch using a workflow_dispatch event.
+name: Manually triggered deployment
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        default: "preprod"
+        type: choice
+        options:
+          - none
+          - preprod
+          - prod
+
+env:
+  CI: true
+  TZ: Europe/Oslo
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - run: npm ci
+      - run: npm test
+      - name: Build and push Docker image
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
+        with:
+          team: skjemadigitalisering
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          image_suffix: ${{ inputs.environment }}
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
+
+  deploy-preprod:
+    needs: build-and-push
+    if: github.event.inputs.environment == 'preprod'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          CLUSTER: dev-gcp
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: .nais/config.yaml
+          VARS: .nais/preprod-config.json
+          VAR: image=${{ needs.build-and-push.outputs.image }}
+
+  deploy-prod:
+    needs: build-and-push
+    if: github.event.inputs.environment == 'prod'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          CLUSTER: prod-gcp
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: .nais/config.yaml
+          VARS: .nais/prod-config.json
+          VAR: image=${{ needs.build-and-push.outputs.image }}

@@ -28,31 +28,9 @@ jobs:
           team: skjemadigitalisering
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          image_suffix: prod
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
-
-  deploy-to-dev:
-    runs-on: ubuntu-latest
-    needs: build-and-push
-    steps:
-      - uses: actions/checkout@v3
-      - name: Generate nais variables
-        run: |
-          cat > .nais/vars.yaml <<EOF
-          namespace: skjemadigitalisering
-          externalHosts:
-            - gx9wf39f.api.sanity.io
-            - gx9wf39f.apicdn.sanity.io
-          ingresses:
-            - https://soknadsveiviserproxy-test.intern.dev.nav.no
-          EOF
-      - uses: nais/deploy/actions/deploy@master
-        env:
-          CLUSTER: dev-gcp
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/config.yaml
-          VARS: .nais/vars.yaml
-          VAR: image=${{ needs.build-and-push.outputs.image }}
 
   deploy-to-prod:
     if: github.ref == 'refs/heads/master'
@@ -60,20 +38,10 @@ jobs:
     needs: build-and-push
     steps:
       - uses: actions/checkout@v3
-      - name: Generate nais variables
-        run: |
-          cat > .nais/vars.yaml <<EOF
-          namespace: skjemadigitalisering
-          externalHosts:
-            - gx9wf39f.api.sanity.io
-            - gx9wf39f.apicdn.sanity.io
-          ingresses:
-            - https://soknadsveiviserproxy.intern.nav.no
-          EOF
       - uses: nais/deploy/actions/deploy@master
         env:
           CLUSTER: prod-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
-          VARS: .nais/vars.yaml
+          VARS: .nais/preprod-config.json
           VAR: image=${{ needs.build-and-push.outputs.image }}
