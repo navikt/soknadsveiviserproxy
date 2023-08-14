@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:18-alpine
 
 RUN ln -fs /usr/share/zoneinfo/Europe/Oslo /etc/localtime
 ENV NODE_ENV production
