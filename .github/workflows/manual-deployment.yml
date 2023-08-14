@@ -1,6 +1,17 @@
 # This workflow can be used to manually trigger a build and deploy of any branch using a workflow_dispatch event.
 name: Manually triggered deployment
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        default: "preprod"
+        type: choice
+        options:
+          - none
+          - preprod
+          - prod
 
 env:
   CI: true
