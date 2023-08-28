@@ -1,0 +1,5 @@
+{
+  "NAMESPACE": "skjemadigitalisering",
+  "EXTERNAL_HOSTS": ["gx9wf39f.api.sanity.io", "gx9wf39f.apicdn.sanity.io"],
+  "INGRESSES": ["https://soknadsveiviserproxy-test.intern.dev.nav.no"]
+}

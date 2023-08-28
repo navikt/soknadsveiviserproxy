@@ -3,7 +3,7 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
   name: soknadsveiviserproxy
-  namespace: {{namespace}}
+  namespace: {{NAMESPACE}}
   labels:
     team: skjemadigitalisering
 spec:
@@ -11,7 +11,7 @@ spec:
   team: skjemadigitalisering
   port: 8080
   ingresses:
-  {{#each ingresses as |url|}}
+  {{#each INGRESSES as |url|}}
      - {{url}}
   {{/each}}
   azure:
@@ -23,7 +23,7 @@ spec:
         - application: soknadsveiviser
     outbound:
       external: 
-      {{#each externalHosts as |url|}}
+      {{#each EXTERNAL_HOSTS as |url|}}
         - host: {{url}}
       {{/each}}
   liveness:
