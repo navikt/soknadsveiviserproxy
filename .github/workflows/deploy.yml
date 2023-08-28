@@ -43,5 +43,5 @@ jobs:
           CLUSTER: prod-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
-          VARS: .nais/preprod-config.json
+          VARS: .nais/prod-config.json
           VAR: image=${{ needs.build-and-push.outputs.image }}
