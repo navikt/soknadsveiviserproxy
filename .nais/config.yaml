@@ -8,7 +8,6 @@ metadata:
     team: skjemadigitalisering
 spec:
   image: {{image}}
-  team: skjemadigitalisering
   port: 8080
   ingresses:
   {{#each INGRESSES as |url|}}
