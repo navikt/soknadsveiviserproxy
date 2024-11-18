@@ -22,6 +22,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - name: Build and push Docker image
+        if: github.ref == 'refs/heads/master'
         uses: nais/docker-build-push@v0
         id: docker-build-push
         with:
@@ -38,7 +39,7 @@ jobs:
     needs: build-and-push
     steps:
       - uses: actions/checkout@v4
-      - uses: nais/deploy/actions/deploy@master
+      - uses: nais/deploy/actions/deploy@v1
         env:
           CLUSTER: prod-gcp
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
