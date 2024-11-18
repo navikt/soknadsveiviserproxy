@@ -1,3 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const sporringer = require("./src/sporringer");
 const express = require("express");
 const createSanityClient = require("./src/utils/createSanityClient");

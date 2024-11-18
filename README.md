@@ -2,7 +2,7 @@
 
 Node.js Express applikasjon som fungerer som et mellomledd mellom [Søknadsveiviser](https://github.com/navikt/soknadsveiviser) og [Sanity](https://www.sanity.io/) som benyttes som database.
 
-Appen kjører på NAIS i en dockercontainer.
+Appen kjører på NAIS i en docker container.
 
 # Kom i gang
 
@@ -10,8 +10,12 @@ Appen kjører på NAIS i en dockercontainer.
 npm install
 ```
 
-Kjør applikasjonen
+Opprett en .env-fil og legg inn Sanity token (finnes i secrets):
+```
+SANITY_TOKEN=<token>
+```
 
+Kjør applikasjonen:
 ```
 npm start
 ```
