@@ -21,7 +21,7 @@ npm start
 Soknadsveiviserproxy bruker github actions.
 
 ### Nais-cluster
-Applikasjonen ligger i default namespace i dev-gcp og prod-gcp.
+Applikasjonen kjører i namespace `skjemadigitalisering` i dev-gcp og prod-gcp.
 
 # Henvendelser
 
@@ -29,4 +29,4 @@ Spørsmål knyttet til koden eller prosjektet kan rettes som issues.
 
 ## For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #team-skjemadigitalisering.
+Interne henvendelser kan sendes via Slack i kanalen #team-fyllut-sendinn.
